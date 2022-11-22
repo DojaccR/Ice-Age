@@ -4,7 +4,7 @@ class GUI:
     
     def __init__(self):
         window = Tk()
-        window.geometry("1280x720")
+        window.geometry("1920x1080")
         window.title("Ice Age")
 
         logo = PhotoImage(file='assets/logo.png')
