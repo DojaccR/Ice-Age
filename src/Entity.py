@@ -1,9 +1,7 @@
-import array as arr
-
 class Entity:
     entityID = 0
-    hitbox = arr([0,0])
-    coords = arr([0,0])
+    hitbox = [0,0]
+    coords = [0,0]
     xvel = 0
     yvel = 0
     health = 0
