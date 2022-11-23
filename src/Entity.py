@@ -1,19 +1,27 @@
+import random
+from math import sin
+
 class Entity:
     entityID = 0
-    hitbox = [0,0]
-    coords = [0,0]
-    xvel = 0
-    yvel = 0
+    hitboxHeight = 0
+    hitboxWidth = 0
+    xCor = 0
+    yCor = 0
+    vel = 4
     health = 0
-
-    def __init__(self, entityID, hitbox, coords, health):
+    healthImageFile = ["assets/Health0.png","assets/Health1.png","assets/Health2.png","assets/Health3.png"]
+    def __init__(self, entityID, hitboxHeight, hitboxWidth, xCor, yCor, health):
         self.entityID = entityID
-        self.hitbox = hitbox
-        self.coords = coords
+        self.hitboxHeight = hitboxHeight
+        self.hitboxWidth = hitboxWidth
+        self.xCor = xCor
+        self.yCor = yCor
         self.health = health
 
-    def move():
-        pass
+    def chooseDir():
+        dir = random.random() * 360
+        
+        
 
     def health(healthchange):
         health += healthchange

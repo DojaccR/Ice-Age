@@ -30,26 +30,29 @@ class GUI:
 class MainScreen(GUI):
     pass
 
-class GameScreen(GUI):
-    window = Tk()
-    window.geometry("1920x1080")
-    window.title("Ice Age")
+class GameScreen:
 
+    def __init__():
+        
+        window = Tk()
+        window.geometry("1920x1080")
+        window.title("Ice Age")
+        playerImage = PhotoImage(file='assets/Player.png')
+        player = Label(window,image=playerImage)
+        player.place(x=0,y=0)
+    def move_up(event):
+        print(player.winfo_x())
+        #player.place(x=player.winfo_x(),y=player.winfo_y()-2)        
+    window.bind("<w>",move_up)
     logo = PhotoImage(file='assets/logo.png')
     window.iconphoto(True,logo)
 
-    def move_up(event):
-        label.place(x=label.winfo_x(),y=label.winfo_y()-2)
+    window.mainloop()
         
     def draw():
         pass
-
-    def initPlayer():
-        window.bind("<w>",move_up)
-        player = PhooImage(file='asstes/Player.png')
-        label = Label(window,image=player)
-        label.place(x=0,y=0)
         
+
     def __init__(self):
         pass
 

@@ -9,3 +9,7 @@ class HostileEntity(Entity):
 
     def target():
         pass
+    
+class DireWolf(HostileEntity):
+    entityImageFile = "assets/Wolf.png"
+    

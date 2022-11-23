@@ -1,18 +1,12 @@
 from Entity import *
 class Player(Entity):
     
-    imageFile = "asstes/player.png"
+    entityImageFile = "assets/player.png"
     temperature = 0
     hunger = 0
     thirst = 0
     freezing = False
     overheating = False
 
-    def __init__(self, entityID, hitbox, coords, health):
-        super.__init__(super, entityID, hitbox, coords, health)
-
-    def keyInput():
-        pass
-
-    def weather():
-        pass
+    def __init__(self, entityID, hitboxHeight, hitboxWidth, xCor, yCor, health):
+        super().__init__(entityID, hitboxHeight, hitboxWidth, xCor, yCor, health)
