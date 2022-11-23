@@ -5,7 +5,6 @@ class Entity:
     xvel = 0
     yvel = 0
     health = 0
-    dropTable = [0]
 
     def __init__(self, entityID, hitbox, coords, health):
         self.entityID = entityID
@@ -19,5 +18,8 @@ class Entity:
     def health(healthchange):
         health += healthchange
 
-    def die():
+    def checkCollisions():
         pass
+
+    
+
