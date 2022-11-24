@@ -1,9 +1,10 @@
 from Player import *
+from Map import *
 from Entity import *
 from HostileEntity import *
 import pygame
 
-ENTITY_MAX = 3
+ENTITY_MAX = 4
 #window loading
 pygame.init()
 

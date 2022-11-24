@@ -10,7 +10,7 @@ class Entity:
     hitboxWidth = 0
     xCor = 0
     yCor = 0
-    vel = 3
+    vel = 1.5
     health = 0
     dir = 0
     persist = 0
@@ -28,7 +28,7 @@ class Entity:
     def changeDir(self, event):
         if self.tickCount == self.persist:
             self.dir = int(random.random() * 360)
-            self.persist = int(random.random()*10)
+            self.persist = int(random.random()*20)+8
             self.tickCount = 0
         else:
             self.tickCount+=1
