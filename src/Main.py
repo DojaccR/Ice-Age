@@ -1,8 +1,9 @@
-#from GUI import *
-#from Entity import *
 from Player import *
+from Entity import *
+from HostileEntity import *
 import pygame
 
+ENTITY_MAX = 2
 #window loading
 pygame.init()
 
@@ -18,10 +19,22 @@ playerImage = pygame.image.load(playerObj.entityImageFile)
 
 def player():
     win.blit(playerImage, (playerObj.xCor, playerObj.yCor))
-
-def health():
     win.blit(pygame.image.load(playerObj.healthImageFile[4-playerObj.health]), (playerObj.xCor, playerObj.yCor+60))
 
+#wolf loading
+entityList = []
+
+def spawnEntity():
+    if Entity.entityCount < ENTITY_MAX:
+        entityList.append(DireWolf(len(entityList), 600, 300))
+    Entity.entityCount+=1
+
+def wolf(i):
+    print("no entites " + str(len(entityList)))
+    print("index fetched " + str(i))
+    win.blit(pygame.image.load(entityList[i].entityImageFile), (entityList[i].xCor, entityList[i].yCor))
+    win.blit(pygame.image.load(entityList[i].healthImageFile[4-entityList[i].health]), (entityList[i].xCor, entityList[i].yCor+60))
+    
 #game loop
 gameTick = 0
 run = True
@@ -49,13 +62,17 @@ while playerObj.health > 0:
     if keys[pygame.K_DOWN] and playerObj.yCor < 720 - playerObj.hitboxHeight:
         playerObj.yCor+= playerObj.vel
 
-    
-    
     win.fill((0,255,0))
-
-    #pygame.draw.rect(win, (0,0,255), (x, y, width, height))
+  
     player()
-    health()
+  
+    for i in range (ENTITY_MAX):
+        spawnEntity()
+        entityList[i].move(entityList[i])
+        wolf(i)
+        entityList[i].target(entityList[i], playerObj)
+
+    
     gameTick+=1
     pygame.display.update()
 
