@@ -11,9 +11,11 @@ class HostileEntity(Entity):
     def attack():
         pass
 
-    def target(self, Player, event):
-        if int(sqrt((self.xCor-Player.xCor)^2+(self.yCor-Player.yCor)^2)) < 100:
-            print("attack, distance is " + str(sqrt((self.xCor-Player.xCor)^2+(self.yCor-Player.yCor)^2)))
+    def target(self, playerObj, event):
+        if int(sqrt((self.xCor-playerObj.xCor)**2+(self.yCor-playerObj.yCor)**2)) < 100:
+            print(playerObj.xCor)
+            print(self.xCor)
+            print("attack, distance is " + str((self.xCor-playerObj.xCor)**2) + " "+ str((self.yCor-playerObj.yCor)**2) + " " + str(sqrt((self.xCor-playerObj.xCor)**2+(self.yCor-playerObj.yCor)**2)))
     
 class DireWolf(HostileEntity):
     entityImageFile = "assets/Wolf.png"
