@@ -8,6 +8,9 @@ class Map:
 
     def __init__(self, mapID):
         if str(mapID) == "create":
-            print("create file")
-
+            map = open("map1.txt", "w")
+        else:
+            map = open("map1.txt")
+            mapStr = map.read()
+            self.mapTiles = [*mapStr]
     

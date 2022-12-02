@@ -1,8 +1,10 @@
 class Item:
     itemID = 0
+    itemName = None
     
 
     def __init__():
+        pass
 
 class Clothing(Item):
     itemStackMax = 1

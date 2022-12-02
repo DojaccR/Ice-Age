@@ -1,4 +1,4 @@
-import HostileEntity from HostileEtity
+from HostileEntity import *
 
 class BossEntity(HostileEntity):
 

@@ -4,7 +4,7 @@ from Entity import *
 from HostileEntity import *
 import pygame
 
-ENTITY_MAX = 4
+ENTITY_MAX = 3
 #window loading
 pygame.init()
 
