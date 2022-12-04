@@ -2,9 +2,11 @@ from Player import *
 from Map import *
 from Entity import *
 from HostileEntity import *
+from Inventory import *
 import pygame
 
 ENTITY_MAX = 3
+ITEM_MAX = 10
 #window loading
 pygame.init()
 
@@ -24,6 +26,8 @@ def player():
 
 #wolf loading
 entityList = []
+#bery spawning
+itemList = []
 
 def spawnEntity():
     if Entity.entityCount < ENTITY_MAX:
@@ -35,13 +39,6 @@ def wolf(i):
     win.blit(pygame.image.load(entityList[i].healthImageFile[4-entityList[i].health]), (entityList[i].xCor, entityList[i].yCor+60))
 
 
-def target(self, playerObj):
-    if int(sqrt((self.xCor - playerObj.xCor) ** 2 + (self.yCor - playerObj.yCor) ** 2)) < 100:
-        print(playerObj.xCor)
-        print(self.xCor)
-        print("attack, distance is " + str((self.xCor - playerObj.xCor) ** 2) + " " + str(
-            (self.yCor - playerObj.yCor) ** 2) + " " + str(
-            sqrt((self.xCor - playerObj.xCor) ** 2 + (self.yCor - playerObj.yCor) ** 2)))
 
 
 #game loop
@@ -54,37 +51,43 @@ while playerObj.health > 0:
     for event in pygame.event.get():
 
         if event.type == pygame.QUIT:
-
+            pygame.quit()
             run = False
 
     keys = pygame.key.get_pressed()
 
-    if keys[pygame.K_LEFT] and playerObj.xCor > 0:
+    if keys[pygame.K_a] and playerObj.xCor > 0:
         playerObj.xCor -= playerObj.vel
 
-    if keys[pygame.K_RIGHT] and playerObj.xCor < 1280 - playerObj.hitboxWidth:
+    if keys[pygame.K_d] and playerObj.xCor < 1280 - playerObj.hitboxWidth:
         playerObj.xCor += playerObj.vel
 
-    if keys[pygame.K_UP] and playerObj.yCor > 0:
+    if keys[pygame.K_w] and playerObj.yCor > 0:
         playerObj.yCor -= playerObj.vel
 
-    if keys[pygame.K_DOWN] and playerObj.yCor < 720 - playerObj.hitboxHeight:
+    if keys[pygame.K_s] and playerObj.yCor < 720 - playerObj.hitboxHeight:
         playerObj.yCor += playerObj.vel
 
-    win.fill((0,255,0))
+    if keys[pygame.K_e]:
+        Inventory.open(Inventory)
+
+    win.fill((0, 255, 0))
   
     player()
-  
+    #entity stuff
     for i in range(ENTITY_MAX):
         spawnEntity()
         entityList[i].changeDir(entityList[i])
         entityList[i].move(entityList[i])
         wolf(i)
-        target(entityList[i], playerObj)
+        HostileEntity.target(entityList[i], playerObj)
 
-
+    #item on ground/ interactable structures
+    #need to write code to detect item on ground distance and pick up item into inventory
+    for i in range(ITEM_MAX):
+        pass
     
-    gameTick+=1
+    gameTick += 1
     pygame.display.update()
 
 pygame.quit()

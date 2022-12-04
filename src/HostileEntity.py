@@ -8,10 +8,10 @@ class HostileEntity(Entity):
         super().__init__(entityID, hitboxHeight, hitboxWidth, xCor, yCor, health)
         self.damage = damage
     
-    def attack():
+    def attack(self):
         pass
 
-    def target(self, playerObj, event):
+    def target(self, playerObj):
         if int(sqrt((self.xCor-playerObj.xCor)**2+(self.yCor-playerObj.yCor)**2)) < 100:
             print(playerObj.xCor)
             print(self.xCor)

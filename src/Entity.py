@@ -16,6 +16,8 @@ class Entity:
     persist = 0
     tickCount = 0
     healthImageFile = ["assets/Health0.png","assets/Health1.png","assets/Health2.png","assets/Health3.png"]
+    entityImageFile = ""
+
     def __init__(self, entityID, hitboxHeight, hitboxWidth, xCor, yCor, health):
         self.entityID = entityID
         self.hitboxHeight = hitboxHeight
@@ -24,7 +26,6 @@ class Entity:
         self.yCor = yCor
         self.health = health
 
-
     def changeDir(self, event):
         if self.tickCount == self.persist:
             self.dir = int(random.random() * 360)
@@ -32,6 +33,7 @@ class Entity:
             self.tickCount = 0
         else:
             self.tickCount+=1
+
     def move(self, event):
         self.xCor += int(self.vel*cos(self.dir))
         self.yCor += int(self.vel*sin(self.dir))
