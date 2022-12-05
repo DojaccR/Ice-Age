@@ -30,6 +30,7 @@ class Entity:
         if self.tickCount == self.persist:
             self.dir = int(random.random() * 360)
             self.persist = int(random.random()*20)+8
+            self.vel = int(random.random()*3)
             self.tickCount = 0
         else:
             self.tickCount+=1
