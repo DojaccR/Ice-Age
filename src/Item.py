@@ -1,3 +1,7 @@
+import pygame
+from Inventory import *
+from math import *
+
 class Item:
     itemID = 0
     itemName = ""
@@ -5,12 +9,19 @@ class Item:
     isPickedUp = False
     xCor = 0
     yCor = 0
+    itemCount = 0
 
     def __init__(self, itemID, itemName, xCor, yCor):
         self.itemID = itemID
         self.itemName = itemName
         self.xCor = xCor
         self.yCor = yCor
+
+    def pickup(self, playerObj, inventory):
+        if int(sqrt((self.xCor-playerObj.xCor)**2+(self.yCor-playerObj.yCor)**2)) < 20:
+            inventory.pickup(self)
+            self.isPickedUp = True
+            print(str(int(sqrt((self.xCor-playerObj.xCor)**2+(self.yCor-playerObj.yCor)**2))))
 
 
 class Clothing(Item):
@@ -22,13 +33,18 @@ class Tool(Item):
 
 
 class Consumable(Item):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, itemID, itemName, xCor, yCor):
+        super().__init__(itemID, itemName, xCor, yCor)
 
     itemStackMax = 15
 
 
 class Berry(Consumable):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, itemID, xCor, yCor):
+        super().__init__(itemID, "berry", xCor, yCor)
         self.itemTexture = "assets/Berry.png"
+        self.berryImage = pygame.image.load(self.itemTexture)
+
+    def render(self, win):
+        win.blit(self.berryImage, (self.xCor, self.yCor))
+        #win.blit(pygame.image.load(self.healthImageFile[4 - self.health]), (self.xCor, self.yCor + 60))

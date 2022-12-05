@@ -3,6 +3,8 @@ from Map import *
 from Entity import *
 from HostileEntity import *
 from Inventory import *
+from Item import *
+import random as random
 import pygame
 
 ENTITY_MAX = 3
@@ -15,7 +17,6 @@ win = pygame.display.set_mode((1280,720))
 pygame.display.set_caption("Ice Age")
 pygame.display.set_icon(pygame.image.load('assets/Logo.png'))
 
-
 #player loading
 playerObj = Player()
 inventory = Inventory()
@@ -24,6 +25,12 @@ inventory = Inventory()
 entityList = []
 #bery spawning
 itemList = []
+def spawnItem():
+    x = int(random.random()*win.get_width())
+    y = int(random.random() * win.get_height())
+    if Item.itemCount < ITEM_MAX:
+        itemList.append(Berry(len(itemList), x, y))
+    Item.itemCount += 1
 
 def spawnEntity():
     if Entity.entityCount < ENTITY_MAX:
@@ -71,6 +78,7 @@ while True:
     win.fill((0, 255, 0))
   
     playerObj.render(win)
+    inventory.render(win)
     #entity stuff
     for i in range(ENTITY_MAX):
         spawnEntity()
@@ -82,8 +90,10 @@ while True:
     #item on ground/ interactable structures
     #need to write code to detect item on ground distance and pick up item into inventory
     for i in range(ITEM_MAX):
-        pass
-    
+        spawnItem()
+        if itemList[i].isPickedUp == False:
+            itemList[i].render(win)
+
     gameTick += 1
     pygame.display.update()
 
