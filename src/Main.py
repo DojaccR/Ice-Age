@@ -69,8 +69,13 @@ while playerObj.health > 0:
     if keys[pygame.K_s] and playerObj.yCor < 720 - playerObj.hitboxHeight:
         playerObj.yCor += playerObj.vel
 
-    if keys[pygame.K_e]:
-        inventory.open(inventory, win)
+    events = pygame.event.get()
+    for event in events:
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_e:
+                print("pressed")
+                inventory.open()
+
 
     win.fill((0, 255, 0))
   

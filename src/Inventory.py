@@ -14,7 +14,7 @@ class Inventory:
         for i in range(24):
             self.slot.append(InventorySlot(i))
 
-    def open(self, win, event):
+    def open(self, win):
         isOpen = True
 
         while isOpen:
