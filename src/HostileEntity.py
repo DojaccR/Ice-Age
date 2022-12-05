@@ -1,10 +1,12 @@
 from Entity import *
 from math import *
+import pygame
 
 class HostileEntity(Entity):
     damage = 0
     aggroRange = 0
     aggro = False
+    atkRange = 0
 
     def __init__(self, entityID, hitboxHeight, hitboxWidth, xCor, yCor, health, damage):
         super().__init__(entityID, hitboxHeight, hitboxWidth, xCor, yCor, health)
@@ -37,9 +39,9 @@ class HostileEntity(Entity):
             elif playerObj.xCor-self.xCor != 0:
                 self.dir = atan((playerObj.yCor-self.yCor)/(playerObj.xCor-self.xCor))
             self.move(e)
-            if int(sqrt((self.xCor-playerObj.xCor)**2+(self.yCor-playerObj.yCor)**2)) == 0:
+            if int(sqrt((self.xCor-playerObj.xCor)**2+(self.yCor-playerObj.yCor)**2)) <= self.atkRange and playerObj.health > 1:
                 playerObj.health -= self.damage
-                print(playerObj.health)
+                print("player health is "+str(playerObj.health))
             print(playerObj.xCor)
             print(self.xCor)
             print("attack, distance is " + str((self.xCor-playerObj.xCor)**2) + " "+ str((self.yCor-playerObj.yCor)**2) + " " + str(sqrt((self.xCor-playerObj.xCor)**2+(self.yCor-playerObj.yCor)**2)))
@@ -53,8 +55,15 @@ class DireWolf(HostileEntity):
     hitboxWidth = 100
     health = 4
     damage = 1
-    aggroRange = 100
+    aggroRange = 150
+    atkRange = 10
 
     def __init__(self, entityID, xCor, yCor):
         super().__init__(entityID, 50, 100, xCor, yCor, 4, 1)
+
+    def render(self, i, win):
+        win.blit(pygame.image.load(self.entityImageFile), (self.xCor, self.yCor))
+        win.blit(pygame.image.load(self.healthImageFile[4 - self.health]), (self.xCor, self.yCor + 60))
+
+
     

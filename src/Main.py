@@ -17,13 +17,8 @@ pygame.display.set_icon(pygame.image.load('assets/Logo.png'))
 
 
 #player loading
-playerObj = Player(1, 100, 100, 200, 200, 4)
-playerImage = pygame.image.load(playerObj.entityImageFile)
+playerObj = Player()
 inventory = Inventory()
-
-def player():
-    win.blit(playerImage, (playerObj.xCor, playerObj.yCor))
-    win.blit(pygame.image.load(playerObj.healthImageFile[4-playerObj.health]), (playerObj.xCor, playerObj.yCor+60))
 
 #wolf loading
 entityList = []
@@ -35,10 +30,6 @@ def spawnEntity():
         entityList.append(DireWolf(len(entityList), 600, 300))
     Entity.entityCount += 1
 
-def wolf(i):
-    win.blit(pygame.image.load(entityList[i].entityImageFile), (entityList[i].xCor, entityList[i].yCor))
-    win.blit(pygame.image.load(entityList[i].healthImageFile[4-entityList[i].health]), (entityList[i].xCor, entityList[i].yCor+60))
-
 
 
 
@@ -46,7 +37,7 @@ def wolf(i):
 gameTick = 0
 run = True
 
-while playerObj.health > 0:
+while True:
     pygame.time.delay(10)
 
     for event in pygame.event.get():
@@ -79,13 +70,13 @@ while playerObj.health > 0:
 
     win.fill((0, 255, 0))
   
-    player()
+    playerObj.render(win)
     #entity stuff
     for i in range(ENTITY_MAX):
         spawnEntity()
         entityList[i].changeDir(entityList[i])
         entityList[i].move(entityList[i])
-        wolf(i)
+        entityList[i].render(i, win)
         HostileEntity.target(entityList[i], playerObj)
 
     #item on ground/ interactable structures
