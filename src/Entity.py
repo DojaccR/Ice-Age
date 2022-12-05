@@ -41,7 +41,7 @@ class Entity:
     def health(self, healthchange):
         self.health += healthchange
 
-    def checkCollisions():
+    def checkCollisions(self):
         pass
 
     

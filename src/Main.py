@@ -19,6 +19,7 @@ pygame.display.set_icon(pygame.image.load('assets/Logo.png'))
 #player loading
 playerObj = Player(1, 100, 100, 200, 200, 4)
 playerImage = pygame.image.load(playerObj.entityImageFile)
+inventory = Inventory()
 
 def player():
     win.blit(playerImage, (playerObj.xCor, playerObj.yCor))
@@ -69,7 +70,7 @@ while playerObj.health > 0:
         playerObj.yCor += playerObj.vel
 
     if keys[pygame.K_e]:
-        Inventory.open(Inventory)
+        inventory.open(inventory, win)
 
     win.fill((0, 255, 0))
   

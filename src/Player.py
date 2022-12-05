@@ -1,4 +1,6 @@
 from Entity import *
+
+
 class Player(Entity):
     
     entityImageFile = "assets/player.png"

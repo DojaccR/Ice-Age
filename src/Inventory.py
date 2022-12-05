@@ -1,6 +1,7 @@
 import pygame
 from InventorySlot import *
 
+
 class Inventory:
     INVENTORY_MAX = 18
     HOTBAR_MAX = 6
@@ -13,13 +14,18 @@ class Inventory:
         for i in range(24):
             self.slot.append(InventorySlot(i))
 
-    def open(self):
+    def open(self, win, event):
         isOpen = True
 
         while isOpen:
-            print("opena")
-            keys = pygame.key.get_pressed()
+            pygame.time.delay(10)
 
+            print("open")
+
+            win.blit(pygame.image.load("assets/Inventory.png"), (0, 0))
+
+            keys = pygame.key.get_pressed()
+            print(keys)
             if keys[pygame.K_e]:
                 isOpen = False
 
