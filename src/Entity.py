@@ -1,5 +1,6 @@
 import random
 from math import *
+import pygame
 
 
 class Entity:
@@ -15,8 +16,8 @@ class Entity:
     dir = 0
     persist = 0
     tickCount = 0
-    healthImageFile = ["assets/Health0.png","assets/Health1.png","assets/Health2.png","assets/Health3.png"]
-    entityImageFile = ""
+    healthTexturePath = ["assets/Health0.png","assets/Health1.png","assets/Health2.png","assets/Health3.png"]
+    entityTexturePath = ""
 
     def __init__(self, entityID, hitboxHeight, hitboxWidth, xCor, yCor, health):
         self.entityID = entityID
@@ -27,6 +28,7 @@ class Entity:
         self.health = health
 
     def changeDir(self, event):
+
         if self.tickCount == self.persist:
             self.dir = int(random.random() * 360)
             self.persist = int(random.random()*20)+8
@@ -45,5 +47,7 @@ class Entity:
     def checkCollisions(self):
         pass
 
-    
+    def render(self, win):
+        win.blit(pygame.image.load(self.entityImageFile), (self.xCor, self.yCor))
+        win.blit(pygame.image.load(self.healthImageFile[4 - self.health]), (self.xCor, self.yCor + 60))
 
