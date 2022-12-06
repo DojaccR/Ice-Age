@@ -5,7 +5,8 @@ from math import *
 class Item:
     itemID = 0
     itemName = ""
-    itemTexture = ""
+    itemTexturePath = ""
+    itemImage = None
     isPickedUp = False
     xCor = 0
     yCor = 0
@@ -18,10 +19,11 @@ class Item:
         self.yCor = yCor
 
     def pickup(self, playerObj, inventory):
-        if int(sqrt((self.xCor-playerObj.xCor)**2+(self.yCor-playerObj.yCor)**2)) < 20:
+        if int(sqrt((self.xCor-playerObj.xCor)**2+(self.yCor-playerObj.yCor)**2)) < 20 and self.isPickedUp == False:
             inventory.pickup(self)
             self.isPickedUp = True
-            print(str(int(sqrt((self.xCor-playerObj.xCor)**2+(self.yCor-playerObj.yCor)**2))))
+
+            #print(str(int(sqrt((self.xCor-playerObj.xCor)**2+(self.yCor-playerObj.yCor)**2))))
 
 
 class Clothing(Item):
@@ -42,9 +44,9 @@ class Consumable(Item):
 class Berry(Consumable):
     def __init__(self, itemID, xCor, yCor):
         super().__init__(itemID, "berry", xCor, yCor)
-        self.itemTexture = "assets/Berry.png"
-        self.berryImage = pygame.image.load(self.itemTexture)
+        self.itemTexturePath = "assets/Berry.png"
+        self.itemImage = pygame.image.load(self.itemTexturePath)
 
     def render(self, win):
-        win.blit(self.berryImage, (self.xCor, self.yCor))
+        win.blit(self.itemImage, (self.xCor, self.yCor))
         #win.blit(pygame.image.load(self.healthImageFile[4 - self.health]), (self.xCor, self.yCor + 60))

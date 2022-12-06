@@ -39,7 +39,7 @@ class HostileEntity(Entity):
             elif playerObj.xCor-self.xCor != 0:
                 self.dir = atan((playerObj.yCor-self.yCor)/(playerObj.xCor-self.xCor))
             self.move(e)
-            if int(sqrt((self.xCor-playerObj.xCor)**2+(self.yCor-playerObj.yCor)**2)) <= self.atkRange and playerObj.health > 1:
+            if int(sqrt((self.xCor-playerObj.xCor)**2+(self.yCor-playerObj.yCor)**2)) <= self.atkRange and playerObj.health > 1 and self.tickCount%100 == 0:
                 playerObj.health -= self.damage
                 print("player health is "+str(playerObj.health))
             print(playerObj.xCor)

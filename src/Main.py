@@ -67,18 +67,13 @@ while True:
     if keys[pygame.K_s] and playerObj.yCor < 720 - playerObj.hitboxHeight:
         playerObj.yCor += playerObj.vel
 
-    events = pygame.event.get()
-    for event in events:
-        if event.type == pygame.KEYUP:
-            if event.key == pygame.K_e:
-                print("pressed")
-                inventory.open()
 
 
+    #Background render
     win.fill((0, 255, 0))
   
-    playerObj.render(win)
-    inventory.render(win)
+    #Midground render
+
     #entity stuff
     for i in range(ENTITY_MAX):
         spawnEntity()
@@ -91,8 +86,22 @@ while True:
     #need to write code to detect item on ground distance and pick up item into inventory
     for i in range(ITEM_MAX):
         spawnItem()
+        itemList[i].pickup(playerObj, inventory)
         if itemList[i].isPickedUp == False:
             itemList[i].render(win)
+
+    #Foreground render
+    playerObj.render(win)
+    inventory.render(win)
+
+    if keys[pygame.K_e]:
+            print("pressed")
+            inventory.open(win)
+            #win.blit(inventory.inventoryImage, (0, 0))
+
+    for i in range(24):
+        if inventory.slot[i][0] != None:
+            print(inventory.slot[i][0].itemName)
 
     gameTick += 1
     pygame.display.update()
