@@ -14,23 +14,27 @@ class Map:
             map = open("map1.txt", "w")
         else:
             map = open("map1.txt")
-            for line in map:
+            for i in range(100):
                 mapStr = map.readline()
                 mapChars = list()
                 mapChars.extend(mapStr)
                 self.mapTiles.append(mapChars)
     
     def render1(self, playerObj, win):
-        print(playerObj.mapXCor-int(((win.get_width()/50)+1)/2)+0)
-        print(playerObj.mapYCor-int(((win.get_height()/50)+1)/2)+0)
-        print(len(self.mapTiles))
+
+        #print(len(self.mapTiles))
+        #print(len(self.mapTiles[0]))
         for i in range(int((win.get_width()/50)+1)):
-            print(i)
+            #print(i)
             for j in range((int(win.get_height()/50)+1)):
-                print(j)
-                if self.mapTiles[playerObj.mapXCor-int(((win.get_width()/50)+1)/2)+i][playerObj.mapYCor-int(((win.get_height()/50)+1)/2)+j] == 1:
+                #print(j)
+                if int(self.mapTiles[playerObj.mapXCor-int(((win.get_width()/50)+1)/2)+i][playerObj.mapYCor-int(((win.get_height()/50)+1)/2)+j]) == 1:
+                    #print(playerObj.mapXCor - int(((win.get_width() / 50) + 1) / 2) + i)
+                    #print(playerObj.mapYCor - int(((win.get_height() / 50) + 1) / 2) + j)
                     win.blit(pygame.image.load("assets/Grass.png"), (50*i, 50*j))
                 else:
+                    #print(playerObj.mapXCor - int(((win.get_width() / 50) + 1) / 2) + i)
+                    #print(playerObj.mapYCor - int(((win.get_height() / 50) + 1) / 2) + j)
                     win.blit(pygame.image.load("assets/Grass2.png"), (50*i, 50*j))
 
     def render2(self, playerObj, win):
