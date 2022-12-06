@@ -11,6 +11,8 @@ class Player(Entity):
     freezing = False
     overheating = False
     playerImage = pygame.image.load(entityImageFile)
+    mapXCor = 50
+    mapYCor = 50
 
     def __init__(self):
         super().__init__(1, 100, 100, 200, 200, 4)
