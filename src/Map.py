@@ -26,18 +26,19 @@ class Map:
 
         #print(len(self.mapTiles))
         #print(len(self.mapTiles[0]))
-        for i in range(int((win.get_width()/50)+1)):
+        print("rendering " + str((int(win.get_height()/100)+1)*(int((win.get_width()/100)+1))) + " chunks")
+        for i in range(int((win.get_width()/100)+1)):
             #print(i)
-            for j in range((int(win.get_height()/50)+1)):
+            for j in range((int(win.get_height()/100)+1)):
                 #print(j)
-                if int(self.mapTiles[playerObj.mapXCor-int(((win.get_width()/50)+1)/2)+i][playerObj.mapYCor-int(((win.get_height()/50)+1)/2)+j]) == 1:
+                if int(self.mapTiles[playerObj.mapXCor-int(((win.get_width()/100)+1)/2)+i][playerObj.mapYCor-int(((win.get_height()/100)+1)/2)+j]) == 1:
                     #print(playerObj.mapXCor - int(((win.get_width() / 50) + 1) / 2) + i)
                     #print(playerObj.mapYCor - int(((win.get_height() / 50) + 1) / 2) + j)
-                    win.blit(pygame.image.load("assets/Grass.png"), (50*i, 50*j))
+                    win.blit(pygame.image.load("assets/Grass.png"), (100*i, 100*j))
                 else:
                     #print(playerObj.mapXCor - int(((win.get_width() / 50) + 1) / 2) + i)
                     #print(playerObj.mapYCor - int(((win.get_height() / 50) + 1) / 2) + j)
-                    win.blit(pygame.image.load("assets/Grass2.png"), (50*i, 50*j))
+                    win.blit(pygame.image.load("assets/Grass2.png"), (100*i, 100*j))
 
 
     #loads on screen into array and then displayed
@@ -68,9 +69,21 @@ class Map:
                     x += "0"
                 else:
                     x += "1"
-
+1
             x += "\n"
 
         map.write(x)
 
+    def getAdjacent(self, direction, xCor, yCor):
+        if direction == "up":
+            return str(xCor + "," + (yCor - 1))
+        elif direction == "down":
+            return str(xCor + "," + (yCor + 1))
+        elif direction == "left":
+            return str((xCor - 1) + "," + yCor)
+        elif direction == "right":
+            return str((xCor + 1) + "," + yCor)
+        else:
+            print("invalid")
+            return "invalid"
 

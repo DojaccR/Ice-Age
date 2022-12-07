@@ -81,7 +81,7 @@ while True:
         spawnEntity()
         entityList[i].changeDir(entityList[i])
         entityList[i].move(entityList[i])
-        entityList[i].render(i, win)
+        entityList[i].render(win)
         HostileEntity.target(entityList[i], playerObj)
 
     #item on ground/ interactable structures
