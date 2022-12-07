@@ -13,6 +13,7 @@ class HostileEntity(Entity):
         self.damage = damage
 
     def changeDir(self, event):
+
         if self.tickCount >= self.persist and self.aggro == False:
             self.dir = int(random.random() * 360)
             self.persist = int(random.random()*20)+8
@@ -29,19 +30,24 @@ class HostileEntity(Entity):
         pass
 
     def target(self, playerObj):
+
         if int(sqrt((self.xCor-playerObj.xCor)**2+(self.yCor-playerObj.yCor)**2)) < self.aggroRange:
             self.aggro = True
             self.vel = 3
+
             if playerObj.yCor-self.yCor > 0 and playerObj.xCor-self.xCor < 0:
                 self.dir = atan((playerObj.yCor-self.yCor)/(playerObj.xCor-self.xCor)) + 180
             elif playerObj.yCor-self.yCor < 0 and playerObj.xCor-self.xCor < 0:
                 self.dir = atan((playerObj.yCor-self.yCor)/(playerObj.xCor-self.xCor)) - 180
             elif playerObj.xCor-self.xCor != 0:
                 self.dir = atan((playerObj.yCor-self.yCor)/(playerObj.xCor-self.xCor))
+
             self.move(e)
+
             if int(sqrt((self.xCor-playerObj.xCor)**2+(self.yCor-playerObj.yCor)**2)) <= self.atkRange and playerObj.health > 1 and self.tickCount%100 == 0:
                 playerObj.health -= self.damage
                 print("player health is "+str(playerObj.health))
+
             print(playerObj.xCor)
             print(self.xCor)
             print("attack, distance is " + str((self.xCor-playerObj.xCor)**2) + " "+ str((self.yCor-playerObj.yCor)**2) + " " + str(sqrt((self.xCor-playerObj.xCor)**2+(self.yCor-playerObj.yCor)**2)))
@@ -50,20 +56,19 @@ class HostileEntity(Entity):
 
     
 class DireWolf(HostileEntity):
-    entityImageFile = "assets/Wolf.png"
+    entityTexturePath = "assets/Wolf.png"
     hitboxHeight = 50
     hitboxWidth = 100
     health = 4
     damage = 1
     aggroRange = 150
     atkRange = 10
+    dropTable = [["meat", "2"], ["fur", "2"], ["fang", "2"]]
 
     def __init__(self, entityID, xCor, yCor):
         super().__init__(entityID, 50, 100, xCor, yCor, 4, 1)
 
-    def render(self, i, win):
-        win.blit(pygame.image.load(self.entityImageFile), (self.xCor, self.yCor))
-        win.blit(pygame.image.load(self.healthImageFile[4 - self.health]), (self.xCor, self.yCor + 60))
+
 
 
     

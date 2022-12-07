@@ -17,6 +17,7 @@ win = pygame.display.set_mode((1280,720))
 pygame.display.set_caption("Ice Age")
 pygame.display.set_icon(pygame.image.load('assets/Logo.png'))
 
+map = Map(0)
 #player loading
 playerObj = Player()
 inventory = Inventory()
@@ -71,7 +72,8 @@ while True:
 
     #Background render
     win.fill((0, 255, 0))
-  
+
+    map.render1(playerObj, win)
     #Midground render
 
     #entity stuff
@@ -79,7 +81,7 @@ while True:
         spawnEntity()
         entityList[i].changeDir(entityList[i])
         entityList[i].move(entityList[i])
-        entityList[i].render(i, win)
+        entityList[i].render(win)
         HostileEntity.target(entityList[i], playerObj)
 
     #item on ground/ interactable structures
