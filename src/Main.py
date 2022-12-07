@@ -25,8 +25,10 @@ inventory = Inventory()
 
 #wolf loading
 entityList = []
-#bery spawning
+#bery loading
 itemList = []
+#berry bush loading
+structureList = []
 def spawnItem():
     x = int(random.random()*win.get_width())
     y = int(random.random() * win.get_height())

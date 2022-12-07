@@ -20,3 +20,6 @@ class Player(Entity):
     def render(self, win):
         win.blit(self.playerImage, (self.xCor, self.yCor))
         win.blit(pygame.image.load(self.healthTexturePath[4 - self.health]), (self.xCor, self.yCor + 60))
+
+    def pickup(self, itemList, inventory):
+        pass
