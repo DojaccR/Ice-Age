@@ -86,7 +86,7 @@ while True:
     #need to write code to detect item on ground distance and pick up item into inventory
     for i in range(ITEM_MAX):
         spawnItem()
-        itemList[i].pickup(playerObj, inventory)
+        itemList[i].pickup(playerObj, inventory, win)
         if itemList[i].isPickedUp == False:
             itemList[i].render(win)
 
@@ -100,8 +100,9 @@ while True:
             #win.blit(inventory.inventoryImage, (0, 0))
 
     for i in range(24):
-        if inventory.slot[i][0] != None:
-            print(inventory.slot[i][0].itemName)
+        if len(inventory.slot[i]) > 0:
+            pass
+            #print(inventory.slot[i][0].itemName)
 
     gameTick += 1
     pygame.display.update()

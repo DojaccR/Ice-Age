@@ -18,9 +18,9 @@ class Item:
         self.xCor = xCor
         self.yCor = yCor
 
-    def pickup(self, playerObj, inventory):
+    def pickup(self, playerObj, inventory, win):
         if int(sqrt((self.xCor-playerObj.xCor)**2+(self.yCor-playerObj.yCor)**2)) < 20 and self.isPickedUp == False:
-            inventory.pickup(self)
+            inventory.pickup(self, win)
             self.isPickedUp = True
 
             #print(str(int(sqrt((self.xCor-playerObj.xCor)**2+(self.yCor-playerObj.yCor)**2))))
