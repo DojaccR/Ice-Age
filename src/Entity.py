@@ -11,7 +11,7 @@ class Entity:
     hitboxWidth = 0
     xCor = 0
     yCor = 0
-    vel = 1.5
+    vel = 2
     health = 0
     dir = 0
     persist = 0

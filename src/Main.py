@@ -9,6 +9,7 @@ import pygame
 
 ENTITY_MAX = 3
 ITEM_MAX = 10
+CAMERA_SPEED = 1
 #window loading
 pygame.init()
 
@@ -19,7 +20,7 @@ pygame.display.set_icon(pygame.image.load('assets/Logo.png'))
 
 map = Map(0)
 #player loading
-playerObj = Player()
+playerObj = Player(win)
 inventory = Inventory()
 
 #wolf loading
@@ -57,17 +58,42 @@ while True:
     keys = pygame.key.get_pressed()
 
     if keys[pygame.K_a] and playerObj.xCor > 0:
-        playerObj.xCor -= playerObj.vel
+        #playerObj.xCor -= playerObj.vel
+        playerObj.mapXCor -= 1#playerObj.vel
+        for i in range(len(entityList)):
+            entityList[i].xCor += 100
+
+        for i in range(len(itemList)):
+            itemList[i].xCor += 100
+
 
     if keys[pygame.K_d] and playerObj.xCor < 1280 - playerObj.hitboxWidth:
-        playerObj.xCor += playerObj.vel
+        #playerObj.xCor += playerObj.vel
+        playerObj.mapXCor += 1#playerObj.vel
+        for i in range(len(entityList)):
+            entityList[i].xCor -= 100
+
+        for i in range(len(itemList)):
+            itemList[i].xCor -= 100
+
 
     if keys[pygame.K_w] and playerObj.yCor > 0:
-        playerObj.yCor -= playerObj.vel
+        #playerObj.yCor -= playerObj.vel
+        playerObj.mapYCor -= 1#playerObj.vel
+        for i in range(len(entityList)):
+            entityList[i].yCor += 100
+
+        for i in range(len(itemList)):
+            itemList[i].yCor += 100
 
     if keys[pygame.K_s] and playerObj.yCor < 720 - playerObj.hitboxHeight:
-        playerObj.yCor += playerObj.vel
+        #playerObj.yCor += playerObj.vel
+        playerObj.mapYCor += 1#playerObj.vel
+        for i in range(len(entityList)):
+            entityList[i].yCor -= 100
 
+        for i in range(len(itemList)):
+            itemList[i].yCor -= 100
 
 
     #Background render

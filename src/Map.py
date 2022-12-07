@@ -69,9 +69,8 @@ class Map:
                     x += "0"
                 else:
                     x += "1"
-1
-            x += "\n"
 
+            x += "\n"
         map.write(x)
 
     def getAdjacent(self, direction, xCor, yCor):
