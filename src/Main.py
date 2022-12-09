@@ -6,6 +6,7 @@ from Inventory import *
 from Item import *
 import random as random
 import pygame
+import sys
 
 ENTITY_MAX = 3
 ITEM_MAX = 10
@@ -94,12 +95,12 @@ while True:
 
     #Foreground render
     playerObj.render(win)
-    inventory.render(win)
+    inventory.hotRender(win)
+    inventory.invRender(win)
 
     if keys[pygame.K_e]:
-            print("pressed")
-            inventory.open(win)
-            #win.blit(inventory.inventoryImage, (0, 0))
+        print("pressed")
+        inventory.toggleInvRender(win)
 
     for i in range(24):
         if len(inventory.slot[i]) > 0:

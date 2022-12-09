@@ -69,7 +69,7 @@ class Map:
                     x += "0"
                 else:
                     x += "1"
-1
+
             x += "\n"
 
         map.write(x)
