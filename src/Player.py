@@ -13,6 +13,8 @@ class Player(Entity):
     playerImage = pygame.image.load(entityImageFile)
     mapXCor = 50
     mapYCor = 50
+    inBlockXCor = 0
+    inBlockYCor = 0
 
     def __init__(self, win):
         super().__init__(1, 100, 100, win.get_width()/2, win.get_height()/2, 4)
