@@ -16,12 +16,13 @@ class Structure:
         win.blit(self.structureTexture, (self.xCor, self.yCor))
 
 
-
 class IndestructableStructure(Structure):
     pass
 
+
 class DestructableStructure(Structure):
     health = 0
+
 
 class BerryBush(DestructableStructure):
     berryCount = 0
@@ -32,18 +33,20 @@ class BerryBush(DestructableStructure):
                             "assets/Bush4.png",
                             "assets/Bush5.png"]
 
-    def __init__(self):
-        pass
+    def __init__(self, xCor, yCor):
+        self.xCor = xCor
+        self.yCor = yCor
 
     def growBerry(self, tickCount):
-        if tickCount%400 == 0 and self.berryCount < 5:
+        if tickCount % 400 == 0 and self.berryCount < 5:
             self.berryCount += 1
 
     def pickBerry(self):
         pass
 
     def render(self, win):
-        pass
+        win.blit(pygame.image.load(self.structureTexturePath[self.berryCount]), (self.xCor, self.yCor))
+
 
 class Cave(IndestructableStructure):
     structureTexturePath = "assets/Cave.png"
