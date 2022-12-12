@@ -36,7 +36,7 @@ class Inventory:
 
 
     def hotRender(self, win):
-        win.blit(self.hotbarImage, (int((win.get_width()-900)/2), int(win.get_height()-160)))
+        win.blit(self.hotbarImage, (0, int(win.get_height()-70)))
         for i in range(6):
             if len(self.slot[i]) > 0:
                 win.blit(self.slot[i][0].itemImage, (i*150 + int((win.get_width()-900)/2), int(win.get_height()-160)))

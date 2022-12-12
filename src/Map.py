@@ -88,23 +88,22 @@ class Map:
 
     def blockChange(self, playerObj):
         print(str(playerObj.inBlockXCor) + " " + str(playerObj.inBlockYCor))
-        if playerObj.inBlockXCor > 100:
+        if playerObj.inBlockXCor >= 100:
             playerObj.mapXCor -= 1
             print(playerObj.mapXCor)
             playerObj.inBlockXCor = 0
 
-
-        if playerObj.inBlockXCor < 0:
+        if playerObj.inBlockXCor <= 0:
             playerObj.mapXCor += 1
             print(playerObj.mapXCor)
             playerObj.inBlockXCor = 100
 
-        if playerObj.inBlockYCor > 100:
+        if playerObj.inBlockYCor >= 100:
             playerObj.mapYCor -= 1
             print(playerObj.mapYCor)
             playerObj.inBlockYCor = 0
 
-        if playerObj.inBlockYCor < 0:
+        if playerObj.inBlockYCor <= 0:
             playerObj.mapYCor += 1
             print(playerObj.mapYCor)
             playerObj.inBlockYCor = 100
