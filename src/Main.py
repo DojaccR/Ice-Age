@@ -46,6 +46,7 @@ def spawnEntity():
 
 
 #game loop
+clock = pygame.time.Clock()
 gameTick = 0
 run = True
 
@@ -65,7 +66,11 @@ while True:
 
             if event.key == pygame.K_e:
                 print("inventory open")
-                inventory.toggleInvRender(win)
+                UserInterface.toggleInvRender(UserInterface, Inventory)
+
+            #toggle UI rendering
+            if event.key == pygame.K_F1:
+                UserInterface.toggleUI(UserInterface)
 
     keys = pygame.key.get_pressed()
 
@@ -136,7 +141,13 @@ while True:
 
     #Foreground render
     playerObj.render(win)
-    UserInterface.healthRender(UserInterface, win)
+    UserInterface.statRender(UserInterface, win)
+    UserInterface.hotRender(UserInterface, Inventory, win)
+    UserInterface.invRender(UserInterface, Inventory, win)
+
+    #fps counter
+    clock.tick()
+    UserInterface.draw_text(UserInterface, win, str(int(clock.get_fps())), "white", (10, 0))
 
     for i in range(24):
         if len(inventory.slot[i]) > 0:
