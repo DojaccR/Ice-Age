@@ -17,12 +17,9 @@ class Inventory:
             self.slot.append(InventorySlot(i))
 
     def pickup(self, item, win):
-        print('pickup')
         for i in range(self.INVENTORY_MAX + self.HOTBAR_MAX):
             if len(self.slot[i]) == 0 or (self.slot[i][0].itemName == item.itemName and len(self.slot[i]) < self.slot[i][0].itemStackMax):
-                print("succes 1")
                 self.slot[i].append(item)
-                print(self.slot[i])
                 break
 
 
