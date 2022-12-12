@@ -1,4 +1,5 @@
 import pygame
+from HostileEntity import *
 
 class Structure:
     xCor = 0
@@ -50,12 +51,16 @@ class BerryBush(DestructableStructure):
 
 class Cave(IndestructableStructure):
     structureTexturePath = "assets/Cave.png"
+
     def __init__(self):
         pass
 
-    def spawnWolf(self):
-        pass
+    def spawnWolf(self, playerObj, entityList, win):
+        if self.xCor == playerObj.mapXCor*100 + playerObj.inBlockXCor and self.yCor == playerObj.mapYCor * 100 + playerObj.inBlockYCor and len(entityList) < 10:
+            entityList.append(DireWolf(len(entityList),
+                                       random*win.get_width() + playerObj.mapXCor*100 + playerObj.inBlockXCor - win.get_width()/2),
+                                       random*win.get_height() + playerObj.mapYCor*100 + playerObj.inBlockYCor - win.get_height()/2)
 
     def render(self, win):
-        pass
+        win.blit(pygame.image.load(self.structureTexturePath), (self.xCor, self.yCor))
 
