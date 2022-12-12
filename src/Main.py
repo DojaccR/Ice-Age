@@ -58,6 +58,15 @@ while True:
             pygame.quit()
             run = False
 
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_ESCAPE:
+                pygame.quit()
+                run = False
+
+            if event.key == pygame.K_e:
+                print("inventory open")
+                inventory.toggleInvRender(win)
+
     keys = pygame.key.get_pressed()
 
     if keys[pygame.K_a] and playerObj.xCor > 0:
@@ -129,10 +138,6 @@ while True:
     playerObj.render(win)
     inventory.hotRender(win)
     inventory.invRender(win)
-
-    if keys[pygame.K_e]:
-        print("pressed")
-        inventory.toggleInvRender(win)
 
     for i in range(24):
         if len(inventory.slot[i]) > 0:
