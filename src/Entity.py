@@ -16,7 +16,7 @@ class Entity:
     dir = 0
     persist = 0
     tickCount = 0
-    healthTexturePath = ["assets/Health0.png","assets/Health1.png","assets/Health2.png","assets/Health3.png"]
+    healthTexturePath = ["assets/EntityHealth0.png","assets/EntityHealth1.png","assets/EntityHealth2.png","assets/EntityHealth3.png","assets/EntityHealth4.png"]
     entityTexturePath = ""
 
     def __init__(self, entityID, hitboxHeight, hitboxWidth, xCor, yCor, health):
@@ -41,7 +41,7 @@ class Entity:
         self.xCor += int(self.vel*cos(self.dir))
         self.yCor += int(self.vel*sin(self.dir))
 
-    def health(self, healthchange):
+    def healthChange(self, healthchange):
         self.health += healthchange
 
     def checkCollisions(self):
@@ -49,5 +49,5 @@ class Entity:
 
     def render(self, win):
         win.blit(pygame.image.load(self.entityTexturePath), (self.xCor, self.yCor))
-        win.blit(pygame.image.load(self.healthTexturePath[4 - self.health]), (self.xCor, self.yCor + 60))
+        win.blit(pygame.image.load(self.healthTexturePath[self.health]), (self.xCor, self.yCor + 60))
 

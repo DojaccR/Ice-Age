@@ -10,38 +10,11 @@ class Inventory:
 
     slot = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
 
-    inventoryImageFile = "assets/Inventory.png"
-    hotbarImageFile = "assets/Hotbar.png"
-    hoverImageFile = "assets/Hover.png"
-    hotbarImage = pygame.image.load(hotbarImageFile)
-    inventoryImage = pygame.image.load(inventoryImageFile)
-
     isOpen = False
 
     def __init__(self):
         for i in range(24):
             self.slot.append(InventorySlot(i))
-
-    def invRender(self, win):
-        if self.isOpen == True:
-            pygame.time.delay(10)
-            win.blit(self.inventoryImage, (0, 0))
-
-    def toggleInvRender(self, win):
-        if self.isOpen == True:
-            self.isOpen = False
-        else:
-            self.isOpen = True
-
-
-
-    def hotRender(self, win):
-        if self.isOpen == False:
-            win.blit(self.hotbarImage, (0, int(win.get_height()-70)))
-            for i in range(6):
-                if len(self.slot[i]) > 0:
-                    win.blit(self.slot[i][0].itemImage, (i*120 + int((win.get_width()-720)/2), int(win.get_height()-130)))
-            #win.blit(pygame.image.load(self.healthImageFile[4 - self.health]), (self.xCor, self.yCor + 60))
 
     def pickup(self, item, win):
         print('pickup')
