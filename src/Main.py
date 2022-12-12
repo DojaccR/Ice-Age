@@ -6,7 +6,7 @@ from Inventory import *
 from Item import *
 import random as random
 import pygame
-import sys
+from UserInterface import *
 
 ENTITY_MAX = 3
 ITEM_MAX = 10
@@ -136,8 +136,7 @@ while True:
 
     #Foreground render
     playerObj.render(win)
-    inventory.hotRender(win)
-    inventory.invRender(win)
+    UserInterface.healthRender(UserInterface, win)
 
     for i in range(24):
         if len(inventory.slot[i]) > 0:
