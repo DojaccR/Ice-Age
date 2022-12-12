@@ -7,6 +7,7 @@ from Item import *
 import random as random
 import pygame
 from UserInterface import *
+from EntityManager import *
 
 ENTITY_MAX = 3
 ITEM_MAX = 10
@@ -20,16 +21,12 @@ pygame.display.set_caption("Ice Age")
 pygame.display.set_icon(pygame.image.load('assets/Logo.png'))
 
 map = Map(0)
+entityManager = EntityManager()
 #player loading
 playerObj = Player(win)
 inventory = Inventory()
 
-#wolf loading
-entityList = []
-#bery loading
-itemList = []
-#berry bush loading
-structureList = []
+'''
 def spawnItem():
     x = int(random.random()*win.get_width())
     y = int(random.random() * win.get_height())
@@ -43,7 +40,7 @@ def spawnEntity():
     Entity.entityCount += 1
 
 
-
+'''
 
 #game loop
 clock = pygame.time.Clock()
@@ -78,66 +75,43 @@ while True:
         #playerObj.xCor -= playerObj.vel
         playerObj.inBlockXCor += CAMERA_SPEED#playerObj.vel
         map.blockChange(playerObj)
-        for i in range(len(entityList)):
-            entityList[i].xCor += CAMERA_SPEED
-
-        for i in range(len(itemList)):
-            itemList[i].xCor += CAMERA_SPEED
+        entityManager.move("x", "positive", CAMERA_SPEED)
 
 
     if keys[pygame.K_d] and playerObj.xCor < 1280 - playerObj.hitboxWidth:
         #playerObj.xCor += playerObj.vel
         playerObj.inBlockXCor -= CAMERA_SPEED#playerObj.vel
         map.blockChange(playerObj)
-        for i in range(len(entityList)):
-            entityList[i].xCor -= CAMERA_SPEED
-
-        for i in range(len(itemList)):
-            itemList[i].xCor -= CAMERA_SPEED
+        entityManager.move("x", "negative", CAMERA_SPEED)
 
 
     if keys[pygame.K_w] and playerObj.yCor > 0:
         #playerObj.yCor -= playerObj.vel
         playerObj.inBlockYCor += CAMERA_SPEED#playerObj.vel
         map.blockChange(playerObj)
-        for i in range(len(entityList)):
-            entityList[i].yCor += CAMERA_SPEED
-
-        for i in range(len(itemList)):
-            itemList[i].yCor += CAMERA_SPEED
+        entityManager.move("y", "positive", CAMERA_SPEED)
 
     if keys[pygame.K_s] and playerObj.yCor < 720 - playerObj.hitboxHeight:
         #playerObj.yCor += playerObj.vel
         playerObj.inBlockYCor -= CAMERA_SPEED#playerObj.vel
         map.blockChange(playerObj)
-        for i in range(len(entityList)):
-            entityList[i].yCor -= CAMERA_SPEED
-
-        for i in range(len(itemList)):
-            itemList[i].yCor -= CAMERA_SPEED
+        entityManager.move("y", "negative", CAMERA_SPEED)
 
 
     #Background render
     win.fill((0, 255, 0))
 
     map.render1(playerObj, win)
+    entityManager.checkRenderedEntities(playerObj, win)
+    entityManager.runStructureFunctions(gameTick, playerObj, win)
+    entityManager.renderEntities(win)
     #Midground render
 
     #entity stuff
-    for i in range(ENTITY_MAX):
-        spawnEntity()
-        entityList[i].changeDir(entityList[i])
-        entityList[i].move(entityList[i])
-        entityList[i].render(win)
-        HostileEntity.target(entityList[i], playerObj)
 
     #item on ground/ interactable structures
     #need to write code to detect item on ground distance and pick up item into inventory
-    for i in range(ITEM_MAX):
-        spawnItem()
-        itemList[i].pickup(playerObj, inventory, win)
-        if itemList[i].isPickedUp == False:
-            itemList[i].render(win)
+
 
     #Foreground render
     playerObj.render(win)

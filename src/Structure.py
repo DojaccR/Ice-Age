@@ -39,7 +39,7 @@ class BerryBush(DestructableStructure):
         self.yCor = yCor
 
     def growBerry(self, tickCount):
-        if tickCount % 400 == 0 and self.berryCount < 5:
+        if tickCount % 40 == 0 and self.berryCount < 5:
             self.berryCount += 1
 
     def pickBerry(self):
@@ -52,8 +52,9 @@ class BerryBush(DestructableStructure):
 class Cave(IndestructableStructure):
     structureTexturePath = "assets/Cave.png"
 
-    def __init__(self):
-        pass
+    def __init__(self, xCor, yCor):
+        self.xCor = xCor
+        self.yCor = yCor
 
     def spawnWolf(self, playerObj, entityList, win):
         if self.xCor == playerObj.mapXCor*100 + playerObj.inBlockXCor and self.yCor == playerObj.mapYCor * 100 + playerObj.inBlockYCor and len(entityList) < 10:
