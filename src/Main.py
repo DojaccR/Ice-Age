@@ -10,7 +10,7 @@ import sys
 
 ENTITY_MAX = 3
 ITEM_MAX = 10
-CAMERA_SPEED = 1
+CAMERA_SPEED = 10
 #window loading
 pygame.init()
 
@@ -71,41 +71,45 @@ while True:
 
     if keys[pygame.K_a] and playerObj.xCor > 0:
         #playerObj.xCor -= playerObj.vel
-        playerObj.mapXCor -= 1#playerObj.vel
+        playerObj.inBlockXCor += CAMERA_SPEED#playerObj.vel
+        map.blockChange(playerObj)
         for i in range(len(entityList)):
-            entityList[i].xCor += 100
+            entityList[i].xCor += CAMERA_SPEED
 
         for i in range(len(itemList)):
-            itemList[i].xCor += 100
+            itemList[i].xCor += CAMERA_SPEED
 
 
     if keys[pygame.K_d] and playerObj.xCor < 1280 - playerObj.hitboxWidth:
         #playerObj.xCor += playerObj.vel
-        playerObj.mapXCor += 1#playerObj.vel
+        playerObj.inBlockXCor -= CAMERA_SPEED#playerObj.vel
+        map.blockChange(playerObj)
         for i in range(len(entityList)):
-            entityList[i].xCor -= 100
+            entityList[i].xCor -= CAMERA_SPEED
 
         for i in range(len(itemList)):
-            itemList[i].xCor -= 100
+            itemList[i].xCor -= CAMERA_SPEED
 
 
     if keys[pygame.K_w] and playerObj.yCor > 0:
         #playerObj.yCor -= playerObj.vel
-        playerObj.mapYCor -= 1#playerObj.vel
+        playerObj.inBlockYCor += CAMERA_SPEED#playerObj.vel
+        map.blockChange(playerObj)
         for i in range(len(entityList)):
-            entityList[i].yCor += 100
+            entityList[i].yCor += CAMERA_SPEED
 
         for i in range(len(itemList)):
-            itemList[i].yCor += 100
+            itemList[i].yCor += CAMERA_SPEED
 
     if keys[pygame.K_s] and playerObj.yCor < 720 - playerObj.hitboxHeight:
         #playerObj.yCor += playerObj.vel
-        playerObj.mapYCor += 1#playerObj.vel
+        playerObj.inBlockYCor -= CAMERA_SPEED#playerObj.vel
+        map.blockChange(playerObj)
         for i in range(len(entityList)):
-            entityList[i].yCor -= 100
+            entityList[i].yCor -= CAMERA_SPEED
 
         for i in range(len(itemList)):
-            itemList[i].yCor -= 100
+            itemList[i].yCor -= CAMERA_SPEED
 
 
     #Background render

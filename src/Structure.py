@@ -25,15 +25,34 @@ class DestructableStructure(Structure):
 
 class BerryBush(DestructableStructure):
     berryCount = 0
+    structureTexturePath = ["assets/Bush0.png",
+                            "assets/Bush1.png",
+                            "assets/Bush2.png",
+                            "assets/Bush3.png",
+                            "assets/Bush4.png",
+                            "assets/Bush5.png"]
 
     def __init__(self):
         pass
 
-    def growBerry(self):
-        pass
+    def growBerry(self, tickCount):
+        if tickCount%400 == 0 and self.berryCount < 5:
+            self.berryCount += 1
 
     def pickBerry(self):
         pass
 
+    def render(self, win):
+        pass
 
+class Cave(IndestructableStructure):
+    structureTexturePath = "assets/Cave.png"
+    def __init__(self):
+        pass
+
+    def spawnWolf(self):
+        pass
+
+    def render(self, win):
+        pass
 

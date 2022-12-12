@@ -26,19 +26,19 @@ class Map:
 
         #print(len(self.mapTiles))
         #print(len(self.mapTiles[0]))
-        print("rendering " + str((int(win.get_height()/100)+1)*(int((win.get_width()/100)+1))) + " chunks")
-        for i in range(int((win.get_width()/100)+1)):
+        #print("rendering " + str((int(win.get_height()/100)+2)*(int((win.get_width()/100)+2))) + " chunks")
+        for i in range(int((win.get_width()/100)+2)):
             #print(i)
-            for j in range((int(win.get_height()/100)+1)):
+            for j in range((int(win.get_height()/100)+2)):
                 #print(j)
                 if int(self.mapTiles[playerObj.mapXCor-int(((win.get_width()/100)+1)/2)+i][playerObj.mapYCor-int(((win.get_height()/100)+1)/2)+j]) == 1:
                     #print(playerObj.mapXCor - int(((win.get_width() / 50) + 1) / 2) + i)
                     #print(playerObj.mapYCor - int(((win.get_height() / 50) + 1) / 2) + j)
-                    win.blit(pygame.image.load("assets/Grass.png"), (100*i, 100*j))
+                    win.blit(pygame.image.load("assets/Grass.png"), (100*i+playerObj.inBlockXCor-100, 100*j+playerObj.inBlockYCor-100))
                 else:
                     #print(playerObj.mapXCor - int(((win.get_width() / 50) + 1) / 2) + i)
                     #print(playerObj.mapYCor - int(((win.get_height() / 50) + 1) / 2) + j)
-                    win.blit(pygame.image.load("assets/Grass2.png"), (100*i, 100*j))
+                    win.blit(pygame.image.load("assets/Grass2.png"), (100*i+playerObj.inBlockXCor-100, 100*j+playerObj.inBlockYCor-100))
 
 
     #loads on screen into array and then displayed
@@ -86,3 +86,24 @@ class Map:
             print("invalid")
             return "invalid"
 
+    def blockChange(self, playerObj):
+        print(str(playerObj.inBlockXCor) + " " + str(playerObj.inBlockYCor))
+        if playerObj.inBlockXCor >= 100:
+            playerObj.mapXCor -= 1
+            print(playerObj.mapXCor)
+            playerObj.inBlockXCor = 0
+
+        if playerObj.inBlockXCor <= 0:
+            playerObj.mapXCor += 1
+            print(playerObj.mapXCor)
+            playerObj.inBlockXCor = 100
+
+        if playerObj.inBlockYCor >= 100:
+            playerObj.mapYCor -= 1
+            print(playerObj.mapYCor)
+            playerObj.inBlockYCor = 0
+
+        if playerObj.inBlockYCor <= 0:
+            playerObj.mapYCor += 1
+            print(playerObj.mapYCor)
+            playerObj.inBlockYCor = 100

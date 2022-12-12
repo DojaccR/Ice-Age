@@ -46,11 +46,11 @@ class HostileEntity(Entity):
 
             if int(sqrt((self.xCor-playerObj.xCor)**2+(self.yCor-playerObj.yCor)**2)) <= self.atkRange and playerObj.health > 1 and self.tickCount%100 == 0:
                 playerObj.health -= self.damage
-                print("player health is "+str(playerObj.health))
+                #print("player health is "+str(playerObj.health))
 
-            print(playerObj.xCor)
-            print(self.xCor)
-            print("attack, distance is " + str((self.xCor-playerObj.xCor)**2) + " "+ str((self.yCor-playerObj.yCor)**2) + " " + str(sqrt((self.xCor-playerObj.xCor)**2+(self.yCor-playerObj.yCor)**2)))
+            #print(playerObj.xCor)
+            #print(self.xCor)
+            #print("attack, distance is " + str((self.xCor-playerObj.xCor)**2) + " "+ str((self.yCor-playerObj.yCor)**2) + " " + str(sqrt((self.xCor-playerObj.xCor)**2+(self.yCor-playerObj.yCor)**2)))
         else:
             self.aggro = False
 
