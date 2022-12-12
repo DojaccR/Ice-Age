@@ -25,7 +25,7 @@ class Inventory:
     def invRender(self, win):
         if self.isOpen == True:
             pygame.time.delay(10)
-            win.blit(self.inventoryImage, (int((win.get_width()-720)/2), int((win.get_height()-480)/2)))
+            win.blit(self.inventoryImage, (0, 0))
 
     def toggleInvRender(self, win):
         if self.isOpen == True:
@@ -37,7 +37,7 @@ class Inventory:
 
     def hotRender(self, win):
         if self.isOpen == False:
-            win.blit(self.hotbarImage, (int((win.get_width()-720)/2), int(win.get_height()-130)))
+            win.blit(self.hotbarImage, (0, int(win.get_height()-70)))
             for i in range(6):
                 if len(self.slot[i]) > 0:
                     win.blit(self.slot[i][0].itemImage, (i*120 + int((win.get_width()-720)/2), int(win.get_height()-130)))
