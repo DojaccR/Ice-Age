@@ -25,22 +25,23 @@ class Inventory:
     def invRender(self, win):
         if self.isOpen == True:
             pygame.time.delay(10)
-            win.blit(self.inventoryImage, (0, 0))
+            win.blit(self.inventoryImage, (int((win.get_width()-720)/2), int((win.get_height()-480)/2)))
 
     def toggleInvRender(self, win):
         if self.isOpen == True:
             self.isOpen = False
         else:
             self.isOpen = True
-            self.invRender(win)
+
 
 
     def hotRender(self, win):
-        win.blit(self.hotbarImage, (int((win.get_width()-900)/2), int(win.get_height()-160)))
-        for i in range(6):
-            if len(self.slot[i]) > 0:
-                win.blit(self.slot[i][0].itemImage, (i*150 + int((win.get_width()-900)/2), int(win.get_height()-160)))
-        #win.blit(pygame.image.load(self.healthImageFile[4 - self.health]), (self.xCor, self.yCor + 60))
+        if self.isOpen == False:
+            win.blit(self.hotbarImage, (int((win.get_width()-720)/2), int(win.get_height()-130)))
+            for i in range(6):
+                if len(self.slot[i]) > 0:
+                    win.blit(self.slot[i][0].itemImage, (i*120 + int((win.get_width()-720)/2), int(win.get_height()-130)))
+            #win.blit(pygame.image.load(self.healthImageFile[4 - self.health]), (self.xCor, self.yCor + 60))
 
     def pickup(self, item, win):
         print('pickup')
