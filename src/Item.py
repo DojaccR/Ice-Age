@@ -50,6 +50,9 @@ class Berry(Consumable):
         self.itemTexturePath = "assets/Berry.png"
         self.itemImage = pygame.image.load(self.itemTexturePath)
 
+    def consume(self, itemList, playerObj):
+        itemList.remove(self)
+        playerObj.hunger += 10
 
         #win.blit(pygame.image.load(self.healthImageFile[4 - self.health]), (self.xCor, self.yCor + 60))
 
