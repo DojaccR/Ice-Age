@@ -123,3 +123,7 @@ class EntityManager:
             for i in range(len(self.itemList)):
                 self.itemList[i].yCor -= CAMERA_SPEED
 
+    def playerInteract(self, playerObj, key):
+        for i in range(self.renderedStructureList):
+            if int(sqrt((self.renderedStructureList[i].xCor-playerObj.xCor)**2+(self.renderedStructureList[i].yCor-playerObj.yCor)**2)) < 30:
+                pass

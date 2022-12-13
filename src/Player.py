@@ -17,7 +17,7 @@ class Player(Entity):
     inBlockYCor = 1
 
     def __init__(self, win):
-        super().__init__(1, 100, 100, win.get_width()/2, win.get_height()/2, 4)
+        super().__init__(1, 100, 100, win.get_width()/2-self.playerImage.get_width()/2, win.get_height()/2-self.playerImage.get_height()/2, 4)
 
     def render(self, win):
         win.blit(self.playerImage, (self.xCor, self.yCor))
