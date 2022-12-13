@@ -2,6 +2,7 @@ import random as Random
 from Structure import *
 from Item import *
 from Entity import *
+from HostileEntity import *
 
 
 class EntityManager:
@@ -39,11 +40,13 @@ class EntityManager:
         self.renderedMobList = []
 
         for i in range(len(self.structureList)):
-            if self.structureList[i].xCor <= playerObj.mapXCor*100 + playerObj.inBlockXCor and self.structureList[i].yCor <= playerObj.mapYCor * 100 + playerObj.inBlockYCor:
+            #if self.structureList[i].xCor <= playerObj.mapXCor*100 + playerObj.inBlockXCor and self.structureList[i].yCor <= playerObj.mapYCor * 100 + playerObj.inBlockYCor:
+            if self.structureList[i].xCor <= win.get_width() and self.structureList[i].xCor >= 0 and self.structureList[i].yCor <= win.get_height() and self.structureList[i].yCor >= 0:
+                #print("Structure at : " + str(self.structureList[i].xCor) + ", " + str(self.structureList[i].yCor))
                 self.renderedStructureList.append(self.structureList[i])
 
         for i in range(len(self.mobList)):
-            if self.mobList[i].xCor == playerObj.mapXCor * 100 + playerObj.inBlockXCor and self.mobList[i].yCor == playerObj.mapYCor * 100 + playerObj.inBlockYCor:
+            if self.mobList[i].xCor <= win.get_width() and self.mobList[i].xCor >= 0 and self.mobList[i].yCor <= win.get_height() and self.mobList[i].yCor >= 0:
                 self.renderedMobList.append(self.mobList[i])
 
         for i in range(len(self.itemList)):
@@ -51,6 +54,7 @@ class EntityManager:
                 self.renderedItemList.append(self.itemList[i])
 
     def renderEntities(self, win):
+        print(len(self.mobList))
         for i in range(len(self.renderedStructureList)):
             self.renderedStructureList[i].render(win)
 
@@ -66,47 +70,56 @@ class EntityManager:
                 self.structureList[i].growBerry(tickCount)
 
             if type(self.structureList[i]) == Cave:
-                self.structureList[i].spawnWolf(playerObj, self.renderedMobList, win)
+                self.structureList[i].spawnWolf(playerObj,self.mobList, self.renderedMobList, win)
+
+    def runMobFunctions(self):
+        for i in range(len(self.renderedMobList)):
+            print("move")
+            self.renderedMobList[i].changeDir
+            self.renderedMobList[i].move
+            if type(self.renderedMobList[i]) == DireWolf:
+                print("target")
+                self.renderedMobList[i].target
 
     def move(self, axis, direction, CAMERA_SPEED):
         if axis == "x" and direction == "positive":
-            for i in range(len(self.renderedStructureList)):
-                self.renderedStructureList[i].xCor += CAMERA_SPEED
+            for i in range(len(self.structureList)):
+                self.structureList[i].xCor += CAMERA_SPEED
 
-            for i in range(len(self.renderedMobList)):
-                self.renderedMobList[i].xCor += CAMERA_SPEED
+            for i in range(len(self.mobList)):
+                self.mobList[i].xCor += CAMERA_SPEED
 
             for i in range(len(self.renderedItemList)):
-                self.renderedItemList[i].xCor += CAMERA_SPEED
+                self.itemList[i].xCor += CAMERA_SPEED
 
         if axis == "x" and direction == "negative":
-            for i in range(len(self.renderedStructureList)):
-                self.renderedStructureList[i].xCor -= CAMERA_SPEED
+            for i in range(len(self.structureList)):
+                self.structureList[i].xCor -= CAMERA_SPEED
 
-            for i in range(len(self.renderedMobList)):
-                self.renderedMobList[i].xCor -= CAMERA_SPEED
+            for i in range(len(self.mobList)):
+                self.mobList[i].xCor -= CAMERA_SPEED
 
-            for i in range(len(self.renderedItemList)):
-                self.renderedItemList[i].xCor -= CAMERA_SPEED
+            for i in range(len(self.itemList)):
+                self.itemList[i].xCor -= CAMERA_SPEED
 
         if axis == "y" and direction == "positive":
-            for i in range(len(self.renderedStructureList)):
-                self.renderedStructureList[i].yCor += CAMERA_SPEED
+            for i in range(len(self.structureList)):
+                self.structureList[i].yCor += CAMERA_SPEED
 
-            for i in range(len(self.renderedMobList)):
-                self.renderedMobList[i].yCor += CAMERA_SPEED
+            for i in range(len(self.mobList)):
+                self.mobList[i].yCor += CAMERA_SPEED
 
-            for i in range(len(self.renderedItemList)):
-                self.renderedItemList[i].yCor += CAMERA_SPEED
+            for i in range(len(self.itemList)):
+                self.itemList[i].yCor += CAMERA_SPEED
 
 
         if axis == "y" and direction == "negative":
-            for i in range(len(self.renderedStructureList)):
-                self.renderedStructureList[i].yCor -= CAMERA_SPEED
+            for i in range(len(self.structureList)):
+                self.structureList[i].yCor -= CAMERA_SPEED
 
-            for i in range(len(self.renderedMobList)):
-                self.renderedMobList[i].yCor -= CAMERA_SPEED
+            for i in range(len(self.mobList)):
+                self.mobList[i].yCor -= CAMERA_SPEED
 
-            for i in range(len(self.renderedItemList)):
-                self.renderedItemList[i].yCor -= CAMERA_SPEED
+            for i in range(len(self.itemList)):
+                self.itemList[i].yCor -= CAMERA_SPEED
 

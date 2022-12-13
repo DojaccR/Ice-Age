@@ -104,6 +104,7 @@ while True:
     map.render1(playerObj, win)
     entityManager.checkRenderedEntities(playerObj, win)
     entityManager.runStructureFunctions(gameTick, playerObj, win)
+    entityManager.runMobFunctions()
     entityManager.renderEntities(win)
     #Midground render
 

@@ -1,4 +1,5 @@
 import pygame
+import random as Random
 from HostileEntity import *
 
 class Structure:
@@ -56,11 +57,11 @@ class Cave(IndestructableStructure):
         self.xCor = xCor
         self.yCor = yCor
 
-    def spawnWolf(self, playerObj, entityList, win):
-        if self.xCor == playerObj.mapXCor*100 + playerObj.inBlockXCor and self.yCor == playerObj.mapYCor * 100 + playerObj.inBlockYCor and len(entityList) < 10:
-            entityList.append(DireWolf(len(entityList),
-                                       random*win.get_width() + playerObj.mapXCor*100 + playerObj.inBlockXCor - win.get_width()/2),
-                                       random*win.get_height() + playerObj.mapYCor*100 + playerObj.inBlockYCor - win.get_height()/2)
+    def spawnWolf(self, playerObj, mobList, renderedMobList, win):
+        if self.xCor <= win.get_width() and self.xCor >= 0 and self.yCor <= win.get_height() and self.yCor >= 0 and len(renderedMobList) < 10:
+            print("spawning wolf...")
+            mobList.append(DireWolf(len(mobList), self.xCor, self.yCor))
+
 
     def render(self, win):
         win.blit(pygame.image.load(self.structureTexturePath), (self.xCor, self.yCor))
