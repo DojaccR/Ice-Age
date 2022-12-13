@@ -72,11 +72,11 @@ class EntityManager:
             if type(self.structureList[i]) == Cave:
                 self.structureList[i].spawnWolf(playerObj,self.mobList, self.renderedMobList, win)
 
-    def runMobFunctions(self, event, playerObj):
+    def runMobFunctions(self, playerObj):
         for i in range(len(self.renderedMobList)):
             print("move")
-            self.renderedMobList[i].changeDir(event)
-            self.renderedMobList[i].move(event)
+            self.renderedMobList[i].changeDir(e)
+            self.renderedMobList[i].move(e)
             if type(self.renderedMobList[i]) == DireWolf:
                 print("target")
                 self.renderedMobList[i].target(playerObj)
