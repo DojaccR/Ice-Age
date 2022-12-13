@@ -2,6 +2,7 @@ import pygame
 from Player import *
 from Entity import *
 from Inventory import *
+from Item import *
 
 class UserInterface:
     healthbarImage = ["assets/PlayerHealth0.png","assets/PlayerHealth1.png","assets/PlayerHealth2.png","assets/PlayerHealth3.png","assets/PlayerHealth4.png"]
@@ -35,6 +36,7 @@ class UserInterface:
                 win.blit(pygame.image.load(self.hotbarImage), (0, int(win.get_height()-120)))
                 for i in range(6):
                     if len(Inventory.slot[i]) > 0:
+                        print(Inventory.slot[i][0])
                         win.blit(Inventory.slot[i][0].itemImage, (i*120, int(win.get_height()-120)))
 
 

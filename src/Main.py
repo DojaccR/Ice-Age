@@ -106,6 +106,7 @@ while True:
     entityManager.runStructureFunctions(gameTick, playerObj, win)
     entityManager.runMobFunctions(event, playerObj)
     entityManager.renderEntities(win)
+    entityManager.playerInteract(playerObj, Item)
     #Midground render
 
     #entity stuff

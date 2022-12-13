@@ -3,6 +3,7 @@ from Structure import *
 from Item import *
 from Entity import *
 from HostileEntity import *
+from Inventory import *
 
 
 class EntityManager:
@@ -54,7 +55,7 @@ class EntityManager:
                 self.renderedItemList.append(self.itemList[i])
 
     def renderEntities(self, win):
-        print(len(self.mobList))
+        #print(len(self.mobList))
         for i in range(len(self.renderedStructureList)):
             self.renderedStructureList[i].render(win)
 
@@ -123,7 +124,12 @@ class EntityManager:
             for i in range(len(self.itemList)):
                 self.itemList[i].yCor -= CAMERA_SPEED
 
-    def playerInteract(self, playerObj, key):
-        for i in range(self.renderedStructureList):
+    def playerInteract(self, playerObj, item):
+        for i in range(len(self.renderedStructureList)):
             if int(sqrt((self.renderedStructureList[i].xCor-playerObj.xCor)**2+(self.renderedStructureList[i].yCor-playerObj.yCor)**2)) < 30:
-                pass
+                print("in range")
+                for event in pygame.event.get():
+                    if event.type == pygame.KEYUP:
+                        if event.key == pygame.K_f:
+                            item = Berry
+                            Inventory.pickup(Inventory, item)
