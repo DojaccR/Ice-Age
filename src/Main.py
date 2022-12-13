@@ -9,9 +9,8 @@ import pygame
 from UserInterface import *
 from EntityManager import *
 
-ENTITY_MAX = 3
-ITEM_MAX = 10
 CAMERA_SPEED = 10
+
 #window loading
 pygame.init()
 
@@ -22,6 +21,7 @@ pygame.display.set_icon(pygame.image.load('assets/Logo.png'))
 
 map = Map(0)
 entityManager = EntityManager()
+userInterface = UserInterface()
 #player loading
 playerObj = Player(win)
 inventory = Inventory()
@@ -49,6 +49,8 @@ run = True
 
 while True:
     pygame.time.delay(10)
+    if gameTick % 4 == 0 and playerObj.hunger > 0:
+        playerObj.hunger -= 1
 
     for event in pygame.event.get():
 
@@ -63,11 +65,14 @@ while True:
 
             if event.key == pygame.K_e:
                 print("inventory open")
-                UserInterface.toggleInvRender(UserInterface, Inventory)
+                UserInterface.toggleInvRender(userInterface, inventory)
+
+            if event.key == pygame.K_f:
+                entityManager.playerInteract(playerObj, "f")
 
             #toggle UI rendering
             if event.key == pygame.K_F1:
-                UserInterface.toggleUI(UserInterface)
+                UserInterface.toggleUI(userInterface)
 
     keys = pygame.key.get_pressed()
 
@@ -104,7 +109,7 @@ while True:
     map.render1(playerObj, win)
     entityManager.checkRenderedEntities(playerObj, win)
     entityManager.runStructureFunctions(gameTick, playerObj, win)
-    entityManager.runMobFunctions(event, playerObj)
+    entityManager.runMobFunctions(playerObj)
     entityManager.renderEntities(win)
     entityManager.playerInteract(playerObj, Item)
     #Midground render
@@ -117,13 +122,13 @@ while True:
 
     #Foreground render
     playerObj.render(win)
-    UserInterface.statRender(UserInterface, playerObj, win)
-    UserInterface.hotRender(UserInterface, Inventory, win)
-    UserInterface.invRender(UserInterface, Inventory, win)
+    userInterface.statRender(win, playerObj)
+    userInterface.hotRender(inventory, win)
+    userInterface.invRender(inventory, win)
 
     #fps counter
     clock.tick()
-    UserInterface.draw_text(UserInterface, win, str(int(clock.get_fps())), "white", (10, 0))
+    userInterface.draw_text(win, str(int(clock.get_fps())), "white", (10, 0))
 
     for i in range(24):
         if len(inventory.slot[i]) > 0:
