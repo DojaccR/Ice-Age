@@ -58,6 +58,11 @@ while True:
             pygame.quit()
             run = False
 
+        if event.type == pygame.MOUSEBUTTONUP:
+            print("pressed main")
+            entityManager.playerInteract(playerObj, "m1")
+
+
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_ESCAPE:
                 pygame.quit()
@@ -107,7 +112,7 @@ while True:
     win.fill((0, 255, 0))
 
     map.render1(playerObj, win)
-    entityManager.checkRenderedEntities(playerObj, win)
+    entityManager.checkRenderedEntities(win)
     entityManager.runStructureFunctions(gameTick, playerObj, win)
     entityManager.runMobFunctions(playerObj)
     entityManager.runItemFunctions(playerObj, inventory, win)

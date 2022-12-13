@@ -51,3 +51,10 @@ class Entity:
         win.blit(pygame.image.load(self.entityTexturePath), (self.xCor, self.yCor))
         win.blit(pygame.image.load(self.healthTexturePath[self.health]), (self.xCor, self.yCor + 60))
 
+    def die(self, mobList, itemList):
+        if self.health == 0:
+            mobList.remove(self)
+            self.dropItem(itemList)
+
+    def dropItem(self):
+        pass

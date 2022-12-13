@@ -35,15 +35,14 @@ class EntityManager:
             self.structureList.append(Cave(xCor, yCor))
 
 
-    def checkRenderedEntities(self, playerObj, win):
+    def checkRenderedEntities(self, win):
         self.renderedStructureList = []
         self.renderedItemList = []
         self.renderedMobList = []
 
         for i in range(len(self.structureList)):
-            #if self.structureList[i].xCor <= playerObj.mapXCor*100 + playerObj.inBlockXCor and self.structureList[i].yCor <= playerObj.mapYCor * 100 + playerObj.inBlockYCor:
-            if self.structureList[i].xCor <= win.get_width() and self.structureList[i].xCor >= 0 and self.structureList[i].yCor <= win.get_height() and self.structureList[i].yCor >= 0:
-                #print("Structure at : " + str(self.structureList[i].xCor) + ", " + str(self.structureList[i].yCor))
+
+            if self.structureList[i].xCor <= win.get_width() and self.structureList[i].xCor >= -200 and self.structureList[i].yCor <= win.get_height() and self.structureList[i].yCor >= -200:
                 self.renderedStructureList.append(self.structureList[i])
 
         for i in range(len(self.mobList)):
@@ -76,11 +75,13 @@ class EntityManager:
     def runMobFunctions(self, playerObj):
         for i in range(len(self.renderedMobList)):
             print("move")
+            self.renderedMobList[i].die(self.mobList, self.itemList)
             self.renderedMobList[i].changeDir(e)
             self.renderedMobList[i].move(e)
             if type(self.renderedMobList[i]) == DireWolf:
                 print("target")
                 self.renderedMobList[i].target(playerObj)
+
 
     def runItemFunctions(self, playerObj, inventory, win):
         for i in range(len(self.renderedItemList)):
@@ -129,6 +130,13 @@ class EntityManager:
                 self.itemList[i].yCor -= CAMERA_SPEED
 
     def playerInteract(self, playerObj, keys):
-        for i in range(len(self.renderedStructureList)):
-            if int(sqrt((self.renderedStructureList[i].xCor-playerObj.xCor)**2+(self.renderedStructureList[i].yCor-playerObj.yCor)**2)) < 30 and type(self.renderedStructureList[i]) == BerryBush:
-                self.renderedStructureList[i].dropBerry(self.itemList)
+        if keys == "f":
+            for i in range(len(self.renderedStructureList)):
+                if int(sqrt((self.renderedStructureList[i].xCor-playerObj.xCor)**2+(self.renderedStructureList[i].yCor-playerObj.yCor)**2)) < 30 and type(self.renderedStructureList[i]) == BerryBush:
+                    self.renderedStructureList[i].dropBerry(self.itemList)
+
+        elif keys == "m1":
+            print("mouse presssed")
+            for i in range(len(self.renderedMobList)):
+                if int(sqrt((self.renderedMobList[i].xCor-playerObj.xCor)**2+(self.renderedMobList[i].yCor-playerObj.yCor)**2)) < 30:
+                    self.renderedMobList[i].health -= 1

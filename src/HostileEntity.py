@@ -1,6 +1,8 @@
 from Entity import *
+from Item import *
 from math import *
 import pygame
+import random as Random
 
 class HostileEntity(Entity):
     damage = 0
@@ -63,10 +65,12 @@ class DireWolf(HostileEntity):
     damage = 1
     aggroRange = 150
     atkRange = 10
-    dropTable = [["meat", "2"], ["fur", "2"], ["fang", "2"]]
 
     def __init__(self, entityID, xCor, yCor):
         super().__init__(entityID, 50, 100, xCor, yCor, 4, 1)
+
+    def dropItem(self, itemList):
+        itemList.append(WolfSkin(len(itemList), self.xCor, self.yCor))
 
 
 

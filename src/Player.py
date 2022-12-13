@@ -22,3 +22,5 @@ class Player(Entity):
     def render(self, win):
         win.blit(self.playerImage, (self.xCor, self.yCor))
 
+    def dropItem(self):
+        pass

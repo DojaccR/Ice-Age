@@ -11,7 +11,7 @@ class Map:
 
     def __init__(self, mapID):
         if str(mapID) == "create":
-            map = open("map1.txt", "w")
+            self.generate()
         else:
             map = open("map1.txt")
             for i in range(100):
@@ -60,7 +60,8 @@ class Map:
 
     def generate(self):
         map = open("map1.txt", "w")
-
+        w, h = 8, 5
+        Matrix = [[None for x in range(w)] for y in range(h)]
         x = ""
 
         for i in range(100):

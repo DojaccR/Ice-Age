@@ -25,6 +25,9 @@ class Item:
 
             #print(str(int(sqrt((self.xCor-playerObj.xCor)**2+(self.yCor-playerObj.yCor)**2))))
 
+    def render(self, win):
+        if self.isPickedUp == False:
+            win.blit(self.itemImage, (self.xCor, self.yCor))
 
 class Clothing(Item):
     itemStackMax = 1
@@ -47,7 +50,12 @@ class Berry(Consumable):
         self.itemTexturePath = "assets/Berry.png"
         self.itemImage = pygame.image.load(self.itemTexturePath)
 
-    def render(self, win):
-        if self.isPickedUp == False:
-            win.blit(self.itemImage, (self.xCor, self.yCor))
+
         #win.blit(pygame.image.load(self.healthImageFile[4 - self.health]), (self.xCor, self.yCor + 60))
+
+class WolfSkin(Consumable):
+
+    def __init__(self, itemID, xCor, yCor):
+        super().__init__(itemID, "wolfskin", xCor, yCor)
+        self.itemTexturePath = "assets/WolfSkin.png"
+        self.itemImage = pygame.image.load(self.itemTexturePath)
