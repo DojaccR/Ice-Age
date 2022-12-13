@@ -35,7 +35,8 @@ class UserInterface:
                 win.blit(pygame.image.load(self.hotbarImage), (0, int(win.get_height()-120)))
                 for i in range(6):
                     if len(inventory.slot[i]) > 0:
-                        win.blit(inventory.slot[i][0].itemImage, (i*120, int(win.get_height()-120)))
+                        win.blit(pygame.transform.scale(inventory.slot[i][0].itemImage, (100,100)), (i*120, int(win.get_height()-120)))
+                        self.draw_text(win, str(len(inventory.slot[i])), "magenta", (i*120 + 100, int(win.get_height()-30)))
 
 
 

@@ -110,8 +110,8 @@ while True:
     entityManager.checkRenderedEntities(playerObj, win)
     entityManager.runStructureFunctions(gameTick, playerObj, win)
     entityManager.runMobFunctions(playerObj)
+    entityManager.runItemFunctions(playerObj, inventory, win)
     entityManager.renderEntities(win)
-    entityManager.playerInteract(playerObj, Item)
     #Midground render
 
     #entity stuff

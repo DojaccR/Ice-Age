@@ -1,6 +1,8 @@
 import pygame
 import random as Random
 from HostileEntity import *
+from Inventory import *
+from Item import *
 
 class Structure:
     xCor = 0
@@ -43,11 +45,13 @@ class BerryBush(DestructableStructure):
         if tickCount % 40 == 0 and self.berryCount < 5:
             self.berryCount += 1
 
-    def pickBerry(self):
-        pass
-
     def render(self, win):
         win.blit(pygame.image.load(self.structureTexturePath[self.berryCount]), (self.xCor, self.yCor))
+
+    def dropBerry(self, itemList):
+        if self.berryCount > 0:
+            self.berryCount -= 1
+            itemList.append(Berry(len(itemList), self.xCor, self.yCor))
 
 
 class Cave(IndestructableStructure):

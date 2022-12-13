@@ -20,7 +20,7 @@ class Item:
 
     def pickup(self, playerObj, inventory, win):
         if int(sqrt((self.xCor-playerObj.xCor)**2+(self.yCor-playerObj.yCor)**2)) < 20 and self.isPickedUp == False:
-            inventory.pickup(self, win)
+            inventory.pickup(self)
             self.isPickedUp = True
 
             #print(str(int(sqrt((self.xCor-playerObj.xCor)**2+(self.yCor-playerObj.yCor)**2))))
@@ -48,5 +48,6 @@ class Berry(Consumable):
         self.itemImage = pygame.image.load(self.itemTexturePath)
 
     def render(self, win):
-        win.blit(self.itemImage, (self.xCor, self.yCor))
+        if self.isPickedUp == False:
+            win.blit(self.itemImage, (self.xCor, self.yCor))
         #win.blit(pygame.image.load(self.healthImageFile[4 - self.health]), (self.xCor, self.yCor + 60))

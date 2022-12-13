@@ -51,7 +51,7 @@ class EntityManager:
                 self.renderedMobList.append(self.mobList[i])
 
         for i in range(len(self.itemList)):
-            if self.itemList[i].xCor == playerObj.mapXCor * 100 + playerObj.inBlockXCor and self.itemList[i].yCor == playerObj.mapYCor * 100 + playerObj.inBlockYCor:
+            if self.itemList[i].xCor <= win.get_width() and self.itemList[i].xCor >= 0 and self.itemList[i].yCor <= win.get_height() and self.itemList[i].yCor >= 0:
                 self.renderedItemList.append(self.itemList[i])
 
     def renderEntities(self, win):
@@ -81,6 +81,10 @@ class EntityManager:
             if type(self.renderedMobList[i]) == DireWolf:
                 print("target")
                 self.renderedMobList[i].target(playerObj)
+
+    def runItemFunctions(self, playerObj, inventory, win):
+        for i in range(len(self.renderedItemList)):
+            self.renderedItemList[i].pickup(playerObj, inventory, win)
 
     def move(self, axis, direction, CAMERA_SPEED):
         if axis == "x" and direction == "positive":
@@ -124,12 +128,7 @@ class EntityManager:
             for i in range(len(self.itemList)):
                 self.itemList[i].yCor -= CAMERA_SPEED
 
-    def playerInteract(self, playerObj, item):
+    def playerInteract(self, playerObj, keys):
         for i in range(len(self.renderedStructureList)):
-            if int(sqrt((self.renderedStructureList[i].xCor-playerObj.xCor)**2+(self.renderedStructureList[i].yCor-playerObj.yCor)**2)) < 30:
-                print("in range")
-                for event in pygame.event.get():
-                    if event.type == pygame.KEYUP:
-                        if event.key == pygame.K_f:
-                            item = Berry
-                            Inventory.pickup(Inventory, item)
+            if int(sqrt((self.renderedStructureList[i].xCor-playerObj.xCor)**2+(self.renderedStructureList[i].yCor-playerObj.yCor)**2)) < 30 and type(self.renderedStructureList[i]) == BerryBush:
+                self.renderedStructureList[i].dropBerry(self.itemList)
