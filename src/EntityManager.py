@@ -72,14 +72,14 @@ class EntityManager:
             if type(self.structureList[i]) == Cave:
                 self.structureList[i].spawnWolf(playerObj,self.mobList, self.renderedMobList, win)
 
-    def runMobFunctions(self):
+    def runMobFunctions(self, event, playerObj):
         for i in range(len(self.renderedMobList)):
             print("move")
-            self.renderedMobList[i].changeDir
-            self.renderedMobList[i].move
+            self.renderedMobList[i].changeDir(event)
+            self.renderedMobList[i].move(event)
             if type(self.renderedMobList[i]) == DireWolf:
                 print("target")
-                self.renderedMobList[i].target
+                self.renderedMobList[i].target(playerObj)
 
     def move(self, axis, direction, CAMERA_SPEED):
         if axis == "x" and direction == "positive":

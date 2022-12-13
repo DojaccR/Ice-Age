@@ -104,7 +104,7 @@ while True:
     map.render1(playerObj, win)
     entityManager.checkRenderedEntities(playerObj, win)
     entityManager.runStructureFunctions(gameTick, playerObj, win)
-    entityManager.runMobFunctions()
+    entityManager.runMobFunctions(event, playerObj)
     entityManager.renderEntities(win)
     #Midground render
 
@@ -116,7 +116,7 @@ while True:
 
     #Foreground render
     playerObj.render(win)
-    UserInterface.statRender(UserInterface, win)
+    UserInterface.statRender(UserInterface, playerObj, win)
     UserInterface.hotRender(UserInterface, Inventory, win)
     UserInterface.invRender(UserInterface, Inventory, win)
 

@@ -19,9 +19,9 @@ class UserInterface:
         win.blit(self.text, pos)
 
 
-    def statRender(self, win):
+    def statRender(self, playerObj, win):
         if self.displayUI == True:
-            win.blit(pygame.image.load(self.healthbarImage[Player.health]), (1134, 20))
+            win.blit(pygame.image.load(self.healthbarImage[playerObj.health]), (1134, 20))
 
             win.blit(pygame.image.load(self.hungerbarImage), (1126, 60))
 
