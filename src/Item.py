@@ -11,6 +11,7 @@ class Item:
     xCor = 0
     yCor = 0
     itemCount = 0
+    itemType = ""
 
     def __init__(self, itemID, itemName, xCor, yCor):
         self.itemID = itemID
@@ -18,9 +19,10 @@ class Item:
         self.xCor = xCor
         self.yCor = yCor
 
-    def pickup(self, playerObj, inventory, win):
+    def pickup(self, playerObj, inventory, itemList):
         if int(sqrt((self.xCor-playerObj.xCor)**2+(self.yCor-playerObj.yCor)**2)) < 20 and self.isPickedUp == False:
             inventory.pickup(self)
+            itemList.remove(self)
             self.isPickedUp = True
 
             #print(str(int(sqrt((self.xCor-playerObj.xCor)**2+(self.yCor-playerObj.yCor)**2))))
@@ -28,6 +30,9 @@ class Item:
     def render(self, win):
         if self.isPickedUp == False:
             win.blit(self.itemImage, (self.xCor, self.yCor))
+
+    def use(self):
+        pass
 
 class Clothing(Item):
     itemStackMax = 1
@@ -43,15 +48,19 @@ class Consumable(Item):
 
     itemStackMax = 15
 
+class Edible(Consumable):
+    def __init__(self, itemID, itemName, xCor, yCor):
+        super().__init__(itemID, itemName, xCor, yCor)
 
-class Berry(Consumable):
+class Berry(Edible):
+    itemType = "edible"
     def __init__(self, itemID, xCor, yCor):
         super().__init__(itemID, "berry", xCor, yCor)
         self.itemTexturePath = "assets/Berry.png"
         self.itemImage = pygame.image.load(self.itemTexturePath)
 
-    def consume(self, itemList, playerObj):
-        itemList.remove(self)
+    def useItem(self, slot, playerObj):
+        slot.remove(self)
         playerObj.hunger += 10
 
         #win.blit(pygame.image.load(self.healthImageFile[4 - self.health]), (self.xCor, self.yCor + 60))

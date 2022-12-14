@@ -63,21 +63,42 @@ while True:
             entityManager.playerInteract(playerObj, "m1")
 
 
-        if event.type == pygame.KEYUP:
+        if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 pygame.quit()
                 run = False
 
             if event.key == pygame.K_e:
                 print("inventory open")
-                UserInterface.toggleInvRender(userInterface, inventory)
+                userInterface.toggleInvRender(userInterface, inventory)
 
             if event.key == pygame.K_f:
                 entityManager.playerInteract(playerObj, "f")
 
+            if event.key == pygame.K_q:
+                inventory.useItem(playerObj)
+
             #toggle UI rendering
             if event.key == pygame.K_F1:
-                UserInterface.toggleUI(userInterface)
+                userInterface.toggleUI(userInterface)
+
+            if event.key == pygame.K_1:
+                inventory.hotbarSlot = 0
+
+            if event.key == pygame.K_2:
+                inventory.hotbarSlot = 1
+
+            if event.key == pygame.K_3:
+                inventory.hotbarSlot = 2
+
+            if event.key == pygame.K_4:
+                inventory.hotbarSlot = 3
+
+            if event.key == pygame.K_5:
+                inventory.hotbarSlot = 4
+
+            if event.key == pygame.K_6:
+                inventory.hotbarSlot = 5
 
     keys = pygame.key.get_pressed()
 

@@ -7,8 +7,12 @@ import sys
 class Inventory:
     INVENTORY_MAX = 18
     HOTBAR_MAX = 6
+    hotbarSlot = 0
 
-    slot = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+    slot = [[],[],[],[],[],[],
+            [],[],[],[],[],[],
+            [],[],[],[],[],[],
+            [],[],[],[],[],[]]
 
     isOpen = False
 
@@ -23,4 +27,7 @@ class Inventory:
                 break
 
 
-
+    def useItem(self, playerObj):
+        if len(self.slot[self.hotbarSlot]) > 0:
+            if self.slot[self.hotbarSlot][len(self.slot[self.hotbarSlot])-1].itemType == "edible":
+                self.slot[self.hotbarSlot][len(self.slot[self.hotbarSlot])-1].useItem(self.slot[self.hotbarSlot], playerObj)

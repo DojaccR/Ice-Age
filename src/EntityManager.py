@@ -85,7 +85,7 @@ class EntityManager:
 
     def runItemFunctions(self, playerObj, inventory, win):
         for i in range(len(self.renderedItemList)):
-            self.renderedItemList[i].pickup(playerObj, inventory, win)
+            self.renderedItemList[i].pickup(playerObj, inventory, self.itemList)
 
     def move(self, axis, direction, CAMERA_SPEED):
         if axis == "x" and direction == "positive":
