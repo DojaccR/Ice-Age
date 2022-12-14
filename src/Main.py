@@ -49,9 +49,9 @@ run = True
 
 while True:
     pygame.time.delay(10)
-    if gameTick % 4 == 0 and playerObj.hunger > 0:
+    if gameTick % 200 == 0 and playerObj.hunger > 0:
         playerObj.hunger -= 1
-
+    entityManager.checkRenderedEntities(win)
     for event in pygame.event.get():
 
         if event.type == pygame.QUIT:
@@ -133,7 +133,7 @@ while True:
     win.fill((0, 255, 0))
 
     map.render1(playerObj, win)
-    entityManager.checkRenderedEntities(win)
+
     entityManager.runStructureFunctions(gameTick, playerObj, win)
     entityManager.runMobFunctions(playerObj)
     entityManager.runItemFunctions(playerObj, inventory, win)

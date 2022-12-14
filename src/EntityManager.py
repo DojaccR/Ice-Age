@@ -88,6 +88,7 @@ class EntityManager:
             self.renderedItemList[i].pickup(playerObj, inventory, self.itemList)
 
     def move(self, axis, direction, CAMERA_SPEED):
+
         if axis == "x" and direction == "positive":
             for i in range(len(self.structureList)):
                 self.structureList[i].xCor += CAMERA_SPEED
