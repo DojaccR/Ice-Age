@@ -9,6 +9,7 @@ class UserInterface:
     hungerIconImage = "assets/HungerIcon.png"
     temperatureImage = "assets/TemperatureNeutral.png"
     hotbarImage = "assets/Hotbar.png"
+    hotbarSelectorImage = "assets/InventorySlotHover.png"
     inventoryImage = "assets/Inventory.png"
 
     displayUI = True
@@ -33,6 +34,7 @@ class UserInterface:
         if self.displayUI == True:
             if inventory.isOpen == False:
                 win.blit(pygame.image.load(self.hotbarImage), (0, int(win.get_height()-120)))
+                win.blit(pygame.image.load(self.hotbarSelectorImage), (120*inventory.hotbarSlot, int(win.get_height()-120)))
                 for i in range(6):
                     if len(inventory.slot[i]) > 0:
                         win.blit(pygame.transform.scale(inventory.slot[i][0].itemImage, (100,100)), (i*120, int(win.get_height()-120)))
