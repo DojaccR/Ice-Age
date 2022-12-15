@@ -23,24 +23,20 @@ class Map:
 
     #calculates and directly displays whats on screen
     def render1(self, playerObj, win):
-
-        #print(len(self.mapTiles))
-        #print(len(self.mapTiles[0]))
-        #print("rendering " + str((int(win.get_height()/100)+2)*(int((win.get_width()/100)+2))) + " chunks")
         for i in range(int((win.get_width()/150)+2)):
             #print(i)
-            for j in range((int(win.get_height()/90)+2)):
+            for j in range((int(win.get_height()/45)+3)):
                 #print(j)
                 if int(self.mapTiles[playerObj.mapXCor-int(((win.get_width()/150)+1)/2)+i][playerObj.mapYCor-int(((win.get_height()/90)+1)/2)+j]) == 1:
-                    if j % 2 == 0:
-                        win.blit(pygame.image.load("assets/Grass0.png"), (150 * i + playerObj.inBlockXCor - 150, 45 * j + playerObj.inBlockYCor - 45))
+                    if (playerObj.mapYCor-int(((win.get_height()/90)+1)/2)+j) % 2 == 0:
+                        win.blit(pygame.image.load("assets/Grass0.png"), (150 * i + playerObj.inBlockXCor - 150, 45 * j + playerObj.inBlockYCor - 135))
                     else:
-                        win.blit(pygame.image.load("assets/Grass0.png"), (225 * i + playerObj.inBlockXCor - 150, 45 * j + playerObj.inBlockYCor - 45))
+                        win.blit(pygame.image.load("assets/Grass0.png"), (150 * i + playerObj.inBlockXCor - 225, 45 * j + playerObj.inBlockYCor - 135))
                 else:
-                    if j % 2 == 0:
-                        win.blit(pygame.image.load("assets/Grass1.png"), (150 * i + playerObj.inBlockXCor - 150, 45 * j + playerObj.inBlockYCor - 45))
+                    if (playerObj.mapYCor-int(((win.get_height()/90)+1)/2)+j) % 2 == 0:
+                        win.blit(pygame.image.load("assets/Grass1.png"), (150 * i + playerObj.inBlockXCor - 150, 45 * j + playerObj.inBlockYCor - 135))
                     else:
-                        win.blit(pygame.image.load("assets/Grass1.png"), (225 * i + playerObj.inBlockXCor - 150, 45 * j + playerObj.inBlockYCor - 45))
+                        win.blit(pygame.image.load("assets/Grass1.png"), (150 * i + playerObj.inBlockXCor - 225, 45 * j + playerObj.inBlockYCor - 135))
 
 
     #loads on screen into array and then displayed
@@ -91,7 +87,7 @@ class Map:
 
     def blockChange(self, playerObj):
         #print(str(playerObj.inBlockXCor) + " " + str(playerObj.inBlockYCor))
-        if playerObj.inBlockXCor > 100:
+        if playerObj.inBlockXCor > 150:
             playerObj.mapXCor -= 1
             #print(playerObj.mapXCor)
             playerObj.inBlockXCor = 1
@@ -99,9 +95,9 @@ class Map:
         if playerObj.inBlockXCor < 0:
             playerObj.mapXCor += 1
             #print(playerObj.mapXCor)
-            playerObj.inBlockXCor = 91
+            playerObj.inBlockXCor = 141
 
-        if playerObj.inBlockYCor > 100:
+        if playerObj.inBlockYCor > 45:
             playerObj.mapYCor -= 1
             #print(playerObj.mapYCor)
             playerObj.inBlockYCor = 1
@@ -109,4 +105,4 @@ class Map:
         if playerObj.inBlockYCor < 0:
             playerObj.mapYCor += 1
             #print(playerObj.mapYCor)
-            playerObj.inBlockYCor = 91
+            playerObj.inBlockYCor = 41
