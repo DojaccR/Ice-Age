@@ -11,7 +11,8 @@ from EntityManager import *
 
 CAMERA_SPEED = 10
 
-#window loading
+# window loading
+
 pygame.init()
 
 win = pygame.display.set_mode((1280,720))
@@ -22,27 +23,14 @@ pygame.display.set_icon(pygame.image.load('assets/Logo.png'))
 map = Map(0)
 entityManager = EntityManager()
 userInterface = UserInterface()
-#player loading
+
+# player loading
+
 playerObj = Player(win)
 inventory = Inventory()
 
-'''
-def spawnItem():
-    x = int(random.random()*win.get_width())
-    y = int(random.random() * win.get_height())
-    if Item.itemCount < ITEM_MAX:
-        itemList.append(Berry(len(itemList), x, y))
-    Item.itemCount += 1
+# game loop
 
-def spawnEntity():
-    if Entity.entityCount < ENTITY_MAX:
-        entityList.append(DireWolf(len(entityList), 600, 300))
-    Entity.entityCount += 1
-
-
-'''
-
-#game loop
 clock = pygame.time.Clock()
 gameTick = 0
 run = True
@@ -62,7 +50,6 @@ while True:
             print("pressed main")
             entityManager.playerInteract(playerObj, "m1")
 
-
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 pygame.quit()
@@ -78,7 +65,8 @@ while True:
             if event.key == pygame.K_q:
                 inventory.useItem(playerObj)
 
-            #toggle UI rendering
+            # toggle UI rendering
+
             if event.key == pygame.K_F1:
                 userInterface.toggleUI(userInterface)
 
@@ -103,33 +91,27 @@ while True:
     keys = pygame.key.get_pressed()
 
     if keys[pygame.K_a] and playerObj.xCor > 0:
-        #playerObj.xCor -= playerObj.vel
-        playerObj.inBlockXCor += CAMERA_SPEED#playerObj.vel
+        playerObj.inBlockXCor += CAMERA_SPEED
         map.blockChange(playerObj)
         entityManager.move("x", "positive", CAMERA_SPEED)
 
-
     if keys[pygame.K_d] and playerObj.xCor < 1280 - playerObj.hitboxWidth:
-        #playerObj.xCor += playerObj.vel
-        playerObj.inBlockXCor -= CAMERA_SPEED#playerObj.vel
+        playerObj.inBlockXCor -= CAMERA_SPEED
         map.blockChange(playerObj)
         entityManager.move("x", "negative", CAMERA_SPEED)
 
-
     if keys[pygame.K_w] and playerObj.yCor > 0:
-        #playerObj.yCor -= playerObj.vel
-        playerObj.inBlockYCor += CAMERA_SPEED#playerObj.vel
+        playerObj.inBlockYCor += CAMERA_SPEED
         map.blockChange(playerObj)
         entityManager.move("y", "positive", CAMERA_SPEED)
 
     if keys[pygame.K_s] and playerObj.yCor < 720 - playerObj.hitboxHeight:
-        #playerObj.yCor += playerObj.vel
-        playerObj.inBlockYCor -= CAMERA_SPEED#playerObj.vel
+        playerObj.inBlockYCor -= CAMERA_SPEED
         map.blockChange(playerObj)
         entityManager.move("y", "negative", CAMERA_SPEED)
 
+    # Background render
 
-    #Background render
     win.fill((0, 255, 0))
 
     map.render1(playerObj, win)
@@ -138,28 +120,18 @@ while True:
     entityManager.runMobFunctions(playerObj)
     entityManager.runItemFunctions(playerObj, inventory, win)
     entityManager.renderEntities(win)
-    #Midground render
 
-    #entity stuff
+    # Foreground render
 
-    #item on ground/ interactable structures
-    #need to write code to detect item on ground distance and pick up item into inventory
-
-
-    #Foreground render
     playerObj.render(win)
     userInterface.statRender(win, playerObj)
     userInterface.hotRender(inventory, win)
     userInterface.invRender(inventory, win)
 
-    #fps counter
+    # fps counter
+
     clock.tick()
     userInterface.draw_text(win, str(int(clock.get_fps())), "white", (10, 0))
-
-    for i in range(24):
-        if len(inventory.slot[i]) > 0:
-            pass
-            #print(inventory.slot[i][0].itemName)
 
     gameTick += 1
     pygame.display.update()

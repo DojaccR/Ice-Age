@@ -56,16 +56,24 @@ class BerryBush(DestructableStructure):
 
 class Cave(IndestructableStructure):
     structureTexturePath = "assets/Cave.png"
+    caveType = ""
 
     def __init__(self, xCor, yCor):
         self.xCor = xCor
         self.yCor = yCor
+        type = int(Random.random() * 2)
+        if type == 0:
+            self.caveType = "DireWolf"
+        else:
+            self.caveType = "SabreTooth"
 
     def spawnWolf(self, playerObj, mobList, renderedMobList, win):
-        if self.xCor <= win.get_width() and self.xCor >= 0 and self.yCor <= win.get_height() and self.yCor >= 0 and len(renderedMobList) < 10:
-            print("spawning wolf...")
-            mobList.append(DireWolf(len(mobList), self.xCor, self.yCor))
-
+        if self.caveType == "DireWolf":
+            if self.xCor <= win.get_width() and self.xCor >= 0 and self.yCor <= win.get_height() and self.yCor >= 0 and len(renderedMobList) < 10:
+                mobList.append(DireWolf(len(mobList), self.xCor + (pygame.image.load(self.structureTexturePath)).get_width()/2, self.yCor + (pygame.image.load(self.structureTexturePath)).get_height()))
+        else:
+            if self.xCor <= win.get_width() and self.xCor >= 0 and self.yCor <= win.get_height() and self.yCor >= 0 and len(renderedMobList) < 5:
+                mobList.append(SabreTooth(len(mobList), self.xCor + (pygame.image.load(self.structureTexturePath)).get_width()/2, self.yCor + (pygame.image.load(self.structureTexturePath)).get_height()))
 
     def render(self, win):
         win.blit(pygame.image.load(self.structureTexturePath), (self.xCor, self.yCor))

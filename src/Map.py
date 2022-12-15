@@ -105,4 +105,4 @@ class Map:
         if playerObj.inBlockYCor < 0:
             playerObj.mapYCor += 1
             #print(playerObj.mapYCor)
-            playerObj.inBlockYCor = 41
+            playerObj.inBlockYCor = 36

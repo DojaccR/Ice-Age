@@ -72,6 +72,20 @@ class DireWolf(HostileEntity):
     def dropItem(self, itemList):
         itemList.append(WolfSkin(len(itemList), self.xCor, self.yCor))
 
+class SabreTooth(HostileEntity):
+    entityTexturePath = "assets/Sabre.png"
+    hitboxHeight = 50
+    hitboxWidth = 100
+    health = 4
+    damage = 1
+    aggroRange = 600
+    atkRange = 15
+
+    def __init__(self, entityID, xCor, yCor):
+        super().__init__(entityID, 50, 100, xCor, yCor, 4, 1)
+
+    def dropItem(self, itemList):
+        itemList.append(WolfSkin(len(itemList), self.xCor, self.yCor))
 
 
 

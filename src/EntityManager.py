@@ -34,7 +34,6 @@ class EntityManager:
             yCor = (int(Random.random() * 10000) - 5000)
             self.structureList.append(Cave(xCor, yCor))
 
-
     def checkRenderedEntities(self, win):
         self.renderedStructureList = []
         self.renderedItemList = []
@@ -54,7 +53,6 @@ class EntityManager:
                 self.renderedItemList.append(self.itemList[i])
 
     def renderEntities(self, win):
-        #print(len(self.mobList))
         for i in range(len(self.renderedStructureList)):
             self.renderedStructureList[i].render(win)
 
@@ -74,14 +72,11 @@ class EntityManager:
 
     def runMobFunctions(self, playerObj):
         for i in range(len(self.renderedMobList)):
-            print("move")
             self.renderedMobList[i].die(self.mobList, self.itemList)
             self.renderedMobList[i].changeDir(e)
             self.renderedMobList[i].move(e)
-            if type(self.renderedMobList[i]) == DireWolf:
-                print("target")
+            if type(self.renderedMobList[i]) == HostileEntity:
                 self.renderedMobList[i].target(playerObj)
-
 
     def runItemFunctions(self, playerObj, inventory, win):
         for i in range(len(self.renderedItemList)):
@@ -118,7 +113,6 @@ class EntityManager:
 
             for i in range(len(self.itemList)):
                 self.itemList[i].yCor += CAMERA_SPEED
-
 
         if axis == "y" and direction == "negative":
             for i in range(len(self.structureList)):
