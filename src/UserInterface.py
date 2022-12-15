@@ -47,6 +47,10 @@ class UserInterface:
             if inventory.isOpen == True:
                 pygame.time.delay(10)
                 win.blit(pygame.image.load(self.inventoryImage), (0, int(win.get_height()-490)))
+                for i in range(6):
+                    if len(inventory.slot[i]) > 0:
+                        win.blit(pygame.transform.scale(inventory.slot[i][0].itemImage, (100,100)), (i*120, int(win.get_height()-120)))
+                        self.draw_text(win, str(len(inventory.slot[i])), "magenta", (i*120 + 100, int(win.get_height()-30)))
 
     def toggleInvRender(self, inventory):
         if inventory.isOpen == True:

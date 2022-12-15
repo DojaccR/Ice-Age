@@ -48,11 +48,7 @@ class Consumable(Item):
 
     itemStackMax = 15
 
-class Edible(Consumable):
-    def __init__(self, itemID, itemName, xCor, yCor):
-        super().__init__(itemID, itemName, xCor, yCor)
-
-class Berry(Edible):
+class Berry(Consumable):
     itemType = "edible"
     def __init__(self, itemID, xCor, yCor):
         super().__init__(itemID, "berry", xCor, yCor)
@@ -69,8 +65,17 @@ class Berry(Edible):
         #win.blit(pygame.image.load(self.healthImageFile[4 - self.health]), (self.xCor, self.yCor + 60))
 
 class WolfSkin(Consumable):
+    itemType = "material"
 
     def __init__(self, itemID, xCor, yCor):
         super().__init__(itemID, "wolfskin", xCor, yCor)
         self.itemTexturePath = "assets/WolfSkin.png"
+        self.itemImage = pygame.image.load(self.itemTexturePath)
+
+class Flint(Consumable):
+    itemType = "material"
+
+    def __init__(self, itemID, xCor, yCor):
+        super().__init__(itemID, "flint", xCor, yCor)
+        self.itemTexturePath = "assets/Flint.png"
         self.itemImage = pygame.image.load(self.itemTexturePath)

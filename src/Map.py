@@ -8,8 +8,18 @@ class Map:
     mapFile = ""
     mapTiles = []
     renderedTiles = [[]]
+    tileWidth = 0
+    tileHeight = 0
+    tileTexturePath = ["assets/Grass0.png", "assets/Grass1.png"]
+    tileTextures = []
 
     def __init__(self, mapID):
+        for i in range(len(self.tileTexturePath)):
+            self.tileTextures.append(pygame.image.load(self.tileTexturePath[i]))
+
+        self.tileWidth = self.tileTextures[0].get_width()
+        self.tileHeight = self.tileTextures[0].get_height()
+
         if str(mapID) == "create":
             self.generate()
         else:
@@ -23,38 +33,13 @@ class Map:
 
     #calculates and directly displays whats on screen
     def render1(self, playerObj, win):
-        for i in range(int((win.get_width()/150)+2)):
+        for i in range(int((win.get_width()/self.tileWidth)+2)):
             #print(i)
-            for j in range((int(win.get_height()/45)+3)):
-                #print(j)
-                if int(self.mapTiles[playerObj.mapXCor-int(((win.get_width()/150)+1)/2)+i][playerObj.mapYCor-int(((win.get_height()/90)+1)/2)+j]) == 1:
-                    if (playerObj.mapYCor-int(((win.get_height()/90)+1)/2)+j) % 2 == 0:
-                        win.blit(pygame.image.load("assets/Grass0.png"), (150 * i + playerObj.inBlockXCor - 150, 45 * j + playerObj.inBlockYCor - 135))
-                    else:
-                        win.blit(pygame.image.load("assets/Grass0.png"), (150 * i + playerObj.inBlockXCor - 225, 45 * j + playerObj.inBlockYCor - 135))
+            for j in range((int(win.get_height()/(self.tileHeight/2))+3)):
+                if (playerObj.mapYCor-int(((win.get_height()/self.tileHeight)+1)/2)+j) % 2 == 0:
+                    win.blit(self.tileTextures[int(self.mapTiles[playerObj.mapXCor-int(((win.get_width()/self.tileWidth)+1)/2)+i][playerObj.mapYCor-int(((win.get_height()/self.tileHeight)+1)/2)+j])], (self.tileWidth * i + playerObj.inBlockXCor - self.tileWidth, self.tileHeight / 2 * j + playerObj.inBlockYCor - self.tileHeight * 3 / 2))
                 else:
-                    if (playerObj.mapYCor-int(((win.get_height()/90)+1)/2)+j) % 2 == 0:
-                        win.blit(pygame.image.load("assets/Grass1.png"), (150 * i + playerObj.inBlockXCor - 150, 45 * j + playerObj.inBlockYCor - 135))
-                    else:
-                        win.blit(pygame.image.load("assets/Grass1.png"), (150 * i + playerObj.inBlockXCor - 225, 45 * j + playerObj.inBlockYCor - 135))
-
-
-    #loads on screen into array and then displayed
-    def render2(self, playerObj, win):
-        for i in range(int((win.get_width / 50) + 1)):
-            for j in range((int(win.get_height / 50) + 1)):
-                self.renderedTiles[i][j] = self.mapTiles[playerObj.mapXCor - int(((win.get_width / 50) + 1) / 2) + i][
-                    playerObj.mapYCor - int(((win.get_height / 50) + 1) / 2) + j]
-
-
-    #loads whole map
-    def render3(self, playerObj, win):
-        for i in range(100):
-            for j in range(100):
-                if int(self.mapTiles[i][j]) == 1:
-                    win.blit(pygame.image.load("assets/Grass.png"), (50*i, 50*j))
-                else:
-                    win.blit(pygame.image.load("assets/Grass2.png"), (50*i, 50*j))
+                    win.blit(self.tileTextures[int(self.mapTiles[playerObj.mapXCor-int(((win.get_width()/self.tileWidth)+1)/2)+i][playerObj.mapYCor-int(((win.get_height()/self.tileHeight)+1)/2)+j])], (self.tileWidth * i + playerObj.inBlockXCor - self.tileWidth / 2 * 3, self.tileHeight / 2 * j + playerObj.inBlockYCor - self.tileHeight * 3 / 2))
 
     def generate(self):
         map = open("map1.txt", "w")
@@ -87,7 +72,7 @@ class Map:
 
     def blockChange(self, playerObj):
         #print(str(playerObj.inBlockXCor) + " " + str(playerObj.inBlockYCor))
-        if playerObj.inBlockXCor > 150:
+        if playerObj.inBlockXCor > self.tileWidth:
             playerObj.mapXCor -= 1
             #print(playerObj.mapXCor)
             playerObj.inBlockXCor = 1
@@ -95,9 +80,9 @@ class Map:
         if playerObj.inBlockXCor < 0:
             playerObj.mapXCor += 1
             #print(playerObj.mapXCor)
-            playerObj.inBlockXCor = 136
+            playerObj.inBlockXCor = self.tileWidth - (self.tileWidth/10) + 1
 
-        if playerObj.inBlockYCor > 45:
+        if playerObj.inBlockYCor > self.tileHeight/2:
             playerObj.mapYCor -= 1
             #print(playerObj.mapYCor)
             playerObj.inBlockYCor = 1
@@ -105,5 +90,5 @@ class Map:
         if playerObj.inBlockYCor < 0:
             playerObj.mapYCor += 1
             #print(playerObj.mapYCor)
-            playerObj.inBlockYCor = 31
+            playerObj.inBlockYCor = self.tileHeight/2 - (self.tileWidth/10) + 1
 
