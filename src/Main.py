@@ -15,7 +15,7 @@ CAMERA_SPEED = 15
 
 pygame.init()
 
-win = pygame.display.set_mode((853,480))
+win = pygame.display.set_mode((1280,720))
 
 pygame.display.set_caption("Ice Age")
 pygame.display.set_icon(pygame.image.load('assets/Logo.png'))

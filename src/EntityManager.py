@@ -75,7 +75,7 @@ class EntityManager:
             self.renderedMobList[i].die(self.mobList, self.itemList)
             self.renderedMobList[i].changeDir(e)
             self.renderedMobList[i].move(e)
-            if type(self.renderedMobList[i]) == HostileEntity:
+            if isinstance(self.renderedMobList[i], HostileEntity):
                 self.renderedMobList[i].target(playerObj)
 
     def runItemFunctions(self, playerObj, inventory, win):
