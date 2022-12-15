@@ -9,13 +9,13 @@ import pygame
 from UserInterface import *
 from EntityManager import *
 
-CAMERA_SPEED = 10
+CAMERA_SPEED = 15
 
 # window loading
 
 pygame.init()
 
-win = pygame.display.set_mode((1280,720))
+win = pygame.display.set_mode((853,480))
 
 pygame.display.set_caption("Ice Age")
 pygame.display.set_icon(pygame.image.load('assets/Logo.png'))
@@ -57,7 +57,7 @@ while True:
 
             if event.key == pygame.K_e:
                 print("inventory open")
-                userInterface.toggleInvRender(userInterface, inventory)
+                userInterface.toggleInvRender(inventory)
 
             if event.key == pygame.K_f:
                 entityManager.playerInteract(playerObj, "f")
