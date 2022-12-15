@@ -27,18 +27,20 @@ class Map:
         #print(len(self.mapTiles))
         #print(len(self.mapTiles[0]))
         #print("rendering " + str((int(win.get_height()/100)+2)*(int((win.get_width()/100)+2))) + " chunks")
-        for i in range(int((win.get_width()/100)+2)):
+        for i in range(int((win.get_width()/150)+2)):
             #print(i)
-            for j in range((int(win.get_height()/100)+2)):
+            for j in range((int(win.get_height()/90)+2)):
                 #print(j)
-                if int(self.mapTiles[playerObj.mapXCor-int(((win.get_width()/100)+1)/2)+i][playerObj.mapYCor-int(((win.get_height()/100)+1)/2)+j]) == 1:
-                    #print(playerObj.mapXCor - int(((win.get_width() / 50) + 1) / 2) + i)
-                    #print(playerObj.mapYCor - int(((win.get_height() / 50) + 1) / 2) + j)
-                    win.blit(pygame.image.load("assets/Grass.png"), (100*i+playerObj.inBlockXCor-100, 100*j+playerObj.inBlockYCor-100))
+                if int(self.mapTiles[playerObj.mapXCor-int(((win.get_width()/150)+1)/2)+i][playerObj.mapYCor-int(((win.get_height()/90)+1)/2)+j]) == 1:
+                    if j % 2 == 0:
+                        win.blit(pygame.image.load("assets/Grass0.png"), (150 * i + playerObj.inBlockXCor - 150, 45 * j + playerObj.inBlockYCor - 45))
+                    else:
+                        win.blit(pygame.image.load("assets/Grass0.png"), (225 * i + playerObj.inBlockXCor - 150, 45 * j + playerObj.inBlockYCor - 45))
                 else:
-                    #print(playerObj.mapXCor - int(((win.get_width() / 50) + 1) / 2) + i)
-                    #print(playerObj.mapYCor - int(((win.get_height() / 50) + 1) / 2) + j)
-                    win.blit(pygame.image.load("assets/Grass2.png"), (100*i+playerObj.inBlockXCor-100, 100*j+playerObj.inBlockYCor-100))
+                    if j % 2 == 0:
+                        win.blit(pygame.image.load("assets/Grass1.png"), (150 * i + playerObj.inBlockXCor - 150, 45 * j + playerObj.inBlockYCor - 45))
+                    else:
+                        win.blit(pygame.image.load("assets/Grass1.png"), (225 * i + playerObj.inBlockXCor - 150, 45 * j + playerObj.inBlockYCor - 45))
 
 
     #loads on screen into array and then displayed

@@ -61,7 +61,10 @@ class Berry(Edible):
 
     def useItem(self, slot, playerObj):
         slot.remove(self)
-        playerObj.hunger += 10
+        if playerObj.hunger + 10 <= 100:
+            playerObj.hunger += 10
+        else:
+            playerObj.hunger = 100
 
         #win.blit(pygame.image.load(self.healthImageFile[4 - self.health]), (self.xCor, self.yCor + 60))
 
