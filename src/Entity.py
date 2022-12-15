@@ -18,6 +18,7 @@ class Entity:
     tickCount = 0
     healthTexturePath = ["assets/EntityHealth0.png","assets/EntityHealth1.png","assets/EntityHealth2.png","assets/EntityHealth3.png","assets/EntityHealth4.png"]
     entityTexturePath = ""
+    entityTexture = None
 
     def __init__(self, entityID, hitboxHeight, hitboxWidth, xCor, yCor, health):
         self.entityID = entityID
@@ -48,7 +49,7 @@ class Entity:
         pass
 
     def render(self, win):
-        win.blit(pygame.image.load(self.entityTexturePath), (self.xCor, self.yCor))
+        win.blit(self.entityTexture, (self.xCor, self.yCor))
         win.blit(pygame.image.load(self.healthTexturePath[self.health]), (self.xCor, self.yCor + 60))
 
     def die(self, mobList, itemList):

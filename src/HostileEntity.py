@@ -59,6 +59,7 @@ class HostileEntity(Entity):
     
 class DireWolf(HostileEntity):
     entityTexturePath = "assets/Wolf.png"
+    entityTexture = pygame.image.load(entityTexturePath)
     hitboxHeight = 50
     hitboxWidth = 100
     health = 4
@@ -74,6 +75,7 @@ class DireWolf(HostileEntity):
 
 class SabreTooth(HostileEntity):
     entityTexturePath = "assets/Sabre.png"
+    entityTexture = pygame.image.load(entityTexturePath)
     hitboxHeight = 50
     hitboxWidth = 100
     health = 4
