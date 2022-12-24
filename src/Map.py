@@ -10,7 +10,7 @@ class Map:
     renderedTiles = [[]]
     tileWidth = 0
     tileHeight = 0
-    tileTexturePath = ["assets/Grass0.png", "assets/Grass1.png"]
+    tileTexturePath = ["assets/Grass0.png", "assets/Grass1.png", "assets/Sand.png"]
     tileTextures = []
 
     def __init__(self, mapID):
@@ -22,6 +22,12 @@ class Map:
 
         if str(mapID) == "create":
             self.generate()
+            map = open("map1.txt")
+            for i in range(100):
+                mapStr = map.readline()
+                mapChars = list()
+                mapChars.extend(mapStr)
+                self.mapTiles.append(mapChars)
         else:
             map = open("map1.txt")
             for i in range(100):
@@ -41,20 +47,75 @@ class Map:
                 else:
                     win.blit(self.tileTextures[int(self.mapTiles[playerObj.mapXCor-int(((win.get_width()/self.tileWidth)+1)/2)+i][playerObj.mapYCor-int(((win.get_height()/self.tileHeight)+1)/2)+j])], (self.tileWidth * i + playerObj.inBlockXCor - self.tileWidth / 2 * 3, self.tileHeight / 2 * j + playerObj.inBlockYCor - self.tileHeight * 3 / 2))
 
+    def checkAdjacent(self, cor, mapSize, nextList, changed, chance):
+        if cor[0] > 0 and r.random() * 100 < chance:
+            if changed.count([cor[0] - 1, cor[1]]) == 0 and nextList.count([cor[0] - 1, cor[1]]) == 0:
+                nextList.append([cor[0] - 1, cor[1]])
+                print("appended")
+
+        if cor[0] < mapSize - 1 and r.random() * 100 < chance:
+            if changed.count([cor[0] + 1, cor[1]]) == 0 and nextList.count([cor[0] + 1, cor[1]]) == 0:
+                nextList.append([cor[0] + 1, cor[1]])
+                print("appended")
+
+        if cor[1] > 0 and r.random() * 100 < chance:
+            if changed.count([cor[0], cor[1] - 1]) == 0 and nextList.count([cor[0], cor[1] - 1]) == 0:
+                nextList.append([cor[0], cor[1] - 1])
+                print("appended")
+
+        if cor[1] < mapSize - 1 and r.random() * 100 < chance:
+            if changed.count([cor[0], cor[1] + 1]) == 0 and nextList.count([cor[0], cor[1] + 1]) == 0:
+                nextList.append([cor[0], cor[1] + 1])
+                print("appended")
+
+    def grow(self, corList, blockType, mapBlocks):
+        for i in range(len(corList) - 1):
+            print(i)
+            print(len(corList) - 1)
+            mapBlocks[corList[i][0]][corList[i][1]] = blockType
+
+    def generateBiome(self, mapBlocks):
+        chance = 100
+        decay = 0.95
+        biome = int(r.random() * 2) + 1
+
+        startCor = [int(r.random() * 100), int(r.random() * 100)]
+
+        corList = [startCor]
+        changed = []
+        nextList = []
+        for i in range(30):
+            print("round" + str(i) + str(len(corList)))
+            self.grow(corList, biome, mapBlocks)
+            length = len(corList)
+            for i in range(length):
+                print("looping" + str(len(corList)))
+
+                self.checkAdjacent(corList[0], 100, nextList, changed, chance)
+                changed.append(corList.pop(0))
+            print("new " + str(len(nextList)))
+            corList = nextList
+            chance = chance * decay
     def generate(self):
         map = open("map1.txt", "w")
-        w, h = 8, 5
-        Matrix = [[None for x in range(w)] for y in range(h)]
+        mapBlocks = []
+
         x = ""
 
         for i in range(100):
+            mapBlocks.append([])
             for j in range(100):
-                if int(r.random() * 2) == 1:
-                    x += "0"
-                else:
-                    x += "1"
+                mapBlocks[i].append(0)
+
+        for i in range(20):
+            self.generateBiome(mapBlocks)
+
+        for i in range(100):
+            for j in range(100):
+                x += str(mapBlocks[i][j])
 
             x += "\n"
+        print(x)
         map.write(x)
 
     def getAdjacent(self, direction, xCor, yCor):

@@ -20,7 +20,7 @@ win = pygame.display.set_mode((1280,720))
 pygame.display.set_caption("Ice Age")
 pygame.display.set_icon(pygame.image.load('assets/Logo.png'))
 
-map = Map(0)
+map = Map("create")
 entityManager = EntityManager()
 userInterface = UserInterface()
 
