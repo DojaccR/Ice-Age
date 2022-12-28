@@ -5,6 +5,7 @@ import pygame
 
 class Map:
     mapID = 0
+    mapSize = 100
     mapFile = ""
     mapTiles = []
     renderedTiles = [[]]
@@ -51,27 +52,21 @@ class Map:
         if cor[0] > 0 and r.random() * 100 < chance:
             if changed.count([cor[0] - 1, cor[1]]) == 0 and nextList.count([cor[0] - 1, cor[1]]) == 0:
                 nextList.append([cor[0] - 1, cor[1]])
-                print("appended")
 
         if cor[0] < mapSize - 1 and r.random() * 100 < chance:
             if changed.count([cor[0] + 1, cor[1]]) == 0 and nextList.count([cor[0] + 1, cor[1]]) == 0:
                 nextList.append([cor[0] + 1, cor[1]])
-                print("appended")
 
         if cor[1] > 0 and r.random() * 100 < chance:
             if changed.count([cor[0], cor[1] - 1]) == 0 and nextList.count([cor[0], cor[1] - 1]) == 0:
                 nextList.append([cor[0], cor[1] - 1])
-                print("appended")
 
         if cor[1] < mapSize - 1 and r.random() * 100 < chance:
             if changed.count([cor[0], cor[1] + 1]) == 0 and nextList.count([cor[0], cor[1] + 1]) == 0:
                 nextList.append([cor[0], cor[1] + 1])
-                print("appended")
 
     def grow(self, corList, blockType, mapBlocks):
         for i in range(len(corList) - 1):
-            print(i)
-            print(len(corList) - 1)
             mapBlocks[corList[i][0]][corList[i][1]] = blockType
 
     def generateBiome(self, mapBlocks):
@@ -85,15 +80,11 @@ class Map:
         changed = []
         nextList = []
         for i in range(30):
-            print("round" + str(i) + str(len(corList)))
             self.grow(corList, biome, mapBlocks)
             length = len(corList)
             for i in range(length):
-                print("looping" + str(len(corList)))
-
                 self.checkAdjacent(corList[0], 100, nextList, changed, chance)
                 changed.append(corList.pop(0))
-            print("new " + str(len(nextList)))
             corList = nextList
             chance = chance * decay
     def generate(self):
@@ -115,7 +106,6 @@ class Map:
                 x += str(mapBlocks[i][j])
 
             x += "\n"
-        print(x)
         map.write(x)
 
     def getAdjacent(self, direction, xCor, yCor):
@@ -132,24 +122,19 @@ class Map:
             return "invalid"
 
     def blockChange(self, playerObj):
-        #print(str(playerObj.inBlockXCor) + " " + str(playerObj.inBlockYCor))
         if playerObj.inBlockXCor > self.tileWidth:
             playerObj.mapXCor -= 1
-            #print(playerObj.mapXCor)
             playerObj.inBlockXCor = 1
 
         if playerObj.inBlockXCor < 0:
             playerObj.mapXCor += 1
-            #print(playerObj.mapXCor)
             playerObj.inBlockXCor = self.tileWidth - (self.tileWidth/10) + 1
 
         if playerObj.inBlockYCor > self.tileHeight/2:
             playerObj.mapYCor -= 1
-            #print(playerObj.mapYCor)
             playerObj.inBlockYCor = 1
 
         if playerObj.inBlockYCor < 0:
             playerObj.mapYCor += 1
-            #print(playerObj.mapYCor)
             playerObj.inBlockYCor = self.tileHeight/2 - (self.tileWidth/10) + 1
 

@@ -47,7 +47,6 @@ while True:
             run = False
 
         if event.type == pygame.MOUSEBUTTONUP:
-            print("pressed main")
             entityManager.playerInteract(playerObj, "m1")
 
         if event.type == pygame.KEYDOWN:
@@ -56,7 +55,6 @@ while True:
                 run = False
 
             if event.key == pygame.K_e:
-                print("inventory open")
                 userInterface.toggleInvRender(inventory)
 
             if event.key == pygame.K_f:
@@ -90,22 +88,22 @@ while True:
 
     keys = pygame.key.get_pressed()
 
-    if keys[pygame.K_a] and playerObj.xCor > 0:
+    if keys[pygame.K_a] and playerObj.mapXCor > (win.get_width()/map.tileWidth)/2 + 1:
         playerObj.inBlockXCor += CAMERA_SPEED
         map.blockChange(playerObj)
         entityManager.move("x", "positive", CAMERA_SPEED)
 
-    if keys[pygame.K_d] and playerObj.xCor < 1280 - playerObj.hitboxWidth:
+    if keys[pygame.K_d] and playerObj.mapXCor < map.mapSize - (win.get_width()/map.tileWidth)/2 - 3:
         playerObj.inBlockXCor -= CAMERA_SPEED
         map.blockChange(playerObj)
         entityManager.move("x", "negative", CAMERA_SPEED)
 
-    if keys[pygame.K_w] and playerObj.yCor > 0:
+    if keys[pygame.K_w] and playerObj.mapYCor > (win.get_height()/map.tileHeight)/2 + 1:
         playerObj.inBlockYCor += CAMERA_SPEED
         map.blockChange(playerObj)
         entityManager.move("y", "positive", CAMERA_SPEED)
 
-    if keys[pygame.K_s] and playerObj.yCor < 720 - playerObj.hitboxHeight:
+    if keys[pygame.K_s] and playerObj.mapYCor < map.mapSize - (win.get_height()/map.tileHeight)/2 - 4:
         playerObj.inBlockYCor -= CAMERA_SPEED
         map.blockChange(playerObj)
         entityManager.move("y", "negative", CAMERA_SPEED)

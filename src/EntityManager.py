@@ -18,20 +18,12 @@ class EntityManager:
     renderedDestructableStructureList = []
 
     def __init__(self):
-        for i in range(10):
-            xCor = (int(Random.random() * 1280))
-            yCor = (int(Random.random() * 720))
-            print("Berry Bush at: " + str(xCor) + " " + str(yCor))
-            self.structureList.append(BerryBush(xCor, yCor))
-
         for i in range(int(Random.random()*30+300)):
             xCor = (int(Random.random() * 10000) - 5000)
             yCor = (int(Random.random() * 10000) - 5000)
-            print("Berry Bush at: " + str(xCor) + " " + str(yCor))
             self.structureList.append(BerryBush(xCor, yCor))
 
         for i in range(int(Random.random() * 5 + 50)):
-            print("Cave at: " + str(xCor) + " " + str(yCor))
             xCor = (int(Random.random() * 10000) - 5000)
             yCor = (int(Random.random() * 10000) - 5000)
             self.structureList.append(Cave(xCor, yCor))
@@ -137,11 +129,9 @@ class EntityManager:
         if keys == "f":
             for i in range(len(self.renderedStructureList)):
                 if int(sqrt((self.renderedStructureList[i].xCor-playerObj.xCor)**2+(self.renderedStructureList[i].yCor-playerObj.yCor)**2)) < 30 and type(self.renderedStructureList[i]) == BerryBush:
-                    print("health removed")
                     self.renderedStructureList[i].dropBerry(self.itemList)
 
         elif keys == "m1":
-            print("mouse presssed")
             for i in range(len(self.renderedMobList)):
                 if int(sqrt((self.renderedMobList[i].xCor-playerObj.xCor)**2+(self.renderedMobList[i].yCor-playerObj.yCor)**2)) < 30:
                     self.renderedMobList[i].health -= 1
