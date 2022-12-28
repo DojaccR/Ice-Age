@@ -3,7 +3,7 @@ from Map import *
 from Entity import *
 from HostileEntity import *
 from Inventory import *
-from Item import *sssssssssssssssssssss
+from Item import *
 import random as random
 import pygame
 from UserInterface import *
