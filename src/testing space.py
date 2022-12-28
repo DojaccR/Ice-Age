@@ -1,7 +1,7 @@
 import os
 import random as r
 
-map = open("map1.txt", "w")
+map = open("maps/map1.txt", "w")
 mapBlocks = []
 
 

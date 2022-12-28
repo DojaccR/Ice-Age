@@ -15,6 +15,8 @@ class EntityManager:
     renderedMobList = []
     renderedItemList = []
 
+    renderedDestructableStructureList = []
+
     def __init__(self):
         for i in range(10):
             xCor = (int(Random.random() * 1280))
@@ -38,11 +40,14 @@ class EntityManager:
         self.renderedStructureList = []
         self.renderedItemList = []
         self.renderedMobList = []
+        self.renderedDestructableStructureList = []
 
         for i in range(len(self.structureList)):
 
             if self.structureList[i].xCor <= win.get_width() and self.structureList[i].xCor >= -200 and self.structureList[i].yCor <= win.get_height() and self.structureList[i].yCor >= -200:
                 self.renderedStructureList.append(self.structureList[i])
+                if isinstance(self.structureList[i], DestructableStructure):
+                    self.renderedDestructableStructureList.append(self.structureList[i])
 
         for i in range(len(self.mobList)):
             if self.mobList[i].xCor <= win.get_width() and self.mobList[i].xCor >= 0 and self.mobList[i].yCor <= win.get_height() and self.mobList[i].yCor >= 0:
@@ -69,6 +74,10 @@ class EntityManager:
 
             if type(self.structureList[i]) == Cave:
                 self.structureList[i].spawnWolf(playerObj,self.mobList, self.renderedMobList, win)
+
+        for i in range(len(self.renderedDestructableStructureList)):
+            self.renderedDestructableStructureList[i].die(self.itemList, self.renderedStructureList)
+
 
     def runMobFunctions(self, playerObj):
         for i in range(len(self.renderedMobList)):
@@ -128,6 +137,7 @@ class EntityManager:
         if keys == "f":
             for i in range(len(self.renderedStructureList)):
                 if int(sqrt((self.renderedStructureList[i].xCor-playerObj.xCor)**2+(self.renderedStructureList[i].yCor-playerObj.yCor)**2)) < 30 and type(self.renderedStructureList[i]) == BerryBush:
+                    print("health removed")
                     self.renderedStructureList[i].dropBerry(self.itemList)
 
         elif keys == "m1":
@@ -135,3 +145,7 @@ class EntityManager:
             for i in range(len(self.renderedMobList)):
                 if int(sqrt((self.renderedMobList[i].xCor-playerObj.xCor)**2+(self.renderedMobList[i].yCor-playerObj.yCor)**2)) < 30:
                     self.renderedMobList[i].health -= 1
+
+            for i in range(len(self.renderedStructureList)):
+                if int(sqrt((self.renderedStructureList[i].xCor-playerObj.xCor)**2+(self.renderedStructureList[i].yCor-playerObj.yCor)**2)) < 30 and isinstance(self.renderedStructureList[i], DestructableStructure):
+                    self.renderedStructureList[i].health -= 1

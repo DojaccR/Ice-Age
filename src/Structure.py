@@ -30,6 +30,7 @@ class DestructableStructure(Structure):
 
 class BerryBush(DestructableStructure):
     berryCount = 0
+    health = 2
     structureTexturePath = ["assets/Bush0.png",
                             "assets/Bush1.png",
                             "assets/Bush2.png",
@@ -42,7 +43,7 @@ class BerryBush(DestructableStructure):
         self.yCor = yCor
 
     def growBerry(self, tickCount):
-        if tickCount % 40 == 0 and self.berryCount < 5:
+        if tickCount % 400 == 0 and self.berryCount < 5:
             self.berryCount += 1
 
     def render(self, win):
@@ -52,6 +53,12 @@ class BerryBush(DestructableStructure):
         if self.berryCount > 0:
             self.berryCount -= 1
             itemList.append(Berry(len(itemList), self.xCor, self.yCor))
+
+    def die(self, itemList, structureList):
+        if self.health == 0:
+            structureList.remove(self)
+            itemList.append(Seed(len(itemList), self.xCor, self.yCor))
+
 
 
 class Cave(IndestructableStructure):

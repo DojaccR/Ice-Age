@@ -79,3 +79,11 @@ class Flint(Consumable):
         super().__init__(itemID, "flint", xCor, yCor)
         self.itemTexturePath = "assets/Flint.png"
         self.itemImage = pygame.image.load(self.itemTexturePath)
+
+class Seed(Consumable):
+    itemType = "seed"
+
+    def __init__(self, itemID, xCor, yCor):
+        super().__init__(itemID, "seed", xCor, yCor)
+        self.itemTexturePath = "assets/Seed.png"
+        self.itemImage = pygame.image.load(self.itemTexturePath)

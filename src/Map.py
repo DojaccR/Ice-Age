@@ -22,14 +22,14 @@ class Map:
 
         if str(mapID) == "create":
             self.generate()
-            map = open("map1.txt")
+            map = open("maps/map1.txt")
             for i in range(100):
                 mapStr = map.readline()
                 mapChars = list()
                 mapChars.extend(mapStr)
                 self.mapTiles.append(mapChars)
         else:
-            map = open("map1.txt")
+            map = open("maps/map1.txt")
             for i in range(100):
                 mapStr = map.readline()
                 mapChars = list()
@@ -97,7 +97,7 @@ class Map:
             corList = nextList
             chance = chance * decay
     def generate(self):
-        map = open("map1.txt", "w")
+        map = open("maps/map1.txt", "w")
         mapBlocks = []
 
         x = ""
