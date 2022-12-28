@@ -65,7 +65,7 @@ class EntityManager:
                 self.structureList[i].growBerry(tickCount)
 
             if type(self.structureList[i]) == Cave:
-                self.structureList[i].spawnWolf(playerObj,self.mobList, self.renderedMobList, win)
+                self.structureList[i].spawnWolf(playerObj,self.mobList, self.renderedMobList, win, tickCount)
 
         for i in range(len(self.renderedDestructableStructureList)):
             self.renderedDestructableStructureList[i].die(self.itemList, self.renderedStructureList)
