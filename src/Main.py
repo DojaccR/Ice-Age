@@ -1,3 +1,4 @@
+import pygame
 from Player import *
 from Map import *
 from Entity import *
@@ -5,7 +6,7 @@ from HostileEntity import *
 from Inventory import *
 from Item import *
 import random as random
-import pygame
+
 from UserInterface import *
 from EntityManager import *
 
@@ -27,7 +28,7 @@ userInterface = UserInterface()
 # player loading
 
 playerObj = Player(win)
-inventory = Inventory()
+inventory = Inventory(entityManager)
 
 # game loop
 
@@ -61,7 +62,7 @@ while True:
                 entityManager.playerInteract(playerObj, "f")
 
             if event.key == pygame.K_q:
-                inventory.useItem(playerObj)
+                inventory.use(playerObj)
 
             # toggle UI rendering
 

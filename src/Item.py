@@ -1,5 +1,6 @@
 import pygame
 from Inventory import *
+from Structure import *
 from math import *
 
 class Item:
@@ -55,7 +56,7 @@ class Berry(Consumable):
         self.itemTexturePath = "assets/Berry.png"
         self.itemImage = pygame.image.load(self.itemTexturePath)
 
-    def useItem(self, slot, playerObj):
+    def use(self, slot, playerObj):
         slot.remove(self)
         if playerObj.hunger + 10 <= 100:
             playerObj.hunger += 10
@@ -87,3 +88,7 @@ class Seed(Consumable):
         super().__init__(itemID, "seed", xCor, yCor)
         self.itemTexturePath = "assets/Seed.png"
         self.itemImage = pygame.image.load(self.itemTexturePath)
+
+    def use(self, structureList, slot, playerObj):
+        structureList.append(BerryBush(playerObj.xCor, playerObj.yCor))
+        slot.remove(self)

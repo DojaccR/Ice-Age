@@ -68,7 +68,7 @@ class EntityManager:
                 self.structureList[i].spawnWolf(playerObj,self.mobList, self.renderedMobList, win, tickCount)
 
         for i in range(len(self.renderedDestructableStructureList)):
-            self.renderedDestructableStructureList[i].die(self.itemList, self.renderedStructureList)
+            self.renderedDestructableStructureList[i].die(self.itemList, self.structureList)
 
 
     def runMobFunctions(self, playerObj):

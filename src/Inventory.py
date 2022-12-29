@@ -16,7 +16,8 @@ class Inventory:
 
     isOpen = False
 
-    def __init__(self):
+    def __init__(self, entityManager):
+        self.entityManager = entityManager
         for i in range(24):
             self.slot.append(InventorySlot(i))
 
@@ -27,7 +28,10 @@ class Inventory:
                 break
 
 
-    def useItem(self, playerObj):
+    def use(self, playerObj):
         if len(self.slot[self.hotbarSlot]) > 0:
             if self.slot[self.hotbarSlot][len(self.slot[self.hotbarSlot])-1].itemType == "edible":
-                self.slot[self.hotbarSlot][len(self.slot[self.hotbarSlot])-1].useItem(self.slot[self.hotbarSlot], playerObj)
+                self.slot[self.hotbarSlot][len(self.slot[self.hotbarSlot])-1].use(self.slot[self.hotbarSlot], playerObj)
+
+            elif self.slot[self.hotbarSlot][len(self.slot[self.hotbarSlot])-1].itemType == "seed":
+                self.slot[self.hotbarSlot][len(self.slot[self.hotbarSlot]) - 1].use(self.entityManager.structureList, self.slot[self.hotbarSlot], playerObj)
