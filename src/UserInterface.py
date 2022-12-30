@@ -1,7 +1,7 @@
 import pygame
-from Player import *
-from Entity import *
-from Inventory import *
+import Player
+import Entity
+import Inventory
 
 class UserInterface:
     healthbarImage = ["assets/PlayerHealth0.png","assets/PlayerHealth1.png","assets/PlayerHealth2.png","assets/PlayerHealth3.png","assets/PlayerHealth4.png"]

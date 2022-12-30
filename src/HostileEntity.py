@@ -1,10 +1,10 @@
-from Entity import *
-from Item import *
-from math import *
+import Entity
+import Item
+import math
 import pygame
-import random as Random
+import random as random
 
-class HostileEntity(Entity):
+class HostileEntity(Entity.Entity):
     damage = 0
     aggroRange = 0
     aggro = False
@@ -14,7 +14,7 @@ class HostileEntity(Entity):
         super().__init__(entityID, hitboxHeight, hitboxWidth, xCor, yCor, health)
         self.damage = damage
 
-    def changeDir(self, event):
+    def changeDir(self):
 
         if self.tickCount >= self.persist and self.aggro == False:
             self.dir = int(random.random() * 360)
@@ -24,29 +24,29 @@ class HostileEntity(Entity):
         else:
             self.tickCount+=1
 
-    def move(self, event):
-        self.xCor += int(self.vel*cos(self.dir))
-        self.yCor += int(self.vel*sin(self.dir))
+    def move(self):
+        self.xCor += int(self.vel*math.cos(self.dir))
+        self.yCor += int(self.vel*math.sin(self.dir))
     
     def attack(self):
         pass
 
     def target(self, playerObj):
 
-        if int(sqrt((self.xCor-playerObj.xCor)**2+(self.yCor-playerObj.yCor)**2)) < self.aggroRange:
+        if int(math.sqrt((self.xCor-playerObj.xCor)**2+(self.yCor-playerObj.yCor)**2)) < self.aggroRange:
             self.aggro = True
             self.vel = 3
 
             if playerObj.yCor-self.yCor > 0 and playerObj.xCor-self.xCor < 0:
-                self.dir = atan((playerObj.yCor-self.yCor)/(playerObj.xCor-self.xCor)) + 180
+                self.dir = math.atan((playerObj.yCor-self.yCor)/(playerObj.xCor-self.xCor)) + 180
             elif playerObj.yCor-self.yCor < 0 and playerObj.xCor-self.xCor < 0:
-                self.dir = atan((playerObj.yCor-self.yCor)/(playerObj.xCor-self.xCor)) - 180
+                self.dir = math.atan((playerObj.yCor-self.yCor)/(playerObj.xCor-self.xCor)) - 180
             elif playerObj.xCor-self.xCor != 0:
-                self.dir = atan((playerObj.yCor-self.yCor)/(playerObj.xCor-self.xCor))
+                self.dir = math.atan((playerObj.yCor-self.yCor)/(playerObj.xCor-self.xCor))
 
-            self.move(e)
+            self.move()
 
-            if int(sqrt((self.xCor-playerObj.xCor)**2+(self.yCor-playerObj.yCor)**2)) <= self.atkRange and playerObj.health > 1 and self.tickCount%100 == 0:
+            if int(math.sqrt((self.xCor-playerObj.xCor)**2+(self.yCor-playerObj.yCor)**2)) <= self.atkRange and playerObj.health > 1 and self.tickCount%100 == 0:
                 playerObj.health -= self.damage
                 #print("player health is "+str(playerObj.health))
 
@@ -71,7 +71,7 @@ class DireWolf(HostileEntity):
         super().__init__(entityID, 50, 100, xCor, yCor, 4, 1)
 
     def dropItem(self, itemList):
-        itemList.append(WolfSkin(len(itemList), self.xCor, self.yCor))
+        itemList.append(Item.WolfSkin(len(itemList), self.xCor, self.yCor))
 
 class SabreTooth(HostileEntity):
     entityTexturePath = "assets/Sabre.png"
@@ -87,7 +87,7 @@ class SabreTooth(HostileEntity):
         super().__init__(entityID, 50, 100, xCor, yCor, 4, 1)
 
     def dropItem(self, itemList):
-        itemList.append(WolfSkin(len(itemList), self.xCor, self.yCor))
+        itemList.append(Item.WolfSkin(len(itemList), self.xCor, self.yCor))
 
 
 

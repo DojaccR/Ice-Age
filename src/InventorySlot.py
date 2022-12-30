@@ -1,4 +1,4 @@
-class InventorySlot:
+class InventorySlot():
     content = None
     slotID = None
 

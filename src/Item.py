@@ -1,9 +1,9 @@
 import pygame
-from Inventory import *
-from Structure import *
-from math import *
+import Inventory
+import Structure
+import math
 
-class Item:
+class Item():
     itemID = 0
     itemName = ""
     itemTexturePath = ""
@@ -21,7 +21,7 @@ class Item:
         self.yCor = yCor
 
     def pickup(self, playerObj, inventory, itemList):
-        if int(sqrt((self.xCor-playerObj.xCor)**2+(self.yCor-playerObj.yCor)**2)) < 20 and self.isPickedUp == False:
+        if int(math.sqrt((self.xCor-playerObj.xCor)**2+(self.yCor-playerObj.yCor)**2)) < 20 and self.isPickedUp == False:
             inventory.pickup(self)
             itemList.remove(self)
             self.isPickedUp = True
@@ -90,5 +90,5 @@ class Seed(Consumable):
         self.itemImage = pygame.image.load(self.itemTexturePath)
 
     def use(self, structureList, slot, playerObj):
-        structureList.append(BerryBush(playerObj.xCor, playerObj.yCor))
+        structureList.append(Structure.BerryBush(playerObj.xCor, playerObj.yCor))
         slot.remove(self)

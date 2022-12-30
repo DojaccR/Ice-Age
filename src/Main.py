@@ -1,14 +1,14 @@
 import pygame
-from Player import *
-from Map import *
-from Entity import *
-from HostileEntity import *
-from Inventory import *
-from Item import *
+import Map
+import Entity
+import Player
+import HostileEntity
+import Inventory
+import Item
 import random as random
 
-from UserInterface import *
-from EntityManager import *
+import UserInterface
+import EntityManager
 
 CAMERA_SPEED = 15
 
@@ -21,14 +21,14 @@ win = pygame.display.set_mode((1280,720))
 pygame.display.set_caption("Ice Age")
 pygame.display.set_icon(pygame.image.load('assets/Logo.png'))
 
-map = Map("create")
-entityManager = EntityManager()
-userInterface = UserInterface()
+map = Map.Map("create")
+entityManager = EntityManager.EntityManager()
+userInterface = UserInterface.UserInterface()
 
 # player loading
 
-playerObj = Player(win)
-inventory = Inventory(entityManager)
+playerObj = Player.Player(win)
+inventory = Inventory.Inventory(entityManager)
 
 # game loop
 
@@ -111,7 +111,7 @@ while True:
 
     # Background render
 
-    win.fill((0, 255, 0))
+    #win.fill((0, 255, 0))
 
     map.render1(playerObj, win)
 

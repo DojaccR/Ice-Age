@@ -1,9 +1,10 @@
 import random
-from math import *
+import math
 import pygame
 
 
-class Entity:
+
+class Entity():
     wonder = False
     entityCount = 0
     entityID = 0
@@ -39,8 +40,8 @@ class Entity:
             self.tickCount+=1
 
     def move(self, event):
-        self.xCor += int(self.vel*cos(self.dir))
-        self.yCor += int(self.vel*sin(self.dir))
+        self.xCor += int(self.vel*math.cos(self.dir))
+        self.yCor += int(self.vel*math.sin(self.dir))
 
     def healthChange(self, healthchange):
         self.health += healthchange

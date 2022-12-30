@@ -1,10 +1,10 @@
 import pygame
 import random as Random
-from HostileEntity import *
-from Inventory import *
-from Item import *
+import HostileEntity
+import Inventory
+import Item
 
-class Structure:
+class Structure():
     xCor = 0
     yCor = 0
     structureTexturePath = ""
@@ -55,12 +55,12 @@ class BerryBush(DestructableStructure):
     def dropBerry(self, itemList):
         if self.berryCount > 0:
             self.berryCount -= 1
-            itemList.append(Berry(len(itemList), self.xCor, self.yCor))
+            itemList.append(Item.Berry(len(itemList), self.xCor, self.yCor))
 
     def die(self, itemList, structureList):
         if self.health == 0:
             structureList.remove(self)
-            itemList.append(Seed(len(itemList), self.xCor, self.yCor))
+            itemList.append(Item.Seed(len(itemList), self.xCor, self.yCor))
 
 
 
@@ -81,10 +81,10 @@ class Cave(IndestructableStructure):
         if tickCount % 30 == 0:
             if self.caveType == "DireWolf":
                 if self.xCor <= win.get_width() and self.xCor >= 0 and self.yCor <= win.get_height() and self.yCor >= 0 and len(renderedMobList) < 10:
-                    mobList.append(DireWolf(len(mobList), self.xCor + (pygame.image.load(self.structureTexturePath)).get_width()/2, self.yCor + (pygame.image.load(self.structureTexturePath)).get_height()))
+                    mobList.append(HostileEntity.DireWolf(len(mobList), self.xCor + (pygame.image.load(self.structureTexturePath)).get_width()/2, self.yCor + (pygame.image.load(self.structureTexturePath)).get_height()))
             else:
                 if self.xCor <= win.get_width() and self.xCor >= 0 and self.yCor <= win.get_height() and self.yCor >= 0 and len(renderedMobList) < 5:
-                    mobList.append(SabreTooth(len(mobList), self.xCor + (pygame.image.load(self.structureTexturePath)).get_width()/2, self.yCor + (pygame.image.load(self.structureTexturePath)).get_height()))
+                    mobList.append(HostileEntity.SabreTooth(len(mobList), self.xCor + (pygame.image.load(self.structureTexturePath)).get_width()/2, self.yCor + (pygame.image.load(self.structureTexturePath)).get_height()))
 
     def render(self, win):
         win.blit(pygame.image.load(self.structureTexturePath), (self.xCor, self.yCor))

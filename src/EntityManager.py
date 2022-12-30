@@ -1,9 +1,10 @@
 import random as Random
-from Structure import *
-from Item import *
-from Entity import *
-from HostileEntity import *
-from Inventory import *
+import Structure
+import Item
+import Entity
+import HostileEntity
+import Inventory
+import math
 
 
 class EntityManager:
@@ -21,12 +22,12 @@ class EntityManager:
         for i in range(int(Random.random()*30+300)):
             xCor = (int(Random.random() * 10000) - 5000)
             yCor = (int(Random.random() * 10000) - 5000)
-            self.structureList.append(BerryBush(xCor, yCor))
+            self.structureList.append(Structure.BerryBush(xCor, yCor))
 
         for i in range(int(Random.random() * 5 + 50)):
             xCor = (int(Random.random() * 10000) - 5000)
             yCor = (int(Random.random() * 10000) - 5000)
-            self.structureList.append(Cave(xCor, yCor))
+            self.structureList.append(Structure.Cave(xCor, yCor))
 
     def checkRenderedEntities(self, win):
         self.renderedStructureList = []
@@ -38,7 +39,7 @@ class EntityManager:
 
             if self.structureList[i].xCor <= win.get_width() and self.structureList[i].xCor >= -200 and self.structureList[i].yCor <= win.get_height() and self.structureList[i].yCor >= -200:
                 self.renderedStructureList.append(self.structureList[i])
-                if isinstance(self.structureList[i], DestructableStructure):
+                if isinstance(self.structureList[i], Structure.DestructableStructure):
                     self.renderedDestructableStructureList.append(self.structureList[i])
 
         for i in range(len(self.mobList)):
@@ -61,10 +62,10 @@ class EntityManager:
 
     def runStructureFunctions(self, tickCount, playerObj, win):
         for i in range(len(self.structureList)):
-            if type(self.structureList[i]) == BerryBush:
+            if type(self.structureList[i]) == Structure.BerryBush:
                 self.structureList[i].growBerry(tickCount)
 
-            if type(self.structureList[i]) == Cave:
+            if type(self.structureList[i]) == Structure.Cave:
                 self.structureList[i].spawnWolf(playerObj,self.mobList, self.renderedMobList, win, tickCount)
 
         for i in range(len(self.renderedDestructableStructureList)):
@@ -74,9 +75,9 @@ class EntityManager:
     def runMobFunctions(self, playerObj):
         for i in range(len(self.renderedMobList)):
             self.renderedMobList[i].die(self.mobList, self.itemList)
-            self.renderedMobList[i].changeDir(e)
-            self.renderedMobList[i].move(e)
-            if isinstance(self.renderedMobList[i], HostileEntity):
+            self.renderedMobList[i].changeDir()
+            self.renderedMobList[i].move()
+            if isinstance(self.renderedMobList[i], HostileEntity.HostileEntity):
                 self.renderedMobList[i].target(playerObj)
 
     def runItemFunctions(self, playerObj, inventory, win):
@@ -128,14 +129,14 @@ class EntityManager:
     def playerInteract(self, playerObj, keys):
         if keys == "f":
             for i in range(len(self.renderedStructureList)):
-                if int(sqrt((self.renderedStructureList[i].xCor-playerObj.xCor)**2+(self.renderedStructureList[i].yCor-playerObj.yCor)**2)) < 30 and type(self.renderedStructureList[i]) == BerryBush:
+                if int(math.sqrt((self.renderedStructureList[i].xCor-playerObj.xCor)**2+(self.renderedStructureList[i].yCor-playerObj.yCor)**2)) < 30 and type(self.renderedStructureList[i]) == Structure.BerryBush:
                     self.renderedStructureList[i].dropBerry(self.itemList)
 
         elif keys == "m1":
             for i in range(len(self.renderedMobList)):
-                if int(sqrt((self.renderedMobList[i].xCor-playerObj.xCor)**2+(self.renderedMobList[i].yCor-playerObj.yCor)**2)) < 30:
+                if int(math.sqrt((self.renderedMobList[i].xCor-playerObj.xCor)**2+(self.renderedMobList[i].yCor-playerObj.yCor)**2)) < 30:
                     self.renderedMobList[i].health -= 1
 
             for i in range(len(self.renderedStructureList)):
-                if int(sqrt((self.renderedStructureList[i].xCor-playerObj.xCor)**2+(self.renderedStructureList[i].yCor-playerObj.yCor)**2)) < 30 and isinstance(self.renderedStructureList[i], DestructableStructure):
+                if int(math.sqrt((self.renderedStructureList[i].xCor-playerObj.xCor)**2+(self.renderedStructureList[i].yCor-playerObj.yCor)**2)) < 30 and isinstance(self.renderedStructureList[i], Structure.DestructableStructure):
                     self.renderedStructureList[i].health -= 1

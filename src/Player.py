@@ -1,8 +1,8 @@
-from Entity import *
+import Entity
 import pygame
 
 
-class Player(Entity):
+class Player(Entity.Entity):
     
     entityTexturePath = "assets/player.png"
     playerTexture = pygame.image.load(entityTexturePath)

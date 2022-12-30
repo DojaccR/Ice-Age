@@ -1,10 +1,10 @@
 import pygame
-from InventorySlot import *
-from Item import *
+import InventorySlot
+import Item
 import sys
 
 
-class Inventory:
+class Inventory():
     INVENTORY_MAX = 18
     HOTBAR_MAX = 6
     hotbarSlot = 0
@@ -19,7 +19,7 @@ class Inventory:
     def __init__(self, entityManager):
         self.entityManager = entityManager
         for i in range(24):
-            self.slot.append(InventorySlot(i))
+            self.slot.append(InventorySlot.InventorySlot(i))
 
     def pickup(self, item):
         for i in range(self.INVENTORY_MAX + self.HOTBAR_MAX):
