@@ -49,11 +49,11 @@ class EntityManager:
                     self.renderedDestructableStructureList.append(self.structureList[i])
 
         for i in range(len(self.mobList)):
-            if self.mobList[i].xCor <= win.get_width() and self.mobList[i].xCor >= 0 and self.mobList[i].yCor <= win.get_height() and self.mobList[i].yCor >= 0:
+            if self.mobList[i].xCor <= win.get_width() and self.mobList[i].xCor >= -200 and self.mobList[i].yCor <= win.get_height() and self.mobList[i].yCor >= -200:
                 self.renderedMobList.append(self.mobList[i])
 
         for i in range(len(self.itemList)):
-            if self.itemList[i].xCor <= win.get_width() and self.itemList[i].xCor >= 0 and self.itemList[i].yCor <= win.get_height() and self.itemList[i].yCor >= 0:
+            if self.itemList[i].xCor <= win.get_width() and self.itemList[i].xCor >= -20 and self.itemList[i].yCor <= win.get_height() and self.itemList[i].yCor >= -20:
                 self.renderedItemList.append(self.itemList[i])
 
     def renderEntities(self, win):
