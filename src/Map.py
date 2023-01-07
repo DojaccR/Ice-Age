@@ -87,6 +87,10 @@ class Map:
                 changed.append(corList.pop(0))
             corList = nextList
             chance = chance * decay
+
+    def generateRiver(self):
+        pass
+
     def generate(self):
         map = open("maps/map1.txt", "w")
         mapBlocks = []

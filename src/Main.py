@@ -36,6 +36,11 @@ clock = pygame.time.Clock()
 gameTick = 0
 run = True
 
+pygame.mixer.init()
+pygame.mixer.music.load("audio/Theme1.mp3")
+pygame.mixer.music.set_volume(0.7)
+pygame.mixer.music.play()
+
 while True:
     pygame.time.delay(10)
     if gameTick % 200 == 0 and playerObj.hunger > 0:
@@ -93,21 +98,29 @@ while True:
         playerObj.inBlockXCor += CAMERA_SPEED
         map.blockChange(playerObj)
         entityManager.move("x", "positive", CAMERA_SPEED)
+        if int(random.random()*100) > 98:
+            playerObj.hunger -= 1
 
     if keys[pygame.K_d] and playerObj.mapXCor < map.mapSize - (win.get_width()/map.tileWidth)/2 - 3:
         playerObj.inBlockXCor -= CAMERA_SPEED
         map.blockChange(playerObj)
         entityManager.move("x", "negative", CAMERA_SPEED)
+        if int(random.random()*100) > 98:
+            playerObj.hunger -= 1
 
     if keys[pygame.K_w] and playerObj.mapYCor > (win.get_height()/map.tileHeight)/2 + 1:
         playerObj.inBlockYCor += CAMERA_SPEED
         map.blockChange(playerObj)
         entityManager.move("y", "positive", CAMERA_SPEED)
+        if int(random.random()*100) > 98:
+            playerObj.hunger -= 1
 
     if keys[pygame.K_s] and playerObj.mapYCor < map.mapSize - (win.get_height()/map.tileHeight)/2 - 4:
         playerObj.inBlockYCor -= CAMERA_SPEED
         map.blockChange(playerObj)
         entityManager.move("y", "negative", CAMERA_SPEED)
+        if int(random.random()*100) > 98:
+            playerObj.hunger -= 1
 
     # Background render
 
