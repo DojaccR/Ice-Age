@@ -29,7 +29,7 @@ class Entity():
         self.yCor = yCor
         self.health = health
 
-    def changeDir(self, event):
+    def changeDir(self):
 
         if self.tickCount == self.persist:
             self.dir = int(random.random() * 360)
@@ -39,7 +39,7 @@ class Entity():
         else:
             self.tickCount+=1
 
-    def move(self, event):
+    def move(self):
         self.xCor += int(self.vel*math.cos(self.dir))
         self.yCor += int(self.vel*math.sin(self.dir))
 

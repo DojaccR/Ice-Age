@@ -60,15 +60,15 @@ class HostileEntity(Entity.Entity):
 class DireWolf(HostileEntity):
     entityTexturePath = "assets/Wolf.png"
     entityTexture = pygame.image.load(entityTexturePath)
-    hitboxHeight = 50
-    hitboxWidth = 100
+    hitboxHeight = entityTexture.get_height()
+    hitboxWidth = entityTexture.get_width()
     health = 4
     damage = 1
     aggroRange = 150
     atkRange = 10
 
     def __init__(self, entityID, xCor, yCor):
-        super().__init__(entityID, 50, 100, xCor, yCor, 4, 1)
+        super().__init__(entityID, self.hitboxHeight, self.hitboxWidth, xCor, yCor, self.health, self.damage)
 
     def dropItem(self, itemList):
         itemList.append(Item.WolfSkin(len(itemList), self.xCor, self.yCor))
@@ -76,15 +76,15 @@ class DireWolf(HostileEntity):
 class SabreTooth(HostileEntity):
     entityTexturePath = "assets/Sabre.png"
     entityTexture = pygame.image.load(entityTexturePath)
-    hitboxHeight = 50
-    hitboxWidth = 100
+    hitboxHeight = entityTexture.get_height()
+    hitboxWidth = entityTexture.get_width()
     health = 4
     damage = 1
     aggroRange = 600
     atkRange = 15
 
     def __init__(self, entityID, xCor, yCor):
-        super().__init__(entityID, 50, 100, xCor, yCor, 4, 1)
+        super().__init__(entityID, self.hitboxHeight, self.hitboxWidth, xCor, yCor, self.health, self.damage)
 
     def dropItem(self, itemList):
         itemList.append(Item.WolfSkin(len(itemList), self.xCor, self.yCor))

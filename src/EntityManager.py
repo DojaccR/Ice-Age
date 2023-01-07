@@ -5,6 +5,7 @@ import Entity
 import HostileEntity
 import Inventory
 import math
+import PeacefulEntity
 
 
 class EntityManager:
@@ -28,6 +29,11 @@ class EntityManager:
             xCor = (int(Random.random() * 10000) - 5000)
             yCor = (int(Random.random() * 10000) - 5000)
             self.structureList.append(Structure.Cave(xCor, yCor))
+
+        for i in range(int(Random.random()*30+300)):
+            xCor = (int(Random.random() * 10000) - 5000)
+            yCor = (int(Random.random() * 10000) - 5000)
+            self.mobList.append(PeacefulEntity.Mammoth(len(self.mobList), xCor, yCor))
 
     def checkRenderedEntities(self, win):
         self.renderedStructureList = []

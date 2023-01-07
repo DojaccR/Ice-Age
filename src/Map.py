@@ -11,7 +11,8 @@ class Map:
     renderedTiles = [[]]
     tileWidth = 0
     tileHeight = 0
-    tileTexturePath = ["assets/Grass0.png", "assets/Grass1.png", "assets/Sand.png"]
+    tileTexturePath = ["assets/Grass0.png", "assets/Grass1.png", "assets/Sand.png", "assets/Water0.png", "assets/water1.png"]
+    waterTexturePath = ["assets/Water0.png", "assets/water1.png"]
     tileTextures = []
 
     def __init__(self, mapID):
@@ -88,7 +89,7 @@ class Map:
             corList = nextList
             chance = chance * decay
 
-    def generateRiver(self):
+    def generateRiver(self, mapBlocks):
         pass
 
     def generate(self):
