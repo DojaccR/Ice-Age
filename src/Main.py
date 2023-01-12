@@ -22,6 +22,7 @@ pygame.display.set_caption("Ice Age")
 pygame.display.set_icon(pygame.image.load('assets/Logo.png'))
 
 map = Map.Map("create")
+print("map generated")
 entityManager = EntityManager.EntityManager()
 userInterface = UserInterface.UserInterface()
 

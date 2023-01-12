@@ -5,7 +5,7 @@ import pygame
 
 class Map:
     mapID = 0
-    mapSize = 100
+    mapSize = 1000
     mapFile = ""
     mapTiles = []
     renderedTiles = [[]]
@@ -25,14 +25,14 @@ class Map:
         if str(mapID) == "create":
             self.generate()
             map = open("maps/map1.txt")
-            for i in range(100):
+            for i in range(self.mapSize):
                 mapStr = map.readline()
                 mapChars = list()
                 mapChars.extend(mapStr)
                 self.mapTiles.append(mapChars)
         else:
             map = open("maps/map1.txt")
-            for i in range(100):
+            for i in range(self.mapSize):
                 mapStr = map.readline()
                 mapChars = list()
                 mapChars.extend(mapStr)
@@ -45,9 +45,9 @@ class Map:
             #print(i)
             for j in range((int(win.get_height()/(self.tileHeight/2))+3)):
                 if (playerObj.mapYCor-int(((win.get_height()/self.tileHeight)+1)/2)+j) % 2 == 0:
-                    win.blit(self.tileTextures[int(self.mapTiles[playerObj.mapXCor-int(((win.get_width()/self.tileWidth)+1)/2)+i][playerObj.mapYCor-int(((win.get_height()/self.tileHeight)+1)/2)+j])], (self.tileWidth * i + playerObj.inBlockXCor - self.tileWidth, self.tileHeight / 2 * j + playerObj.inBlockYCor - self.tileHeight * 3 / 2))
+                    win.blit(self.tileTextures[int(self.mapTiles[int(playerObj.mapXCor-int(((win.get_width()/self.tileWidth)+1)/2)+i)][int(playerObj.mapYCor-int(((win.get_height()/self.tileHeight)+1)/2)+j)])], (self.tileWidth * i + playerObj.inBlockXCor - self.tileWidth, self.tileHeight / 2 * j + playerObj.inBlockYCor - self.tileHeight * 3 / 2))
                 else:
-                    win.blit(self.tileTextures[int(self.mapTiles[playerObj.mapXCor-int(((win.get_width()/self.tileWidth)+1)/2)+i][playerObj.mapYCor-int(((win.get_height()/self.tileHeight)+1)/2)+j])], (self.tileWidth * i + playerObj.inBlockXCor - self.tileWidth / 2 * 3, self.tileHeight / 2 * j + playerObj.inBlockYCor - self.tileHeight * 3 / 2))
+                    win.blit(self.tileTextures[int(self.mapTiles[int(playerObj.mapXCor-int(((win.get_width()/self.tileWidth)+1)/2)+i)][int(playerObj.mapYCor-int(((win.get_height()/self.tileHeight)+1)/2)+j)])], (self.tileWidth * i + playerObj.inBlockXCor - self.tileWidth / 2 * 3, self.tileHeight / 2 * j + playerObj.inBlockYCor - self.tileHeight * 3 / 2))
 
     def checkAdjacent(self, cor, mapSize, nextList, changed, chance):
         if cor[0] > 0 and r.random() * 100 < chance:
@@ -72,19 +72,21 @@ class Map:
 
     def generateBiome(self, mapBlocks):
         chance = 100
-        decay = 0.95
+        decay = 0.98
         biome = int(r.random() * 2) + 1
+        print(biome)
 
-        startCor = [int(r.random() * 100), int(r.random() * 100)]
+        startCor = [int(r.random() * self.mapSize), int(r.random() * self.mapSize)]
 
         corList = [startCor]
         changed = []
         nextList = []
-        for i in range(30):
+        for i in range(90):
             self.grow(corList, biome, mapBlocks)
+            print("grown: " + str(i))
             length = len(corList)
             for i in range(length):
-                self.checkAdjacent(corList[0], 100, nextList, changed, chance)
+                self.checkAdjacent(corList[0], self.mapSize, nextList, changed, chance)
                 changed.append(corList.pop(0))
             corList = nextList
             chance = chance * decay
@@ -98,16 +100,16 @@ class Map:
 
         x = ""
 
-        for i in range(100):
+        for i in range(self.mapSize):
             mapBlocks.append([])
-            for j in range(100):
+            for j in range(self.mapSize):
                 mapBlocks[i].append(0)
 
         for i in range(20):
             self.generateBiome(mapBlocks)
 
-        for i in range(100):
-            for j in range(100):
+        for i in range(self.mapSize):
+            for j in range(self.mapSize):
                 x += str(mapBlocks[i][j])
 
             x += "\n"

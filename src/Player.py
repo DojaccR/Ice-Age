@@ -1,5 +1,6 @@
 import Entity
 import pygame
+import Map
 
 
 class Player(Entity.Entity):
@@ -11,8 +12,8 @@ class Player(Entity.Entity):
     thirst = 100
     freezing = False
     overheating = False
-    mapXCor = 50
-    mapYCor = 50
+    mapXCor = Map.Map.mapSize/2
+    mapYCor = Map.Map.mapSize/2
     inBlockXCor = 1
     inBlockYCor = 1
 
