@@ -1,4 +1,4 @@
-#import os
+import numpy as np
 import random as r
 import pygame
 
@@ -96,14 +96,9 @@ class Map:
 
     def generate(self):
         map = open("maps/map1.txt", "w")
-        mapBlocks = []
+        mapBlocks = np.zeros((self.mapSize, self.mapSize), dtype=int)
 
         x = ""
-
-        for i in range(self.mapSize):
-            mapBlocks.append([])
-            for j in range(self.mapSize):
-                mapBlocks[i].append(0)
 
         for i in range(20):
             self.generateBiome(mapBlocks)
