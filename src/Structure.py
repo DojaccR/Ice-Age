@@ -1,7 +1,6 @@
 import pygame
 import random as Random
 import HostileEntity
-import Inventory
 import Item
 
 class Structure():
@@ -57,6 +56,7 @@ class BerryBush(DestructableStructure):
             self.berryCount -= 1
             itemList.append(Item.Berry(len(itemList), self.xCor, self.yCor))
 
+    # deletes self
     def die(self, itemList, structureList):
         if self.health == 0:
             structureList.remove(self)
@@ -77,6 +77,7 @@ class Cave(IndestructableStructure):
         else:
             self.caveType = "SabreTooth"
 
+    # spawns a wolf
     def spawnWolf(self, playerObj, mobList, renderedMobList, win, tickCount):
         if tickCount % 30 == 0:
             if self.caveType == "DireWolf":

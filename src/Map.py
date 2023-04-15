@@ -4,18 +4,21 @@ import pygame
 
 
 class Map:
-    mapID = 0
-    mapSize = 1000
-    mapFile = ""
-    mapTiles = []
-    renderedTiles = [[]]
-    tileWidth = 0
-    tileHeight = 0
-    tileTexturePath = ["assets/Grass0.png", "assets/Grass1.png", "assets/Sand.png", "assets/Water0.png", "assets/water1.png"]
-    waterTexturePath = ["assets/Water0.png", "assets/water1.png"]
-    tileTextures = []
+
 
     def __init__(self, mapID):
+        self.mapID = 0
+        self.mapSize = 1000
+        self.mapFile = ""
+        self.mapTiles = []
+        self.renderedTiles = [[]]
+        self.tileWidth = 0
+        self.tileHeight = 0
+        self.tileTexturePath = ["assets/Grass0.png", "assets/Grass1.png", "assets/Sand.png", "assets/Water0.png",
+                           "assets/water1.png"]
+        self.waterTexturePath = ["assets/Water0.png", "assets/water1.png"]
+        self.tileTextures = []
+
         for i in range(len(self.tileTexturePath)):
             self.tileTextures.append(pygame.image.load(self.tileTexturePath[i]))
 
@@ -38,18 +41,17 @@ class Map:
                 mapChars.extend(mapStr)
                 self.mapTiles.append(mapChars)
 
-
-    #calculates and directly displays whats on screen
+    # Renders the map to screen by drawing all visible tiles from top left to bottom right
     def render1(self, playerObj, win):
         for i in range(int((win.get_width()/self.tileWidth)+2)):
-            #print(i)
             for j in range((int(win.get_height()/(self.tileHeight/2))+3)):
                 if (playerObj.mapYCor-int(((win.get_height()/self.tileHeight)+1)/2)+j) % 2 == 0:
                     win.blit(self.tileTextures[int(self.mapTiles[int(playerObj.mapXCor-int(((win.get_width()/self.tileWidth)+1)/2)+i)][int(playerObj.mapYCor-int(((win.get_height()/self.tileHeight)+1)/2)+j)])], (self.tileWidth * i + playerObj.inBlockXCor - self.tileWidth, self.tileHeight / 2 * j + playerObj.inBlockYCor - self.tileHeight * 3 / 2))
                 else:
                     win.blit(self.tileTextures[int(self.mapTiles[int(playerObj.mapXCor-int(((win.get_width()/self.tileWidth)+1)/2)+i)][int(playerObj.mapYCor-int(((win.get_height()/self.tileHeight)+1)/2)+j)])], (self.tileWidth * i + playerObj.inBlockXCor - self.tileWidth / 2 * 3, self.tileHeight / 2 * j + playerObj.inBlockYCor - self.tileHeight * 3 / 2))
 
-    def checkAdjacent(self, cor, mapSize, nextList, changed, chance):
+    # Adds adjacent blocks to next blocks to fill i.e. nextList given the chance of spreading.
+    def addAdjacent(self, cor, mapSize, nextList, changed, chance):
         if cor[0] > 0 and r.random() * 100 < chance:
             if changed.count([cor[0] - 1, cor[1]]) == 0 and nextList.count([cor[0] - 1, cor[1]]) == 0:
                 nextList.append([cor[0] - 1, cor[1]])
@@ -70,6 +72,7 @@ class Map:
         for i in range(len(corList) - 1):
             mapBlocks[corList[i][0]][corList[i][1]] = blockType
 
+    # Generates biomes using the lazy flood fill algorithm
     def generateBiome(self, mapBlocks):
         chance = 100
         decay = 0.98
@@ -86,7 +89,7 @@ class Map:
             print("grown: " + str(i))
             length = len(corList)
             for i in range(length):
-                self.checkAdjacent(corList[0], self.mapSize, nextList, changed, chance)
+                self.addAdjacent(corList[0], self.mapSize, nextList, changed, chance)
                 changed.append(corList.pop(0))
             corList = nextList
             chance = chance * decay
@@ -94,6 +97,7 @@ class Map:
     def generateRiver(self, mapBlocks):
         pass
 
+    # Generates the map
     def generate(self):
         map = open("maps/map1.txt", "w")
         mapBlocks = np.zeros((self.mapSize, self.mapSize), dtype=int)
@@ -123,6 +127,9 @@ class Map:
             print("invalid")
             return "invalid"
 
+    # two coordinate systems are used. The map(X/Y)Cor describes the grid and inBlock(X/Y)Cor describes the position of
+    # the player within the block of the grid of the map.
+    # The below function checks if the player moves from one grid block to another grid block.
     def blockChange(self, playerObj):
         if playerObj.inBlockXCor > self.tileWidth:
             playerObj.mapXCor -= 1

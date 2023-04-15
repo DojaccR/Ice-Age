@@ -43,11 +43,14 @@ pygame.mixer.music.set_volume(0.7)
 pygame.mixer.music.play()
 
 while True:
-    pygame.time.delay(10)
-    if gameTick % 200 == 0 and playerObj.hunger > 0:
+    pygame.time.delay(10)  # is a clock, delays loop by 20 ms every cycle.
+
+    if gameTick % 200 == 0 and playerObj.hunger > 0:  # reduces player hunger.
         playerObj.hunger -= 1
+
     entityManager.checkRenderedEntities(win)
-    for event in pygame.event.get():
+
+    for event in pygame.event.get():  # checks for player interactions
 
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -95,6 +98,7 @@ while True:
 
     keys = pygame.key.get_pressed()
 
+    # following code is player movement
     if keys[pygame.K_a] and playerObj.mapXCor > (win.get_width()/map.tileWidth)/2 + 1:
         playerObj.inBlockXCor += CAMERA_SPEED
         map.blockChange(playerObj)
@@ -124,8 +128,6 @@ while True:
             playerObj.hunger -= 1
 
     # Background render
-
-    #win.fill((0, 255, 0))
 
     map.render1(playerObj, win)
 

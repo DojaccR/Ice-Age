@@ -1,9 +1,6 @@
 import random as Random
 import Structure
-import Item
-import Entity
 import HostileEntity
-import Inventory
 import math
 import PeacefulEntity
 
@@ -20,6 +17,7 @@ class EntityManager:
     renderedDestructableStructureList = []
 
     def __init__(self):
+        # generates initial entities on the map
         for i in range(int(Random.random()*30+300)):
             xCor = (int(Random.random() * 10000) - 5000)
             yCor = (int(Random.random() * 10000) - 5000)
@@ -35,6 +33,7 @@ class EntityManager:
             yCor = (int(Random.random() * 10000) - 5000)
             self.mobList.append(PeacefulEntity.Mammoth(len(self.mobList), xCor, yCor))
 
+    # Checks which entities are on screen
     def checkRenderedEntities(self, win):
         self.renderedStructureList = []
         self.renderedItemList = []
@@ -56,6 +55,7 @@ class EntityManager:
             if self.itemList[i].xCor <= win.get_width() and self.itemList[i].xCor >= -20 and self.itemList[i].yCor <= win.get_height() and self.itemList[i].yCor >= -20:
                 self.renderedItemList.append(self.itemList[i])
 
+    # Draws entites to screen
     def renderEntities(self, win):
         for i in range(len(self.renderedStructureList)):
             self.renderedStructureList[i].render(win)
@@ -66,6 +66,7 @@ class EntityManager:
         for i in range(len(self.renderedItemList)):
             self.renderedItemList[i].render(win)
 
+    # runs the primary function of every structure
     def runStructureFunctions(self, tickCount, playerObj, win):
         for i in range(len(self.structureList)):
             if type(self.structureList[i]) == Structure.BerryBush:
@@ -77,7 +78,7 @@ class EntityManager:
         for i in range(len(self.renderedDestructableStructureList)):
             self.renderedDestructableStructureList[i].die(self.itemList, self.structureList)
 
-
+    # runs mob functions
     def runMobFunctions(self, playerObj):
         for i in range(len(self.renderedMobList)):
             self.renderedMobList[i].die(self.mobList, self.itemList)
@@ -86,10 +87,12 @@ class EntityManager:
             if isinstance(self.renderedMobList[i], HostileEntity.HostileEntity):
                 self.renderedMobList[i].target(playerObj)
 
+    # runs item functions
     def runItemFunctions(self, playerObj, inventory, win):
         for i in range(len(self.renderedItemList)):
             self.renderedItemList[i].pickup(playerObj, inventory, self.itemList)
 
+    # everything moves relative to the player
     def move(self, axis, direction, CAMERA_SPEED):
 
         if axis == "x" and direction == "positive":
@@ -132,6 +135,7 @@ class EntityManager:
             for i in range(len(self.itemList)):
                 self.itemList[i].yCor -= CAMERA_SPEED
 
+    # player-entity interactions
     def playerInteract(self, playerObj, keys):
         if keys == "f":
             for i in range(len(self.renderedStructureList)):

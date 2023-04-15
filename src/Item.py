@@ -1,5 +1,4 @@
 import pygame
-import Inventory
 import Structure
 import math
 
