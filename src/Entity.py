@@ -3,24 +3,29 @@ import math
 import pygame
 
 
+class Entity:
 
-class Entity():
-    wonder = False
     entityCount = 0
-    entityID = 0
-    hitboxHeight = 0
-    hitboxWidth = 0
-    xCor = 0
-    yCor = 0
-    vel = 2
-    health = 0
-    dir = 0
-    persist = 0
-    tickCount = 0
     healthTexturePath = ["assets/EntityHealth0.png","assets/EntityHealth1.png","assets/EntityHealth2.png","assets/EntityHealth3.png","assets/EntityHealth4.png"]
-    entityTexturePath = ""
-    entityTexture = None
 
+    # default constructor
+    def __init__(self):
+        self.entityID = 0
+        self.hitboxHeight = 0
+        self.hitboxWidth = 0
+        self.xCor = 0
+        self.yCor = 0
+        self.wonder = False
+        self.entityTexturePath = ""
+        self.entityTexture = None
+        self.vel = 2
+        self.health = 0
+        self.dir = 0
+        self.persist = 0
+        self.tickCount = 0
+
+    # parameterised constructor
+    # removed params for testing , entityTexturePath, vel
     def __init__(self, entityID, hitboxHeight, hitboxWidth, xCor, yCor, health):
         self.entityID = entityID
         self.hitboxHeight = hitboxHeight
@@ -28,6 +33,13 @@ class Entity():
         self.xCor = xCor
         self.yCor = yCor
         self.health = health
+        self.wonder = False
+        self.entityTexturePath = ""
+        # self.entityTexture = pygame.image.load(self.entityTexturePath)
+        self.vel = 2
+        self.dir = 0
+        self.persist = 0
+        self.tickCount = 0
 
     def changeDir(self):
 

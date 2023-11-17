@@ -12,8 +12,9 @@ class Player(Entity.Entity):
     thirst = 100
     freezing = False
     overheating = False
-    mapXCor = Map.Map.mapSize/2
-    mapYCor = Map.Map.mapSize/2
+    # could not get numbers from Map class, I have no idea why. If can be fixed please do.
+    mapXCor = 500
+    mapYCor = 500
     inBlockXCor = 1
     inBlockYCor = 1
 

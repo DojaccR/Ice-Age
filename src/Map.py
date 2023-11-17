@@ -4,18 +4,17 @@ import pygame
 
 
 class Map:
-
+    mapSize = 1000
 
     def __init__(self, mapID):
         self.mapID = 0
-        self.mapSize = 1000
         self.mapFile = ""
         self.mapTiles = []
         self.renderedTiles = [[]]
         self.tileWidth = 0
         self.tileHeight = 0
-        self.tileTexturePath = ["assets/Grass0.png", "assets/Grass1.png", "assets/Sand.png", "assets/Water0.png",
-                           "assets/water1.png"]
+        self.tileTexturePath = ["assets/Grass0.png", "assets/grass new 150.png", "assets/Sand.png", "assets/Water0.png",
+                                "assets/water1.png"]
         self.waterTexturePath = ["assets/Water0.png", "assets/water1.png"]
         self.tileTextures = []
 

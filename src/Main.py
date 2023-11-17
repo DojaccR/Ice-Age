@@ -1,10 +1,7 @@
 import pygame
 import Map
-import Entity
 import Player
-import HostileEntity
 import Inventory
-import Item
 import random as random
 
 import UserInterface
@@ -16,10 +13,18 @@ CAMERA_SPEED = 15
 
 pygame.init()
 
-win = pygame.display.set_mode((1280,720))
+win = pygame.display.set_mode((1280, 720), pygame.RESIZABLE)
 
 pygame.display.set_caption("Ice Age")
 pygame.display.set_icon(pygame.image.load('assets/Logo.png'))
+
+# main screen
+onMain = True
+
+# while onMain:
+    # pygame.time.delay(30)
+    # win.blit(pygame.image.load("assets/main screen.png"), (0, 0))
+
 
 map = Map.Map("create")
 print("map generated")
@@ -42,7 +47,7 @@ pygame.mixer.music.load("audio/Theme1.mp3")
 pygame.mixer.music.set_volume(0.7)
 pygame.mixer.music.play()
 
-while True:
+while run:
     pygame.time.delay(10)  # is a clock, delays loop by 20 ms every cycle.
 
     if gameTick % 200 == 0 and playerObj.hunger > 0:  # reduces player hunger.

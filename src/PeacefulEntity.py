@@ -6,6 +6,12 @@ class PeacefulEntity(Entity.Entity):
     def __init__(self, entityID, hitboxHeight, hitboxWidth, xCor, yCor, health):
         super().__init__(entityID, hitboxHeight, hitboxWidth, xCor, yCor, health)
 
+    def retaliate(self):
+        pass
+
+    def graze(self):
+        pass
+
 
 class Mammoth(PeacefulEntity):
     entityTexturePath = "assets/Mammoth.png"

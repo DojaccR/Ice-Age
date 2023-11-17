@@ -62,15 +62,6 @@ class Berry(Consumable):
         else:
             playerObj.hunger = 100
 
-        #win.blit(pygame.image.load(self.healthImageFile[4 - self.health]), (self.xCor, self.yCor + 60))
-
-class WolfSkin(Consumable):
-    itemType = "material"
-
-    def __init__(self, itemID, xCor, yCor):
-        super().__init__(itemID, "wolfskin", xCor, yCor)
-        self.itemTexturePath = "assets/WolfSkin.png"
-        self.itemImage = pygame.image.load(self.itemTexturePath)
 
 class Flint(Consumable):
     itemType = "material"
@@ -79,6 +70,7 @@ class Flint(Consumable):
         super().__init__(itemID, "flint", xCor, yCor)
         self.itemTexturePath = "assets/Flint.png"
         self.itemImage = pygame.image.load(self.itemTexturePath)
+
 
 class Seed(Consumable):
     itemType = "seed"
@@ -91,3 +83,13 @@ class Seed(Consumable):
     def use(self, structureList, slot, playerObj):
         structureList.append(Structure.BerryBush(playerObj.xCor, playerObj.yCor))
         slot.remove(self)
+
+
+
+class WolfSkin(Consumable):
+    itemType = "material"
+
+    def __init__(self, itemID, xCor, yCor):
+        super().__init__(itemID, "wolfskin", xCor, yCor)
+        self.itemTexturePath = "assets/WolfSkin.png"
+        self.itemImage = pygame.image.load(self.itemTexturePath)
