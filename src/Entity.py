@@ -20,7 +20,7 @@ class Entity:
         self.entityTexture = None
         self.vel = 2
         self.health = 0
-        self.dir = 0
+        self.direction = 0
         self.persist = 0
         self.tickCount = 0
 
@@ -37,14 +37,14 @@ class Entity:
         self.entityTexturePath = ""
         # self.entityTexture = pygame.image.load(self.entityTexturePath)
         self.vel = 2
-        self.dir = 0
+        self.direction = 0
         self.persist = 0
         self.tickCount = 0
 
-    def changeDir(self):
+    def changeDirection(self):
 
         if self.tickCount == self.persist:
-            self.dir = int(random.random() * 360)
+            self.direction = int(random.random() * 360)
             self.persist = int(random.random()*20)+8
             self.vel = int(random.random()*3)
             self.tickCount = 0
@@ -52,8 +52,8 @@ class Entity:
             self.tickCount+=1
 
     def move(self):
-        self.xCor += int(self.vel*math.cos(self.dir))
-        self.yCor += int(self.vel*math.sin(self.dir))
+        self.xCor += int(self.vel*math.cos(self.direction))
+        self.yCor += int(self.vel*math.sin(self.direction))
 
     def healthChange(self, healthchange):
         self.health += healthchange
@@ -70,5 +70,5 @@ class Entity:
             mobList.remove(self)
             self.dropItem(itemList)
 
-    def dropItem(self):
+    def dropItem(self, itemList):
         pass

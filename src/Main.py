@@ -61,8 +61,9 @@ while run:
             pygame.quit()
             run = False
 
-        if event.type == pygame.MOUSEBUTTONUP:
-            entityManager.playerInteract(playerObj, "m1")
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1:
+                entityManager.playerInteract(playerObj, "m1")
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:

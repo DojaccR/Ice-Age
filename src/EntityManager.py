@@ -18,16 +18,20 @@ class EntityManager:
 
     def __init__(self):
         # generates initial entities on the map
+
+        # adds berry bushes
         for i in range(int(Random.random()*30+300)):
             xCor = (int(Random.random() * 10000) - 5000)
             yCor = (int(Random.random() * 10000) - 5000)
             self.structureList.append(Structure.BerryBush(xCor, yCor))
 
+        # adds caves
         for i in range(int(Random.random() * 5 + 50)):
             xCor = (int(Random.random() * 10000) - 5000)
             yCor = (int(Random.random() * 10000) - 5000)
             self.structureList.append(Structure.Cave(xCor, yCor))
 
+        # spawns mammoths
         for i in range(int(Random.random()*30+300)):
             xCor = (int(Random.random() * 10000) - 5000)
             yCor = (int(Random.random() * 10000) - 5000)
