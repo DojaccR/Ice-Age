@@ -23,3 +23,7 @@ class Mammoth(PeacefulEntity):
 
     def __init__(self, entityID, xCor, yCor):
         super().__init__(entityID, self.hitboxHeight, self.hitboxWidth, xCor, yCor, self.health)
+
+    def render(self, win):
+        win.blit(Mammoth.entityTexture, (self.xCor, self.yCor))
+        win.blit(Entity.Entity.healthTexture[self.health], (self.xCor, self.yCor + 60))

@@ -86,7 +86,7 @@ class EntityManager:
     def runMobFunctions(self, playerObj):
         for i in range(len(self.renderedMobList)):
             self.renderedMobList[i].die(self.mobList, self.itemList)
-            self.renderedMobList[i].changeDir()
+            self.renderedMobList[i].changeDirection()
             self.renderedMobList[i].move()
             if isinstance(self.renderedMobList[i], HostileEntity.HostileEntity):
                 self.renderedMobList[i].target(playerObj)

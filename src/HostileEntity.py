@@ -64,6 +64,10 @@ class DireWolf(HostileEntity):
     def dropItem(self, itemList):
         itemList.append(Item.WolfSkin(len(itemList), self.xCor, self.yCor))
 
+    def render(self, win):
+        win.blit(DireWolf.entityTexture, (self.xCor, self.yCor))
+        win.blit(Entity.Entity.healthTexture[self.health], (self.xCor, self.yCor + 60))
+
 
 class SabreTooth(HostileEntity):
     entityTexturePath = "assets/Sabre.png"
@@ -80,3 +84,7 @@ class SabreTooth(HostileEntity):
 
     def dropItem(self, itemList):
         itemList.append(Item.WolfSkin(len(itemList), self.xCor, self.yCor))
+
+    def render(self, win):
+        win.blit(SabreTooth.entityTexture, (self.xCor, self.yCor))
+        win.blit(Entity.Entity.healthTexture[self.health], (self.xCor, self.yCor + 60))

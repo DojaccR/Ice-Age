@@ -6,13 +6,11 @@ import Item
 class Structure():
     xCor = 0
     yCor = 0
-    structureTexturePath = ""
 
 
-    def __init__(self, xCor, yCor, structureTexturePath):
+    def __init__(self, xCor, yCor):
         self.xCor = xCor
         self.yCor = yCor
-        self.structureTexturePath = structureTexturePath
         self.structureTexture = pygame.image.load(self.structureTexturePath)
 
     def render(self, win):
