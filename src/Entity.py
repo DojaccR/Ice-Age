@@ -2,13 +2,12 @@ import random
 import math
 import pygame
 
+entityCount = 0
+healthTexture = [pygame.image.load("assets/EntityHealth0.png"), pygame.image.load("assets/EntityHealth1.png"),
+                 pygame.image.load("assets/EntityHealth2.png"), pygame.image.load("assets/EntityHealth3.png"),
+                 pygame.image.load("assets/EntityHealth4.png")]
 
 class Entity:
-
-    entityCount = 0
-    healthTexture = [pygame.image.load("assets/EntityHealth0.png"), pygame.image.load("assets/EntityHealth1.png"),
-                     pygame.image.load("assets/EntityHealth2.png"), pygame.image.load("assets/EntityHealth3.png"),
-                     pygame.image.load("assets/EntityHealth4.png")]
 
     # default constructor
     def __init__(self):
@@ -65,7 +64,7 @@ class Entity:
 
     def render(self, win):
         win.blit(self.entityTexture, (self.xCor, self.yCor))
-        win.blit(pygame.image.load(self.healthTexture[self.health]), (self.xCor, self.yCor + 60))
+        win.blit(pygame.image.load(healthTexture[self.health]), (self.xCor, self.yCor + 60))
 
     def die(self, mobList, itemList):
         if self.health == 0:

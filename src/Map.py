@@ -19,7 +19,7 @@ class Map:
         self.tileTextures = []
 
         for i in range(len(self.tileTexturePath)):
-            self.tileTextures.append(pygame.image.load(self.tileTexturePath[i]))
+            self.tileTextures.append(pygame.image.load(self.tileTexturePath[i]).convert_alpha())
 
         self.tileWidth = self.tileTextures[0].get_width()
         self.tileHeight = self.tileTextures[0].get_height()

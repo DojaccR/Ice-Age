@@ -47,12 +47,10 @@ class HostileEntity(Entity.Entity):
         else:
             self.aggro = False
 
-    
+direwolfTexture = pygame.image.load("assets/Wolf.png")
 class DireWolf(HostileEntity):
-    entityTexturePath = "assets/Wolf.png"
-    entityTexture = pygame.image.load(entityTexturePath)
-    hitboxHeight = entityTexture.get_height()
-    hitboxWidth = entityTexture.get_width()
+    hitboxHeight = direwolfTexture.get_height()
+    hitboxWidth = direwolfTexture.get_width()
     health = 4
     damage = 1
     aggroRange = 150
@@ -65,15 +63,14 @@ class DireWolf(HostileEntity):
         itemList.append(Item.WolfSkin(len(itemList), self.xCor, self.yCor))
 
     def render(self, win):
-        win.blit(DireWolf.entityTexture, (self.xCor, self.yCor))
-        win.blit(Entity.Entity.healthTexture[self.health], (self.xCor, self.yCor + 60))
+        win.blit(direwolfTexture, (self.xCor, self.yCor))
+        win.blit(Entity.healthTexture[self.health], (self.xCor, self.yCor + 60))
 
-
+sabretoothTexture = pygame.image.load("assets/Sabre.png")
 class SabreTooth(HostileEntity):
-    entityTexturePath = "assets/Sabre.png"
-    entityTexture = pygame.image.load(entityTexturePath)
-    hitboxHeight = entityTexture.get_height()
-    hitboxWidth = entityTexture.get_width()
+
+    hitboxHeight = sabretoothTexture.get_height()
+    hitboxWidth = sabretoothTexture.get_width()
     health = 4
     damage = 1
     aggroRange = 600
@@ -86,5 +83,5 @@ class SabreTooth(HostileEntity):
         itemList.append(Item.WolfSkin(len(itemList), self.xCor, self.yCor))
 
     def render(self, win):
-        win.blit(SabreTooth.entityTexture, (self.xCor, self.yCor))
-        win.blit(Entity.Entity.healthTexture[self.health], (self.xCor, self.yCor + 60))
+        win.blit(sabretoothTexture, (self.xCor, self.yCor))
+        win.blit(Entity.healthTexture[self.health], (self.xCor, self.yCor + 60))

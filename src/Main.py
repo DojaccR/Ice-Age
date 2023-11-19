@@ -6,6 +6,9 @@ import random as random
 
 import UserInterface
 import EntityManager
+import PeacefulEntity
+import HostileEntity
+import Structure
 
 CAMERA_SPEED = 15
 
@@ -17,6 +20,13 @@ win = pygame.display.set_mode((1280, 720), pygame.RESIZABLE)
 
 pygame.display.set_caption("Ice Age")
 pygame.display.set_icon(pygame.image.load('assets/Logo.png'))
+
+# image convertions
+PeacefulEntity.mammothTexture.convert_alpha()
+HostileEntity.direwolfTexture.convert_alpha()
+HostileEntity.sabretoothTexture.convert_alpha()
+for i in range(len(Structure.berryTexture)):
+    Structure.berryTexture[i].convert_alpha()
 
 # main screen
 onMain = True

@@ -13,17 +13,15 @@ class PeacefulEntity(Entity.Entity):
     def graze(self):
         pass
 
-
+mammothTexture = pygame.image.load("assets/Mammoth.png")
 class Mammoth(PeacefulEntity):
-    entityTexturePath = "assets/Mammoth.png"
-    entityTexture = pygame.image.load(entityTexturePath)
-    hitboxHeight = entityTexture.get_height()
-    hitboxWidth = entityTexture.get_width()
+    hitboxHeight = mammothTexture.get_height()
+    hitboxWidth = mammothTexture.get_width()
     health = 4
 
     def __init__(self, entityID, xCor, yCor):
         super().__init__(entityID, self.hitboxHeight, self.hitboxWidth, xCor, yCor, self.health)
 
     def render(self, win):
-        win.blit(Mammoth.entityTexture, (self.xCor, self.yCor))
-        win.blit(Entity.Entity.healthTexture[self.health], (self.xCor, self.yCor + 60))
+        win.blit(mammothTexture, (self.xCor, self.yCor))
+        win.blit(Entity.healthTexture[self.health], (self.xCor, self.yCor + 60))

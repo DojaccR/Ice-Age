@@ -27,16 +27,15 @@ class DestructableStructure(Structure):
     def die(self):
         pass
 
-
+berryTexture = [pygame.image.load("assets/Bush0.png"),
+                pygame.image.load("assets/Bush1.png"),
+                pygame.image.load("assets/Bush2.png"),
+                pygame.image.load("assets/Bush3.png"),
+                pygame.image.load("assets/Bush4.png"),
+                pygame.image.load("assets/Bush5.png")]
 class BerryBush(DestructableStructure):
     berryCount = 0
     health = 2
-    structureTexturePath = ["assets/Bush0.png",
-                            "assets/Bush1.png",
-                            "assets/Bush2.png",
-                            "assets/Bush3.png",
-                            "assets/Bush4.png",
-                            "assets/Bush5.png"]
 
     def __init__(self, xCor, yCor):
         self.xCor = xCor
@@ -47,7 +46,7 @@ class BerryBush(DestructableStructure):
             self.berryCount += 1
 
     def render(self, win):
-        win.blit(pygame.image.load(self.structureTexturePath[self.berryCount]), (self.xCor, self.yCor))
+        win.blit(berryTexture[self.berryCount], (self.xCor, self.yCor))
 
     def dropBerry(self, itemList):
         if self.berryCount > 0:
