@@ -18,7 +18,7 @@ pygame.init()
 
 win = pygame.display.set_mode((1280, 720), pygame.RESIZABLE)
 
-pygame.display.set_caption("Ice Age")
+pygame.display.set_caption("The Caveman Experience")
 pygame.display.set_icon(pygame.image.load('assets/Logo.png'))
 
 # image convertions
