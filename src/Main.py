@@ -60,7 +60,7 @@ pygame.mixer.music.play()
 while run:
     pygame.time.delay(10)  # is a clock, delays loop by 20 ms every cycle.
 
-    if gameTick % 200 == 0 and playerObj.hunger > 0:  # reduces player hunger.
+    if gameTick % 200 == 0 and playerObj.hunger > 1:  # reduces player hunger.
         playerObj.hunger -= 1
 
     entityManager.checkRenderedEntities(win)
@@ -119,28 +119,28 @@ while run:
         playerObj.inBlockXCor += CAMERA_SPEED
         map.blockChange(playerObj)
         entityManager.move("x", "positive", CAMERA_SPEED)
-        if int(random.random()*100) > 98:
+        if int(random.random()*100) > 98 and playerObj.hunger > 0:
             playerObj.hunger -= 1
 
     if keys[pygame.K_d] and playerObj.mapXCor < map.mapSize - (win.get_width()/map.tileWidth)/2 - 3:
         playerObj.inBlockXCor -= CAMERA_SPEED
         map.blockChange(playerObj)
         entityManager.move("x", "negative", CAMERA_SPEED)
-        if int(random.random()*100) > 98:
+        if int(random.random()*100) > 98 and playerObj.hunger > 0:
             playerObj.hunger -= 1
 
     if keys[pygame.K_w] and playerObj.mapYCor > (win.get_height()/map.tileHeight)/2 + 1:
         playerObj.inBlockYCor += CAMERA_SPEED
         map.blockChange(playerObj)
         entityManager.move("y", "positive", CAMERA_SPEED)
-        if int(random.random()*100) > 98:
+        if int(random.random()*100) > 98 and playerObj.hunger > 0:
             playerObj.hunger -= 1
 
     if keys[pygame.K_s] and playerObj.mapYCor < map.mapSize - (win.get_height()/map.tileHeight)/2 - 4:
         playerObj.inBlockYCor -= CAMERA_SPEED
         map.blockChange(playerObj)
         entityManager.move("y", "negative", CAMERA_SPEED)
-        if int(random.random()*100) > 98:
+        if int(random.random()*100) > 98 and playerObj.hunger > 0:
             playerObj.hunger -= 1
 
     # Background render
